@@ -29,6 +29,7 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:atari_xl_pbi
+LIBS:atari_pbi-cache
 EELAYER 25 0
 EELAYER END
 $Descr B 17000 11000
@@ -591,13 +592,13 @@ Entry Wire Line
 	8950 9050 9050 9150
 Entry Wire Line
 	8950 9150 9050 9250
-Text Label 8900 8850 2    60   ~ 0
+Text Label 8050 8950 0    60   ~ 0
 PBI_N_RDY
-Text Label 8900 8950 2    60   ~ 0
+Text Label 8050 9150 0    60   ~ 0
 PBI_N_EXTSEL
-Text Label 8900 9050 2    60   ~ 0
+Text Label 8050 8850 0    60   ~ 0
 PBI_N_MPD
-Text Label 8900 9150 2    60   ~ 0
+Text Label 8050 9050 0    60   ~ 0
 PBI_N_IRQ
 Text Label 8900 5600 2    60   ~ 0
 A0
@@ -651,21 +652,21 @@ Text Label 8900 7800 2    60   ~ 0
 DATA_DIR
 Text Label 8900 7950 2    60   ~ 0
 DATA_N_OE
-Text Label 8900 8450 2    60   ~ 0
+Text Label 8050 8450 0    60   ~ 0
 PHI2
-Text Label 8900 8550 2    60   ~ 0
+Text Label 8050 8550 0    60   ~ 0
 N_RESET
-Text Label 8900 8650 2    60   ~ 0
+Text Label 8050 8650 0    60   ~ 0
 RW
-Text Label 8900 8750 2    60   ~ 0
+Text Label 8050 8750 0    60   ~ 0
 N_EXTENB
-Text Label 6650 8950 2    60   ~ 0
+Text Label 6000 9150 0    60   ~ 0
 N_EXTSEL
-Text Label 6650 8850 2    60   ~ 0
+Text Label 6000 8950 0    60   ~ 0
 N_RDY
-Text Label 6650 9050 2    60   ~ 0
+Text Label 6300 8850 2    60   ~ 0
 N_MPD
-Text Label 6650 9150 2    60   ~ 0
+Text Label 6000 9050 0    60   ~ 0
 N_IRQ
 Entry Wire Line
 	5850 8950 5950 8850
