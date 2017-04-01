@@ -29,7 +29,6 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:atari_xl_pbi
-LIBS:atari_pbi-cache
 EELAYER 25 0
 EELAYER END
 $Descr B 17000 11000
