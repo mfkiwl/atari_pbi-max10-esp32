@@ -1,5 +1,4 @@
 EESchema Schematic File Version 2
-LIBS:atari_pbi-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -30,7 +29,6 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:atari_xl_pbi
-LIBS:atari_pbi-cache
 EELAYER 25 0
 EELAYER END
 $Descr B 17000 11000
@@ -48,23 +46,23 @@ $EndDescr
 $Comp
 L 74HC245 U?
 U 1 1 58DE5FA6
-P 7350 4100
-F 0 "U?" H 7450 4675 50  0000 L BNN
-F 1 "74LVC245" H 7400 3525 50  0000 L TNN
-F 2 "" H 7350 4100 50  0001 C CNN
-F 3 "" H 7350 4100 50  0001 C CNN
-	1    7350 4100
+P 7350 5400
+F 0 "U?" H 7450 5975 50  0000 L BNN
+F 1 "74LVC245" H 7400 4825 50  0000 L TNN
+F 2 "" H 7350 5400 50  0001 C CNN
+F 3 "" H 7350 5400 50  0001 C CNN
+	1    7350 5400
 	1    0    0    -1  
 $EndComp
 $Comp
 L 74HC245 U?
 U 1 1 58DE60C1
-P 7350 5500
-F 0 "U?" H 7450 6075 50  0000 L BNN
-F 1 "74LVC245" H 7400 4925 50  0000 L TNN
-F 2 "" H 7350 5500 50  0001 C CNN
-F 3 "" H 7350 5500 50  0001 C CNN
-	1    7350 5500
+P 7350 3950
+F 0 "U?" H 7450 4525 50  0000 L BNN
+F 1 "74LVC245" H 7400 3375 50  0000 L TNN
+F 2 "" H 7350 3950 50  0001 C CNN
+F 3 "" H 7350 3950 50  0001 C CNN
+	1    7350 3950
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -230,24 +228,6 @@ PBI_D6
 Text Label 4400 5650 0    60   ~ 0
 PBI_D7
 Entry Wire Line
-	5700 4200 5800 4300
-Entry Wire Line
-	5700 4100 5800 4200
-Entry Wire Line
-	5700 4000 5800 4100
-Entry Wire Line
-	5700 3900 5800 4000
-Entry Wire Line
-	5700 3800 5800 3900
-Entry Wire Line
-	5700 3700 5800 3800
-Entry Wire Line
-	5700 3600 5800 3700
-Entry Wire Line
-	5700 3500 5800 3600
-Entry Wire Line
-	5700 5600 5800 5700
-Entry Wire Line
 	5700 5500 5800 5600
 Entry Wire Line
 	5700 5400 5800 5500
@@ -261,6 +241,24 @@ Entry Wire Line
 	5700 5000 5800 5100
 Entry Wire Line
 	5700 4900 5800 5000
+Entry Wire Line
+	5700 4800 5800 4900
+Entry Wire Line
+	5700 4050 5800 4150
+Entry Wire Line
+	5700 3950 5800 4050
+Entry Wire Line
+	5700 3850 5800 3950
+Entry Wire Line
+	5700 3750 5800 3850
+Entry Wire Line
+	5700 3650 5800 3750
+Entry Wire Line
+	5700 3550 5800 3650
+Entry Wire Line
+	5700 3450 5800 3550
+Entry Wire Line
+	5700 3350 5800 3450
 Entry Wire Line
 	5700 7200 5800 7300
 Entry Wire Line
@@ -277,53 +275,53 @@ Entry Wire Line
 	5700 6600 5800 6700
 Entry Wire Line
 	5700 6500 5800 6600
-Text Label 6200 3600 0    60   ~ 0
-PBI_A0
-Text Label 6200 3700 0    60   ~ 0
-PBI_A1
-Text Label 6200 3800 0    60   ~ 0
-PBI_A2
-Text Label 6200 3900 0    60   ~ 0
-PBI_A3
-Text Label 6200 4000 0    60   ~ 0
-PBI_A4
-Text Label 6200 4100 0    60   ~ 0
-PBI_A5
-Text Label 6200 4200 0    60   ~ 0
-PBI_A6
-Text Label 6200 4300 0    60   ~ 0
-PBI_A7
-Text Label 6200 5000 0    60   ~ 0
-PBI_A8
-Text Label 6200 5100 0    60   ~ 0
-PBI_A9
-Text Label 6200 5200 0    60   ~ 0
-PBI_A10
-Text Label 6200 5300 0    60   ~ 0
-PBI_A11
-Text Label 6200 5400 0    60   ~ 0
-PBI_A12
-Text Label 6200 5500 0    60   ~ 0
-PBI_A13
 Text Label 6200 5600 0    60   ~ 0
+PBI_A0
+Text Label 6200 5500 0    60   ~ 0
+PBI_A1
+Text Label 6200 5400 0    60   ~ 0
+PBI_A2
+Text Label 6200 5300 0    60   ~ 0
+PBI_A3
+Text Label 6200 5200 0    60   ~ 0
+PBI_A4
+Text Label 6200 5100 0    60   ~ 0
+PBI_A5
+Text Label 6200 5000 0    60   ~ 0
+PBI_A6
+Text Label 6200 4900 0    60   ~ 0
+PBI_A7
+Text Label 6200 4150 0    60   ~ 0
+PBI_A8
+Text Label 6200 4050 0    60   ~ 0
+PBI_A9
+Text Label 6200 3950 0    60   ~ 0
+PBI_A10
+Text Label 6200 3850 0    60   ~ 0
+PBI_A11
+Text Label 6200 3750 0    60   ~ 0
+PBI_A12
+Text Label 6200 3650 0    60   ~ 0
+PBI_A13
+Text Label 6200 3550 0    60   ~ 0
 PBI_A14
-Text Label 6200 5700 0    60   ~ 0
+Text Label 6200 3450 0    60   ~ 0
 PBI_A15
-Text Label 6250 6600 0    60   ~ 0
-PBI_D0
-Text Label 6250 6700 0    60   ~ 0
-PBI_D1
-Text Label 6250 6800 0    60   ~ 0
-PBI_D2
-Text Label 6250 6900 0    60   ~ 0
-PBI_D3
-Text Label 6250 7000 0    60   ~ 0
-PBI_D4
-Text Label 6250 7100 0    60   ~ 0
-PBI_D5
-Text Label 6250 7200 0    60   ~ 0
-PBI_D6
 Text Label 6250 7300 0    60   ~ 0
+PBI_D0
+Text Label 6250 7200 0    60   ~ 0
+PBI_D1
+Text Label 6250 7100 0    60   ~ 0
+PBI_D2
+Text Label 6250 7000 0    60   ~ 0
+PBI_D3
+Text Label 6250 6900 0    60   ~ 0
+PBI_D4
+Text Label 6250 6800 0    60   ~ 0
+PBI_D5
+Text Label 6250 6700 0    60   ~ 0
+PBI_D6
+Text Label 6250 6600 0    60   ~ 0
 PBI_D7
 Entry Wire Line
 	5000 4250 5100 4150
@@ -492,20 +490,31 @@ SUPPORT UP TO FOUR PBI DEVICES WITH CONFIGURABLE IRQ ID
 $Comp
 L VCC #PWR?
 U 1 1 58DF5AEF
-P 6550 4500
-F 0 "#PWR?" H 6550 4350 50  0001 C CNN
-F 1 "VCC" H 6550 4650 50  0000 C CNN
-F 2 "" H 6550 4500 50  0001 C CNN
-F 3 "" H 6550 4500 50  0001 C CNN
-	1    6550 4500
+P 6550 5800
+F 0 "#PWR?" H 6550 5650 50  0001 C CNN
+F 1 "VCC" H 6550 5950 50  0000 C CNN
+F 2 "" H 6550 5800 50  0001 C CNN
+F 3 "" H 6550 5800 50  0001 C CNN
+	1    6550 5800
 	1    0    0    -1  
 $EndComp
 $Comp
 L VCC #PWR?
 U 1 1 58DF5B22
+P 6550 4350
+F 0 "#PWR?" H 6550 4200 50  0001 C CNN
+F 1 "VCC" H 6550 4500 50  0000 C CNN
+F 2 "" H 6550 4350 50  0001 C CNN
+F 3 "" H 6550 4350 50  0001 C CNN
+	1    6550 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 58DF5DD0
 P 6550 5900
-F 0 "#PWR?" H 6550 5750 50  0001 C CNN
-F 1 "VCC" H 6550 6050 50  0000 C CNN
+F 0 "#PWR?" H 6550 5650 50  0001 C CNN
+F 1 "GND" H 6550 5750 50  0000 C CNN
 F 2 "" H 6550 5900 50  0001 C CNN
 F 3 "" H 6550 5900 50  0001 C CNN
 	1    6550 5900
@@ -513,24 +522,13 @@ F 3 "" H 6550 5900 50  0001 C CNN
 $EndComp
 $Comp
 L GND #PWR?
-U 1 1 58DF5DD0
-P 6550 4600
-F 0 "#PWR?" H 6550 4350 50  0001 C CNN
-F 1 "GND" H 6550 4450 50  0000 C CNN
-F 2 "" H 6550 4600 50  0001 C CNN
-F 3 "" H 6550 4600 50  0001 C CNN
-	1    6550 4600
-	1    0    0    -1  
-$EndComp
-$Comp
-L GND #PWR?
 U 1 1 58DF5DFA
-P 6550 6000
-F 0 "#PWR?" H 6550 5750 50  0001 C CNN
-F 1 "GND" H 6550 5850 50  0000 C CNN
-F 2 "" H 6550 6000 50  0001 C CNN
-F 3 "" H 6550 6000 50  0001 C CNN
-	1    6550 6000
+P 6550 4450
+F 0 "#PWR?" H 6550 4200 50  0001 C CNN
+F 1 "GND" H 6550 4300 50  0000 C CNN
+F 2 "" H 6550 4450 50  0001 C CNN
+F 3 "" H 6550 4450 50  0001 C CNN
+	1    6550 4450
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -601,53 +599,53 @@ Text Label 8900 9050 2    60   ~ 0
 PBI_N_MPD
 Text Label 8900 9150 2    60   ~ 0
 PBI_N_IRQ
-Text Label 8900 3600 2    60   ~ 0
-A0
-Text Label 8900 3700 2    60   ~ 0
-A1
-Text Label 8900 3800 2    60   ~ 0
-A2
-Text Label 8900 3900 2    60   ~ 0
-A3
-Text Label 8900 4000 2    60   ~ 0
-A4
-Text Label 8900 4100 2    60   ~ 0
-A5
-Text Label 8900 4200 2    60   ~ 0
-A6
-Text Label 8900 4300 2    60   ~ 0
-A7
-Text Label 8900 5000 2    60   ~ 0
-A8
-Text Label 8900 5100 2    60   ~ 0
-A9
-Text Label 8900 5200 2    60   ~ 0
-A10
-Text Label 8900 5300 2    60   ~ 0
-A11
-Text Label 8900 5400 2    60   ~ 0
-A12
-Text Label 8900 5500 2    60   ~ 0
-A13
 Text Label 8900 5600 2    60   ~ 0
+A0
+Text Label 8900 5500 2    60   ~ 0
+A1
+Text Label 8900 5400 2    60   ~ 0
+A2
+Text Label 8900 5300 2    60   ~ 0
+A3
+Text Label 8900 5200 2    60   ~ 0
+A4
+Text Label 8900 5100 2    60   ~ 0
+A5
+Text Label 8900 5000 2    60   ~ 0
+A6
+Text Label 8900 4900 2    60   ~ 0
+A7
+Text Label 8900 4150 2    60   ~ 0
+A8
+Text Label 8900 4050 2    60   ~ 0
+A9
+Text Label 8900 3950 2    60   ~ 0
+A10
+Text Label 8900 3850 2    60   ~ 0
+A11
+Text Label 8900 3750 2    60   ~ 0
+A12
+Text Label 8900 3650 2    60   ~ 0
+A13
+Text Label 8900 3550 2    60   ~ 0
 A14
-Text Label 8900 5700 2    60   ~ 0
+Text Label 8900 3450 2    60   ~ 0
 A15
-Text Label 8900 6600 2    60   ~ 0
-D0
-Text Label 8900 6700 2    60   ~ 0
-D1
-Text Label 8900 6800 2    60   ~ 0
-D2
-Text Label 8900 6900 2    60   ~ 0
-D3
-Text Label 8900 7000 2    60   ~ 0
-D4
-Text Label 8900 7100 2    60   ~ 0
-D5
-Text Label 8900 7200 2    60   ~ 0
-D6
 Text Label 8900 7300 2    60   ~ 0
+D0
+Text Label 8900 7200 2    60   ~ 0
+D1
+Text Label 8900 7100 2    60   ~ 0
+D2
+Text Label 8900 7000 2    60   ~ 0
+D3
+Text Label 8900 6900 2    60   ~ 0
+D4
+Text Label 8900 6800 2    60   ~ 0
+D5
+Text Label 8900 6700 2    60   ~ 0
+D6
+Text Label 8900 6600 2    60   ~ 0
 D7
 Text Label 8900 7800 2    60   ~ 0
 DATA_DIR
@@ -702,37 +700,37 @@ Entry Wire Line
 Entry Wire Line
 	9100 6900 9200 6800
 Entry Wire Line
+	9100 3850 9200 3750
+Entry Wire Line
+	9100 4050 9200 3950
+Entry Wire Line
+	9100 3950 9200 3850
+Entry Wire Line
+	9100 4150 9200 4050
+Entry Wire Line
+	9100 3450 9200 3350
+Entry Wire Line
+	9100 3650 9200 3550
+Entry Wire Line
+	9100 3550 9200 3450
+Entry Wire Line
+	9100 3750 9200 3650
+Entry Wire Line
+	9100 5300 9200 5200
+Entry Wire Line
+	9100 5500 9200 5400
+Entry Wire Line
 	9100 5400 9200 5300
 Entry Wire Line
 	9100 5600 9200 5500
 Entry Wire Line
-	9100 5500 9200 5400
+	9100 4900 9200 4800
 Entry Wire Line
-	9100 5700 9200 5600
+	9100 5100 9200 5000
 Entry Wire Line
 	9100 5000 9200 4900
 Entry Wire Line
 	9100 5200 9200 5100
-Entry Wire Line
-	9100 5100 9200 5000
-Entry Wire Line
-	9100 5300 9200 5200
-Entry Wire Line
-	9100 4000 9200 3900
-Entry Wire Line
-	9100 4200 9200 4100
-Entry Wire Line
-	9100 4100 9200 4000
-Entry Wire Line
-	9100 4300 9200 4200
-Entry Wire Line
-	9100 3600 9200 3500
-Entry Wire Line
-	9100 3800 9200 3700
-Entry Wire Line
-	9100 3700 9200 3600
-Entry Wire Line
-	9100 3900 9200 3800
 Entry Wire Line
 	9100 7950 9200 7850
 Entry Wire Line
@@ -892,25 +890,11 @@ Wire Bus Line
 Wire Bus Line
 	5700 8650 5700 9900
 Wire Wire Line
-	6650 3700 5800 3700
+	6650 5000 5800 5000
 Wire Wire Line
-	6650 3600 5800 3600
-Wire Wire Line
-	6650 3800 5800 3800
-Wire Wire Line
-	6650 3900 5800 3900
-Wire Wire Line
-	6650 4000 5800 4000
-Wire Wire Line
-	6650 4100 5800 4100
-Wire Wire Line
-	6650 4200 5800 4200
-Wire Wire Line
-	6650 4300 5800 4300
+	6650 4900 5800 4900
 Wire Wire Line
 	6650 5100 5800 5100
-Wire Wire Line
-	6650 5000 5800 5000
 Wire Wire Line
 	6650 5200 5800 5200
 Wire Wire Line
@@ -922,7 +906,21 @@ Wire Wire Line
 Wire Wire Line
 	6650 5600 5800 5600
 Wire Wire Line
-	6650 5700 5800 5700
+	6650 3550 5800 3550
+Wire Wire Line
+	6650 3450 5800 3450
+Wire Wire Line
+	6650 3650 5800 3650
+Wire Wire Line
+	6650 3750 5800 3750
+Wire Wire Line
+	6650 3850 5800 3850
+Wire Wire Line
+	6650 3950 5800 3950
+Wire Wire Line
+	6650 4050 5800 4050
+Wire Wire Line
+	6650 4150 5800 4150
 Wire Wire Line
 	6650 6700 5800 6700
 Wire Wire Line
@@ -1134,13 +1132,13 @@ Wire Wire Line
 Wire Wire Line
 	7950 1900 7950 1850
 Wire Wire Line
+	6550 4350 6650 4350
+Wire Wire Line
+	6550 5800 6650 5800
+Wire Wire Line
+	6550 4450 6650 4450
+Wire Wire Line
 	6550 5900 6650 5900
-Wire Wire Line
-	6550 4500 6650 4500
-Wire Wire Line
-	6550 6000 6650 6000
-Wire Wire Line
-	6550 4600 6650 4600
 Wire Wire Line
 	6550 9350 6650 9350
 Wire Wire Line
@@ -1172,21 +1170,7 @@ Wire Wire Line
 Wire Bus Line
 	9050 9900 5700 9900
 Wire Wire Line
-	8050 3600 9100 3600
-Wire Wire Line
-	8050 3700 9100 3700
-Wire Wire Line
-	8050 3800 9100 3800
-Wire Wire Line
-	8050 3900 9100 3900
-Wire Wire Line
-	8050 4000 9100 4000
-Wire Wire Line
-	8050 4100 9100 4100
-Wire Wire Line
-	8050 4200 9100 4200
-Wire Wire Line
-	8050 4300 9100 4300
+	8050 4900 9100 4900
 Wire Wire Line
 	8050 5000 9100 5000
 Wire Wire Line
@@ -1202,7 +1186,21 @@ Wire Wire Line
 Wire Wire Line
 	8050 5600 9100 5600
 Wire Wire Line
-	8050 5700 9100 5700
+	8050 3450 9100 3450
+Wire Wire Line
+	8050 3550 9100 3550
+Wire Wire Line
+	8050 3650 9100 3650
+Wire Wire Line
+	8050 3750 9100 3750
+Wire Wire Line
+	8050 3850 9100 3850
+Wire Wire Line
+	8050 3950 9100 3950
+Wire Wire Line
+	8050 4050 9100 4050
+Wire Wire Line
+	8050 4150 9100 4150
 Wire Wire Line
 	8050 6600 9100 6600
 Wire Wire Line
