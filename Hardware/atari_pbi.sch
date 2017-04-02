@@ -1,5 +1,5 @@
 EESchema Schematic File Version 2
-LIBS:power
+LIBS:altera_max10
 LIBS:atari_pbi-cache
 EELAYER 25 0
 EELAYER END

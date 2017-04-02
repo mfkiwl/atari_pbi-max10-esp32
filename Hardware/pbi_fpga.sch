@@ -1,5 +1,5 @@
 EESchema Schematic File Version 2
-LIBS:power
+LIBS:altera_max10
 LIBS:atari_pbi-cache
 EELAYER 25 0
 EELAYER END
@@ -20,69 +20,7 @@ DATA_BUS_3V
 Wire Bus Line
 	1250 800  1650 800 
 Wire Bus Line
-	1650 800  1650 900 
-Wire Bus Line
-	1650 900  1650 1000
-Wire Bus Line
-	1650 1000 1650 1100
-Wire Bus Line
-	1650 1100 1650 1200
-Wire Bus Line
-	1650 1200 1650 1300
-Wire Bus Line
-	1650 1300 1650 1400
-Wire Bus Line
-	1650 1400 1650 1500
-Wire Bus Line
-	1650 1500 1650 1600
-Wire Bus Line
-	1650 1600 1650 1700
-Wire Bus Line
-	1650 1700 1650 1800
-Wire Bus Line
-	1650 1800 1650 1900
-Wire Bus Line
-	1650 1900 1650 2000
-Wire Bus Line
-	1650 2000 1650 2100
-Wire Bus Line
-	1650 2100 1650 2200
-Wire Bus Line
-	1650 2200 1650 2300
-Wire Bus Line
-	1650 2300 1650 2400
-Wire Bus Line
-	1650 2400 1650 2600
-Wire Bus Line
-	1650 2600 1650 2700
-Wire Bus Line
-	1650 2700 1650 2800
-Wire Bus Line
-	1650 2800 1650 2900
-Wire Bus Line
-	1650 2900 1650 3000
-Wire Bus Line
-	1650 3000 1650 3100
-Wire Bus Line
-	1650 3100 1650 3200
-Wire Bus Line
-	1650 3200 1650 3300
-Wire Bus Line
-	1650 3300 1650 3800
-Wire Bus Line
-	1650 3800 1650 3900
-Wire Bus Line
-	1650 3900 1650 4000
-Wire Bus Line
-	1650 4000 1650 4100
-Wire Bus Line
-	1650 4100 1650 4200
-Wire Bus Line
-	1650 4200 1650 4300
-Wire Bus Line
-	1650 4300 1650 4400
-Wire Bus Line
-	1650 4400 1650 4500
+	1650 800  1650 4500
 Text Label 1950 2500 0    60   ~ 0
 A0
 Text Label 1950 2400 0    60   ~ 0
