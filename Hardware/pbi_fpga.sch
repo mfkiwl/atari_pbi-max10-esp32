@@ -363,4 +363,20 @@ Wire Notes Line
 	7900 9600 12100 9600
 Wire Notes Line
 	12100 9600 12100 5450
+Text Label 2200 4900 2    60   ~ 0
+DATA_DIR
+Text Label 1800 5000 0    60   ~ 0
+DATA_N_OE
+Wire Wire Line
+	1750 4800 2350 4800
+Wire Wire Line
+	1750 4900 2350 4900
+Wire Wire Line
+	1750 5000 2350 5000
+Entry Wire Line
+	1750 4900 1650 4800
+Entry Wire Line
+	1750 4800 1650 4700
+Entry Wire Line
+	1750 5000 1650 4900
 $EndSCHEMATC
