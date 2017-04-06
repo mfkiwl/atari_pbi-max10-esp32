@@ -1,8 +1,12 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
 
 entity pbi_bridge is
 	PORT(
+		clk_50		: IN		std_logic;								-- 50MHz clock oscillator
+		phi2_early	: BUFFER	std_logic;								-- shortened PHI2 cycle completion signal
 		phi2			: IN		std_logic;								-- Atari PHI2 clock (1.79MHz NTSC, 1.77MHz PAL)
 		rw				: IN		std_logic;								-- latched read/write (1=Atari reading RAM/device, 0=Atari writing RAM/device)
 		addr			: IN 		std_logic_vector (15 downto 0);	-- address bus
@@ -39,21 +43,46 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	
 	-- constant to hold our device address in hw_sel (single bit set)
 	CONSTANT PBI_ADDR : std_logic_vector(7 downto 0) := X"80";
+
+	-- counter used to tick off cycles of the 50MHz clock after rising edge of PHI2
+	SIGNAL clk_counter : std_logic_vector(3 downto 0);
 BEGIN
 
-process (n_reset, phi2, rw_latch, hw_sel, addr_latch, dev_rom_act, dev_ram_act, hw_sel_act, dev_reg_act, data)
+
+-- create a delayed signal a fixed amount after the rising edge of PHI2
+-- there is jitter on this signal because PHI2 and clk_50 are asynchronous
+process (phi2, clk_50)
+begin
+	if (phi2 = '0') then
+		clk_counter <= "0000";
+
+		phi2_early <= '0';
+	elsif (rising_edge(clk_50)) then
+		-- the counter value here is the number of 50MHz periods to delay after rising edge of PHI2
+		if (clk_counter = "1010") then
+			phi2_early <= '0';
+		else
+			phi2_early <= '1';
+			clk_counter <= clk_counter + 1;
+		end if;
+	end if;
+end process;
+
+
+
+process (n_reset, phi2, phi2_early, rw_latch, hw_sel, addr_latch, dev_rom_act, dev_ram_act, hw_sel_act, dev_reg_act, data)
 begin
 	-- TODO: reset!
-
-	dev_rom_act <= (addr_latch >= X"D800" AND addr_latch <= X"D81C");
-	dev_ram_act <= (addr_latch >= X"D600" AND addr_latch <= X"D7FF");
-	hw_sel_act <= (addr_latch = X"D1FF");
-	dev_reg_act <= (addr_latch >= X"D100" AND addr_latch <= X"D1FE");
 
 	if (rising_edge(phi2)) then
 		-- latch in address bus and the rw signal on the rising edge of phi2
 		addr_latch <= addr;
 		rw_latch <= rw;
+
+		dev_rom_act <= (addr >= X"D800" AND addr <= X"D81C");
+		dev_ram_act <= (addr >= X"D600" AND addr <= X"D7FF");
+		hw_sel_act <= (addr = X"D1FF");
+		dev_reg_act <= (addr >= X"D100" AND addr <= X"D1FE");
 
 		-- set data bus transceiver direction and output enables on rising edge of phi2
 		if ((hw_sel = PBI_ADDR AND addr >= X"D800" AND addr <= X"D81C") OR
@@ -73,7 +102,7 @@ begin
 	end if;
 
 	
-	if (rw_latch = '1' AND hw_sel = PBI_ADDR) then
+	if (phi2 = '1' AND rw_latch = '1' AND hw_sel = PBI_ADDR) then
 		-- READ of an address in our PBI device address space
 		-- (note: these are test outputs, they will eventually be connected to registers/buffers/ROM)
 		if (dev_reg_act) then 
@@ -81,20 +110,23 @@ begin
 			data <= X"22";
 		elsif (dev_ram_act) then
 			-- device RAM (buffers)
-			data <= X"99";
+			data <= addr_latch(15 downto 8);
 		elsif (dev_rom_act) then
 			-- device ROM
-			data <= X"CC";
+			data <= addr_latch(7 downto 0);
 		end if;
+	else
+		data <= "ZZZZZZZZ";
 	end if;
+	
 	
 	if (rw_latch = '0') then
 		-- WRITE to an address in our PBI device address space (or hw_sel)
 
 		-- set data bus hi-Z so we can actually read from it
-		data <= "ZZZZZZZZ";
+		--data <= "ZZZZZZZZ";
 		
-		if (hw_sel_act AND falling_edge(phi2)) then
+		if (hw_sel_act AND falling_edge(phi2_early)) then
 			-- hw_sel register write (latched on falling edge of phi2)
 			hw_sel <= data;
 --		else if (dev_reg_act AND falling_edge(phi2)) then

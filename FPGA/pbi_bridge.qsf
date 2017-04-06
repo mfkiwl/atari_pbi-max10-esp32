@@ -82,4 +82,54 @@ set_location_assignment PIN_106 -to data[7]
 set_location_assignment PIN_38 -to addr[0]
 set_location_assignment PIN_111 -to n_data_oe
 set_location_assignment PIN_110 -to data_dir
+set_location_assignment PIN_27 -to clk_50
+set_location_assignment PIN_92 -to phi2_early
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 4
+set_global_assignment -name FLOW_ENABLE_POWER_ANALYZER ON
+set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE "12.5 %"
+set_global_assignment -name VCCA_USER_VOLTAGE 3.3V
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to n_reset
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to phi2
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to rw
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[10]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[11]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[12]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[13]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[14]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[15]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to n_data_oe
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data_dir
+set_instance_assignment -name IO_STANDARD "2.5 V" -to clk_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to phi2_early
+set_global_assignment -name CDF_FILE output_files/Chain1.cdf
+set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 1A
+set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 1B
+set_global_assignment -name IOBANK_VCCIO 2.5V -section_id 2
+set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 3
+set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 4
+set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 5
+set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 6
+set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 7
+set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 8
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

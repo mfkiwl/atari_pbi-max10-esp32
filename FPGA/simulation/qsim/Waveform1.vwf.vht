@@ -19,7 +19,7 @@
 -- the top level entity of the current Quartus project .The user can use this   
 -- testbench to simulate his design using a third-party simulation tool .       
 -- *****************************************************************************
--- Generated on "04/02/2017 22:28:06"
+-- Generated on "04/05/2017 19:50:31"
                                                              
 -- Vhdl Test Bench(with test vectors) for design  :          pbi_bridge
 -- 
@@ -35,20 +35,24 @@ ARCHITECTURE pbi_bridge_arch OF pbi_bridge_vhd_vec_tst IS
 -- constants                                                 
 -- signals                                                   
 SIGNAL addr : STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL clk_50 : STD_LOGIC;
 SIGNAL data : STD_LOGIC_VECTOR(7 DOWNTO 0);
 SIGNAL data_dir : STD_LOGIC;
 SIGNAL n_data_oe : STD_LOGIC;
 SIGNAL n_reset : STD_LOGIC;
 SIGNAL phi2 : STD_LOGIC;
+SIGNAL phi2_early : STD_LOGIC;
 SIGNAL rw : STD_LOGIC;
 COMPONENT pbi_bridge
 	PORT (
 	addr : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+	clk_50 : IN STD_LOGIC;
 	data : INOUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 	data_dir : OUT STD_LOGIC;
 	n_data_oe : OUT STD_LOGIC;
 	n_reset : IN STD_LOGIC;
 	phi2 : IN STD_LOGIC;
+	phi2_early : BUFFER STD_LOGIC;
 	rw : IN STD_LOGIC
 	);
 END COMPONENT;
@@ -57,11 +61,13 @@ BEGIN
 	PORT MAP (
 -- list connections between master ports and signals
 	addr => addr,
+	clk_50 => clk_50,
 	data => data,
 	data_dir => data_dir,
 	n_data_oe => n_data_oe,
 	n_reset => n_reset,
 	phi2 => phi2,
+	phi2_early => phi2_early,
 	rw => rw
 	);
 
@@ -77,6 +83,24 @@ BEGIN
 	n_reset <= '0';
 WAIT;
 END PROCESS t_prcs_n_reset;
+
+-- clk_50
+t_prcs_clk_50: PROCESS
+BEGIN
+	clk_50 <= '1';
+	WAIT FOR 1000 ps;
+	FOR i IN 1 TO 499
+	LOOP
+		clk_50 <= '0';
+		WAIT FOR 10000 ps;
+		clk_50 <= '1';
+		WAIT FOR 10000 ps;
+	END LOOP;
+	clk_50 <= '0';
+	WAIT FOR 10000 ps;
+	clk_50 <= '1';
+WAIT;
+END PROCESS t_prcs_clk_50;
 
 -- phi2
 t_prcs_phi2: PROCESS
@@ -237,7 +261,7 @@ BEGIN
 	addr(4) <= '0';
 	WAIT FOR 560000 ps;
 	addr(4) <= '1';
-	WAIT FOR 560000 ps;
+	WAIT FOR 1120000 ps;
 	addr(4) <= '0';
 WAIT;
 END PROCESS t_prcs_addr_4;
@@ -255,7 +279,7 @@ BEGIN
 	addr(3) <= '0';
 	WAIT FOR 560000 ps;
 	addr(3) <= '1';
-	WAIT FOR 560000 ps;
+	WAIT FOR 1120000 ps;
 	addr(3) <= '0';
 WAIT;
 END PROCESS t_prcs_addr_3;
@@ -273,7 +297,7 @@ BEGIN
 	addr(2) <= '0';
 	WAIT FOR 560000 ps;
 	addr(2) <= '1';
-	WAIT FOR 560000 ps;
+	WAIT FOR 1120000 ps;
 	addr(2) <= '0';
 WAIT;
 END PROCESS t_prcs_addr_2;

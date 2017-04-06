@@ -4,6 +4,10 @@
 			"name" : "Top",
 			"pins" : [
 				{
+					"name" : "phi2_early",
+					"strict" : false
+				},
+				{
 					"name" : "data_dir",
 					"strict" : false
 				},
@@ -44,7 +48,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "rw",
+					"name" : "clk_50",
+					"strict" : false
+				},
+				{
+					"name" : "phi2",
+					"strict" : false
+				},
+				{
+					"name" : "addr[9]",
+					"strict" : false
+				},
+				{
+					"name" : "addr[10]",
 					"strict" : false
 				},
 				{
@@ -64,22 +80,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "addr[8]",
-					"strict" : false
-				},
-				{
-					"name" : "addr[9]",
-					"strict" : false
-				},
-				{
-					"name" : "addr[10]",
-					"strict" : false
-				},
-				{
-					"name" : "addr[11]",
-					"strict" : false
-				},
-				{
 					"name" : "addr[0]",
 					"strict" : false
 				},
@@ -93,6 +93,10 @@
 				},
 				{
 					"name" : "addr[4]",
+					"strict" : false
+				},
+				{
+					"name" : "addr[8]",
 					"strict" : false
 				},
 				{
@@ -112,7 +116,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "phi2",
+					"name" : "addr[11]",
+					"strict" : false
+				},
+				{
+					"name" : "rw",
 					"strict" : false
 				}
 			]
