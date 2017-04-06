@@ -1,3 +1,5 @@
 Hardware/atari_pbi-cache.lib
 *.bak
 *.bck
+*.vwf
+*.flock
