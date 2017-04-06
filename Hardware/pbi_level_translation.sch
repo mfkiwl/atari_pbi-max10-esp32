@@ -1,19 +1,24 @@
 EESchema Schematic File Version 2
-LIBS:altera_max10
+LIBS:74xx
 LIBS:atari_pbi-cache
+LIBS:atari_xl_pbi
+LIBS:altera_max10
+LIBS:power
+LIBS:device
+LIBS:conn
 EELAYER 25 0
 EELAYER END
 $Descr B 17000 11000
 encoding utf-8
 Sheet 3 3
-Title ""
-Date ""
-Rev ""
-Comp ""
-Comment1 ""
-Comment2 ""
+Title "Atari PBI R:Fi -- Bus 5V-3.3V Level Conversion & Protection"
+Date "2017-03-31"
+Rev "A00"
+Comp "Tangent Audio"
+Comment1 "www.tangentaudio.com"
+Comment2 "Designed by Steve Richardson"
 Comment3 ""
-Comment4 ""
+Comment4 "NOTE: EARLY DRAFT, NOT FINAL!"
 $EndDescr
 $Comp
 L 74HC245 U?
@@ -1103,6 +1108,8 @@ Text Notes 4250 10400 0    60   ~ 12
 NOTE: ATARI PBI USES 5V LOGIC, FPGA AND OTHER DEVICES ARE ALL 3.3V\n74LVCxxx DEVICES ARE USED FOR 5V/3.3V LEVEL SHIFTING\nTHEY RUN ON 3.3V VCC AND INPUTS ARE 5V TOLERANT\n
 Text HLabel 8300 750  2    60   BiDi ~ 12
 DATA_BUS_3V
-Text Notes 1700 8700 0    60   ~ 0
-NOTE: IRQ is an open collector signal, fix this
+Text Notes 1250 8700 0    60   ~ 0
+TODO: IRQ is an open collector signal, add transistor
+Text Notes 16450 9200 2    60   ~ 0
+TRADEMARK INFORMATION: All trademarks, trade names, or logos mentioned\nor used are the property of their respective owners. 
 $EndSCHEMATC

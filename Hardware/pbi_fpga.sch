@@ -1,19 +1,24 @@
 EESchema Schematic File Version 2
-LIBS:altera_max10
+LIBS:74xx
 LIBS:atari_pbi-cache
+LIBS:atari_xl_pbi
+LIBS:altera_max10
+LIBS:power
+LIBS:device
+LIBS:conn
 EELAYER 25 0
 EELAYER END
 $Descr B 17000 11000
 encoding utf-8
 Sheet 2 3
-Title ""
-Date ""
-Rev ""
-Comp ""
-Comment1 ""
-Comment2 ""
+Title "Atari PBI R:Fi -- PBI Bus to FPGA Connections"
+Date "2017-03-31"
+Rev "A00"
+Comp "Tangent Audio"
+Comment1 "www.tangentaudio.com"
+Comment2 "Designed by Steve Richardson"
 Comment3 ""
-Comment4 ""
+Comment4 "NOTE: EARLY DRAFT, NOT FINAL!"
 $EndDescr
 Text HLabel 1250 800  0    60   BiDi ~ 0
 DATA_BUS_3V
@@ -379,4 +384,6 @@ Entry Wire Line
 	1750 4800 1650 4700
 Entry Wire Line
 	1750 5000 1650 4900
+Text Notes 16400 9150 2    60   ~ 0
+TRADEMARK INFORMATION: All trademarks, trade names, or logos mentioned\nor used are the property of their respective owners. 
 $EndSCHEMATC
