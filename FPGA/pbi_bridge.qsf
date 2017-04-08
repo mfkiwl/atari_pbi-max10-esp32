@@ -91,33 +91,33 @@ set_global_assignment -name NUM_PARALLEL_PROCESSORS 4
 set_global_assignment -name FLOW_ENABLE_POWER_ANALYZER ON
 set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE "12.5 %"
 set_global_assignment -name VCCA_USER_VOLTAGE 3.3V
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to n_reset
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to phi2
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to rw
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[1]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[2]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[3]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[4]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[5]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[6]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[7]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[8]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[9]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[10]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[11]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[12]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[13]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[14]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[15]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[0]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[1]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[2]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[3]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[4]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[5]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[6]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data[7]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to addr[0]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to n_reset
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to phi2
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to rw
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[1]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[2]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[3]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[4]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[5]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[6]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[7]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[8]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[9]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[10]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[11]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[12]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[13]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[14]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[15]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to data[0]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to data[1]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to data[2]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to data[3]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to data[4]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to data[5]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to data[6]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to data[7]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[0]
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to n_data_oe
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data_dir
 set_instance_assignment -name IO_STANDARD "2.5 V" -to clk_50
@@ -131,5 +131,72 @@ set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 4
 set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 5
 set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 6
 set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 7
-set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 8
+set_global_assignment -name IOBANK_VCCIO 2.5V -section_id 8
+set_instance_assignment -name PCI_IO ON -to phi2
+set_instance_assignment -name PCI_IO ON -to n_reset
+set_instance_assignment -name PCI_IO ON -to rw
+set_instance_assignment -name PCI_IO ON -to addr[1]
+set_instance_assignment -name PCI_IO ON -to addr[2]
+set_instance_assignment -name PCI_IO ON -to addr[3]
+set_instance_assignment -name PCI_IO ON -to addr[4]
+set_instance_assignment -name PCI_IO ON -to addr[5]
+set_instance_assignment -name PCI_IO ON -to addr[6]
+set_instance_assignment -name PCI_IO ON -to addr[7]
+set_instance_assignment -name PCI_IO ON -to addr[8]
+set_instance_assignment -name PCI_IO ON -to addr[9]
+set_instance_assignment -name PCI_IO ON -to addr[10]
+set_instance_assignment -name PCI_IO ON -to addr[11]
+set_instance_assignment -name PCI_IO ON -to addr[12]
+set_instance_assignment -name PCI_IO ON -to addr[13]
+set_instance_assignment -name PCI_IO ON -to addr[14]
+set_instance_assignment -name PCI_IO ON -to addr[15]
+set_instance_assignment -name PCI_IO ON -to data[0]
+set_instance_assignment -name PCI_IO ON -to data[1]
+set_instance_assignment -name PCI_IO ON -to data[2]
+set_instance_assignment -name PCI_IO ON -to data[3]
+set_instance_assignment -name PCI_IO ON -to data[4]
+set_instance_assignment -name PCI_IO ON -to data[5]
+set_instance_assignment -name PCI_IO ON -to data[6]
+set_instance_assignment -name PCI_IO ON -to data[7]
+set_instance_assignment -name PCI_IO ON -to addr[0]
+set_instance_assignment -name PCI_IO ON -to n_data_oe
+set_instance_assignment -name PCI_IO ON -to data_dir
+set_instance_assignment -name PCI_IO ON -to clk_50
+set_instance_assignment -name PCI_IO ON -to phi2_early
+set_location_assignment PIN_119 -to n_extsel
+set_location_assignment PIN_88 -to n_irq
+set_location_assignment PIN_118 -to n_mpd
+set_location_assignment PIN_89 -to n_rdy
+set_location_assignment PIN_91 -to extenb
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to n_extsel
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to n_irq
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to n_mpd
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to n_rdy
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to extenb
+set_instance_assignment -name PCI_IO ON -to n_extsel
+set_instance_assignment -name PCI_IO ON -to n_irq
+set_instance_assignment -name PCI_IO ON -to n_mpd
+set_instance_assignment -name PCI_IO ON -to n_rdy
+set_instance_assignment -name PCI_IO ON -to extenb
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
+set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
+set_global_assignment -name STRATIXV_CONFIGURATION_SCHEME "PASSIVE SERIAL"
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVCMOS"
+set_location_assignment PIN_134 -to n_led2
+set_location_assignment PIN_135 -to n_led3
+set_location_assignment PIN_140 -to n_led4
+set_location_assignment PIN_141 -to n_led5
+set_location_assignment PIN_132 -to n_led1
+set_instance_assignment -name IO_STANDARD "2.5 V" -to n_led2
+set_instance_assignment -name IO_STANDARD "2.5 V" -to n_led3
+set_instance_assignment -name IO_STANDARD "2.5 V" -to n_led4
+set_instance_assignment -name IO_STANDARD "2.5 V" -to n_led5
+set_instance_assignment -name IO_STANDARD "2.5 V" -to n_led1
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

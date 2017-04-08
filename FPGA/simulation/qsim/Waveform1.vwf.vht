@@ -19,7 +19,7 @@
 -- the top level entity of the current Quartus project .The user can use this   
 -- testbench to simulate his design using a third-party simulation tool .       
 -- *****************************************************************************
--- Generated on "04/05/2017 19:50:31"
+-- Generated on "04/08/2017 09:06:21"
                                                              
 -- Vhdl Test Bench(with test vectors) for design  :          pbi_bridge
 -- 
@@ -38,7 +38,12 @@ SIGNAL addr : STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL clk_50 : STD_LOGIC;
 SIGNAL data : STD_LOGIC_VECTOR(7 DOWNTO 0);
 SIGNAL data_dir : STD_LOGIC;
+SIGNAL extenb : STD_LOGIC;
 SIGNAL n_data_oe : STD_LOGIC;
+SIGNAL n_extsel : STD_LOGIC;
+SIGNAL n_irq : STD_LOGIC;
+SIGNAL n_mpd : STD_LOGIC;
+SIGNAL n_rdy : STD_LOGIC;
 SIGNAL n_reset : STD_LOGIC;
 SIGNAL phi2 : STD_LOGIC;
 SIGNAL phi2_early : STD_LOGIC;
@@ -47,9 +52,14 @@ COMPONENT pbi_bridge
 	PORT (
 	addr : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 	clk_50 : IN STD_LOGIC;
-	data : INOUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-	data_dir : OUT STD_LOGIC;
-	n_data_oe : OUT STD_LOGIC;
+	data : BUFFER STD_LOGIC_VECTOR(7 DOWNTO 0);
+	data_dir : BUFFER STD_LOGIC;
+	extenb : IN STD_LOGIC;
+	n_data_oe : BUFFER STD_LOGIC;
+	n_extsel : BUFFER STD_LOGIC;
+	n_irq : BUFFER STD_LOGIC;
+	n_mpd : BUFFER STD_LOGIC;
+	n_rdy : BUFFER STD_LOGIC;
 	n_reset : IN STD_LOGIC;
 	phi2 : IN STD_LOGIC;
 	phi2_early : BUFFER STD_LOGIC;
@@ -64,7 +74,12 @@ BEGIN
 	clk_50 => clk_50,
 	data => data,
 	data_dir => data_dir,
+	extenb => extenb,
 	n_data_oe => n_data_oe,
+	n_extsel => n_extsel,
+	n_irq => n_irq,
+	n_mpd => n_mpd,
+	n_rdy => n_rdy,
 	n_reset => n_reset,
 	phi2 => phi2,
 	phi2_early => phi2_early,

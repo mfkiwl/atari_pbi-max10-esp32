@@ -9,7 +9,7 @@ z2
 cModel Technology
 Z0 dC:/Users/steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim
 Ehard_block
-Z1 w1491436232
+Z1 w1491656783
 Z2 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
 Z3 DPx11 fiftyfivenm 21 fiftyfivenm_atom_pack 0 22 1Dk;4?@modA7lIE5F<?`>0
 Z4 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
@@ -25,9 +25,9 @@ Vhj[i;a0dD85B`o1JPT^cg2
 !s100 3A]XnMhF<;9mKUe5mn3aM1
 Z10 OV;C;10.5b;63
 32
-Z11 !s110 1491436233
+Z11 !s110 1491656785
 !i10b 1
-Z12 !s108 1491436233.000000
+Z12 !s108 1491656785.000000
 Z13 !s90 -work|work|pbi_bridge.vho|
 Z14 !s107 pbi_bridge.vho|
 !i113 1
@@ -41,10 +41,10 @@ R5
 R6
 R7
 DEx4 work 10 hard_block 0 22 hj[i;a0dD85B`o1JPT^cg2
-l76
-L54
-Va5ClDYec`9chO`Ne0M1NL2
-!s100 >:Wi^nX[YiN=@>>JC6K_83
+l64
+L50
+Vb>R0MC?JSoM;9^5LiLRdB0
+!s100 fKQbZo5`HOoKjm4g@4@H`0
 R10
 32
 R11
@@ -69,9 +69,9 @@ R0
 R8
 R9
 l0
-L91
-VLCkKHceYNGl1@zf3X5Phd3
-!s100 2Q?RG44fNlfUL6nAm^?ZS0
+L79
+V_K_=Q=`<kmzBUEV1D1KN`3
+!s100 E7@ac9l9MX`MWQ20lcnA_1
 R10
 32
 R11
@@ -91,11 +91,11 @@ R4
 R5
 R6
 R18
-DEx4 work 10 pbi_bridge 0 22 LCkKHceYNGl1@zf3X5Phd3
-l289
-L139
-VU9>Mdg2R<mIKB^g[DKa>T3
-!s100 fTaRY5UbmW^4iW=al?UDH1
+DEx4 work 10 pbi_bridge 0 22 _K_=Q=`<kmzBUEV1D1KN`3
+l294
+L137
+VJOidhV_UjM^YGFnaY;_TJ1
+!s100 n5nI7RK8iFUDWSR7`F>8f2
 R10
 32
 R11
@@ -107,7 +107,7 @@ R14
 R15
 R16
 Epbi_bridge_vhd_vec_tst
-Z19 w1491436231
+Z19 w1491656781
 R5
 R6
 R0
@@ -131,10 +131,10 @@ Apbi_bridge_arch
 R5
 R6
 Z24 DEx4 work 22 pbi_bridge_vhd_vec_tst 0 22 OEQ=nH?3D@];QU4=UW[9d2
-l59
+l69
 L34
-VCd;iCHn1hbGg:zf3akHRC1
-!s100 5N?XQWQ5Mh_OBiDKd6c@a3
+VHzbFcS^k=H7VNH6]o=TB<2
+!s100 kkLVTlnb>ibeSQoM50o1e0
 R10
 32
 R11
