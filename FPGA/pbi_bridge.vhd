@@ -20,7 +20,7 @@ entity pbi_bridge is
 		n_led3		: OUT		std_logic;
 		n_led4		: OUT		std_logic;
 		n_led5		: OUT		std_logic;
-		clk_50		: IN		std_logic;								-- 50MHz clock oscillator
+		clk_57		: IN		std_logic;								-- 57.28MHz clock oscillator (32 * PHI2)
 		phi2_early	: BUFFER	std_logic;								-- shortened PHI2 cycle completion signal
 		phi2			: IN		std_logic;								-- Atari PHI2 clock (1.79MHz NTSC, 1.77MHz PAL)
 		rw				: IN		std_logic;								-- latched read/write (1=Atari reading RAM/device, 0=Atari writing RAM/device)
@@ -36,6 +36,7 @@ entity pbi_bridge is
 		n_rdy			: OUT		std_logic := '1'						-- Briefly stop CPU (use with extreme caution, ANTIC already uses this)
 	);
 end pbi_bridge;
+
 
 ARCHITECTURE behavior OF pbi_bridge IS
 	-- latch to hold address
@@ -64,7 +65,45 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	
 	-- latch used to hold LED values
 	SIGNAL led_latch : std_logic_vector(3 downto 0) := X"0";
+
+	
+	SIGNAL flash_read : std_logic := '0';
+	SIGNAL flash_read_valid : std_logic := '0';
+	SIGNAL flash_data : std_logic_vector(31 downto 0) := X"FFFFFFFF";
+	SIGNAL flash_data_latch : std_logic_vector(31 downto 0) := X"FFFFFFFF";
+	SIGNAL flash_bank : std_logic_vector(5 downto 0) := "000000";
+	SIGNAL flash_addr : std_logic_vector(14 downto 0) := "000000000000000";
+	
+	
+	component pbi_rom is
+		port (
+			clock                   : in  std_logic                     := 'X';             -- clk
+			reset_n                 : in  std_logic                     := 'X';             -- reset_n
+			avmm_data_addr          : in  std_logic_vector(14 downto 0) := (others => 'X'); -- address
+			avmm_data_read          : in  std_logic                     := 'X';             -- read
+			avmm_data_readdata      : out std_logic_vector(31 downto 0);                    -- readdata
+			avmm_data_waitrequest   : out std_logic;                                        -- waitrequest
+			avmm_data_readdatavalid : out std_logic;                                        -- readdatavalid
+			avmm_data_burstcount    : in  std_logic_vector(3 downto 0)  := (others => 'X')  -- burstcount
+		);
+	end component pbi_rom;
+
+
 BEGIN
+
+
+u0 : component pbi_rom
+	port map (
+		clock                   => clk_57,                   				--    clk.clk
+		reset_n                 => n_reset,                 				-- nreset.reset_n
+		avmm_data_addr(14 downto 9)   => flash_bank, 						--   data.address (64 banks)
+		avmm_data_addr(8 downto 0)   => addr_latch(10 downto 2),   		--   data.address (512 x 32-bit words bank size)
+		avmm_data_read          => flash_read,          					--       .read
+		avmm_data_readdata      => flash_data,     					--       .readdata
+--		avmm_data_waitrequest   => CONNECTED_TO_avmm_data_waitrequest,   --       .waitrequest
+		avmm_data_readdatavalid => flash_read_valid, 						--       .readdatavalid
+		avmm_data_burstcount    => X"1"     									--      .burstcount
+	);
 
 
 process (led_latch)
@@ -75,27 +114,44 @@ begin
 	n_led4 <= NOT led_latch(3);
 end process;
 
--- create a delayed signal a fixed amount after the rising edge of PHI2
--- there is jitter on this signal because PHI2 and clk_50 are asynchronous
-process (phi2, clk_50)
+-- create a delayed signal a fixed amount after PHI2 goes high
+-- the falling edge of this signal is used to latch data from the Atari into FPGA
+process (phi2, clk_57, dev_rom_act, rw_latch)
 begin
 	if (phi2 = '0') then
+		-- counter only runs when PHI2 is '1'
 		clk_counter <= "0000";
 		phi2_early <= '0';
-	elsif (rising_edge(clk_50)) then
-		-- the counter value here is the number of 50MHz periods to delay after rising edge of PHI2
-		if (clk_counter = "1010") then
+	elsif (rising_edge(clk_57)) then
+		if (clk_counter = "0001") then
+			
+			if (dev_rom_act AND rw_latch = '1') then 
+				flash_read <= '1';
+			else
+				flash_read <= '0';
+			end if;
+			
+			phi2_early <= '1';
+		elsif (clk_counter = "1100") then
 			phi2_early <= '0';
 		else
+			flash_read <= '0';
 			phi2_early <= '1';
 			clk_counter <= clk_counter + 1;
 		end if;
 	end if;
 end process;
 
+process (clk_57, flash_read_valid)
+begin
+	if (falling_edge(clk_57) AND flash_read_valid = '1') then
+		flash_data_latch <= flash_data;
+	end if;
+
+end process;
 
 
-process (n_reset, phi2, phi2_early, rw_latch, hw_sel, addr_latch, dev_rom_act, dev_ram_act, hw_sel_act, dev_reg_act, data)
+process (n_reset, phi2, phi2_early, rw_latch, hw_sel, addr_latch, dev_rom_act, dev_ram_act, hw_sel_act, dev_reg_act, addr, data, flash_data_latch)
 begin
 	-- TODO: reset!
 
@@ -115,13 +171,13 @@ begin
 		addr_latch <= addr;
 		rw_latch <= rw;
 
-		dev_rom_act <= (addr >= X"D800" AND addr <= X"D81C");
+		dev_rom_act <= (addr >= X"D800" AND addr <= X"E031");
 		dev_ram_act <= (addr >= X"D600" AND addr <= X"D7FF");
 		hw_sel_act <= (addr = X"D1FF");
 		dev_reg_act <= (addr >= X"D100" AND addr <= X"D1FE");
 
 		-- set data bus transceiver direction and output enables on rising edge of phi2
-		if ((hw_sel = PBI_ADDR AND addr >= X"D800" AND addr <= X"D81C") OR
+		if ((hw_sel = PBI_ADDR AND addr >= X"D800" AND addr <= X"E031") OR
 			 (hw_sel = PBI_ADDR AND addr >= X"D600" AND addr <= X"D7FF") OR
 			 (hw_sel = PBI_ADDR AND addr >= X"D100" AND addr <= X"D1FE") OR
 			 (addr = X"D1FF")) then
@@ -150,13 +206,26 @@ begin
 			n_mpd <= '1';
 			n_extsel <= '0';
 			n_data_oe <= '0';
+	
 			data <= addr_latch(15 downto 8);
+
 		elsif (dev_rom_act) then
 			-- device ROM
 			n_mpd <= '0';
 			n_extsel <= '0';
 			n_data_oe <= '0';
-			data <= addr_latch(7 downto 0);
+
+			-- unpack the 32-bit word from the flash read
+			if (addr_latch(1 downto 0) = "11") then
+				data <= flash_data_latch(31 downto 24);
+			elsif (addr_latch(1 downto 0) = "10") then
+				data <= flash_data_latch(23 downto 16);
+			elsif (addr_latch(1 downto 0) = "01") then
+				data <= flash_data_latch(15 downto 8);
+			else
+				data <= flash_data_latch(7 downto 0);
+			end if;
+
 		else 
 			n_data_oe <= '1';
 			n_mpd <= '1';
@@ -182,7 +251,7 @@ begin
 				-- hw_sel register write (latched on falling edge of phi2_early)
 				hw_sel <= data;
 			
-			elsif (dev_reg_act) then
+			elsif (dev_reg_act  AND hw_sel = PBI_ADDR) then
 				-- device register write (latched on falling edge of phi2)
 				led_latch <= data(3 downto 0);
 				

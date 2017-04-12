@@ -47,12 +47,9 @@ set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
-set_global_assignment -name VHDL_FILE pbi_bridge.vhd
-set_global_assignment -name SDC_FILE pbi_bridge.sdc
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform1.vwf
 set_location_assignment PIN_113 -to n_reset
 set_location_assignment PIN_90 -to phi2
 set_location_assignment PIN_114 -to rw
@@ -82,7 +79,6 @@ set_location_assignment PIN_106 -to data[7]
 set_location_assignment PIN_38 -to addr[0]
 set_location_assignment PIN_111 -to n_data_oe
 set_location_assignment PIN_110 -to data_dir
-set_location_assignment PIN_27 -to clk_50
 set_location_assignment PIN_92 -to phi2_early
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
@@ -120,9 +116,7 @@ set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to data[7]
 set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to addr[0]
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to n_data_oe
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to data_dir
-set_instance_assignment -name IO_STANDARD "2.5 V" -to clk_50
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to phi2_early
-set_global_assignment -name CDF_FILE output_files/Chain1.cdf
 set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 1A
 set_global_assignment -name IOBANK_VCCIO 3.3V -section_id 1B
 set_global_assignment -name IOBANK_VCCIO 2.5V -section_id 2
@@ -161,7 +155,6 @@ set_instance_assignment -name PCI_IO ON -to data[7]
 set_instance_assignment -name PCI_IO ON -to addr[0]
 set_instance_assignment -name PCI_IO ON -to n_data_oe
 set_instance_assignment -name PCI_IO ON -to data_dir
-set_instance_assignment -name PCI_IO ON -to clk_50
 set_instance_assignment -name PCI_IO ON -to phi2_early
 set_location_assignment PIN_119 -to n_extsel
 set_location_assignment PIN_88 -to n_irq
@@ -199,4 +192,12 @@ set_instance_assignment -name IO_STANDARD "2.5 V" -to n_led3
 set_instance_assignment -name IO_STANDARD "2.5 V" -to n_led4
 set_instance_assignment -name IO_STANDARD "2.5 V" -to n_led5
 set_instance_assignment -name IO_STANDARD "2.5 V" -to n_led1
+set_global_assignment -name QSYS_FILE pbi_rom.qsys
+set_global_assignment -name VHDL_FILE pbi_bridge.vhd
+set_global_assignment -name SDC_FILE pbi_bridge.sdc
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform1.vwf
+set_global_assignment -name CDF_FILE output_files/Chain1.cdf
+set_location_assignment PIN_29 -to clk_57
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to clk_57
+set_instance_assignment -name PCI_IO ON -to clk_57
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
