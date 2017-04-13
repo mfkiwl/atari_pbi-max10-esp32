@@ -1,0 +1,129 @@
+mads 1.9.9
+Source: C:\Users\steve\Documents\GitHub\atari_pbi\Atari\Handler\handler.asm
+     1 				; PBI R:Fi PBI ROM Handler
+     2 				; 2017APR12 Steve Richardson (TangentAudio)
+     3 				;-------------------------------------------------------------------------	
+     4
+     5
+     6
+     7 				;-------------------------------------------------------------------------	
+     8 				; tell MADS to get rid of header bytes
+     9 						opt h-f+
+    10
+    11
+    12 				;-------------------------------------------------------------------------	
+    13 = E486			NEWDEV = $E486
+    14 = E48F			GENDEV = $E48F
+    15
+    16 = 0247			DEVMASK = $0247 ; PBI devices known to OS
+    17 = 0248			NDEVREQ = $0248 ; activated PBI device
+    18
+    19 = 031A			HATABS = $031A
+    20
+    21 = 0052			devname = 'R'
+    22
+    23
+    24 				;-------------------------------------------------------------------------	
+    25 				; PBI table (D800-D81C)
+    26 						org $D800
+    27
+    28 D800 EF BE		pbi_table	.word $BEEF		; ROM checksum - ignored
+    29 D802 00					.byte $00		; ROM revision - ignored
+    30 D803 80					.byte $80		; Signature Byte ($80)
+    31 D804 00					.byte $00		; device type
+    32 D805 4C 1D D8				jmp io_vector		; I/O vector
+    33 D808 4C 1F D8				jmp irq_vector		; IRQ vector
+    34 D80B 91					.byte $91		; Signature Byte ($91)
+    35 D80C 52					.byte devname		; device name (ASCII char)
+    36 									; note: all HATABS entries below are -1
+    37 D80D 3A D8				.word open_vector-1	; HATABS - open 
+    38 D80F 3C D8				.word close_vector-1	; HATABS - close
+    39 D811 40 D8				.word get_vector-1	; HATABS - get byte
+    40 D813 42 D8				.word put_vector-1	; HATABS - put byte
+    41 D815 44 D8				.word status_vector-1	; HATABS - status
+    42 D817 46 D8				.word special_vector-1	; HATABS - special
+    43 D819 4C 21 D8				jmp init_vector		; initialization vector
+    44 D81C 00					.byte $00		; unused
+    45
+    46 				;-------------------------------------------------------------------------	
+    47
+    48 				; not implementing now	
+    49 D81D 38			io_vector	sec			
+    50 D81E 60					rts
+    51
+    52 				; no IRQ handling yet
+    53 D81F 38			irq_vector	sec
+    54 D820 60					rts
+    55
+    56 				;-------------------------------------------------------------------------	
+    57 				; device is registered to OS by setting the appropriate bit in DEVMASK
+    58 				; and the CIO handler is registered in the HATABS table by calling the NEWDEV routine
+    59 D821 AD 47 02		init_vector	lda DEVMASK		; get known PBI devices
+    60 D824 0D 48 02				ora NDEVREQ		; OR in the current device request bit
+    61 D827 8D 47 02				sta DEVMASK		; store the devices back 
+    62
+    63 				; Earl Rice method (ANTIC JAN-APR 1985)
+    64 				;		ldx #0
+    65 				;search
+    66 				;		lda HATABS, x
+    67 				;		beq found	; found a spot (=0)
+    68 				;		inx
+    69 				;		inx
+    70 				;		inx
+    71 				;		cpx #36		; length of HATABS
+    72 				;		bcc search
+    73 				;		rts		; no room in HATABS
+    74 				;found
+    75 				;		lda 'R'
+    76 				;		sta HATABS, x
+    77 				;		inx
+    78 				;		
+    79 				;		lda .LO(GENDEV)
+    80 				;		lda .HI(GENDEV)
+    81 				;		sta HATABS + 2, x
+    82
+    83 						;; roland scholz method
+    84 D82A A6 52				ldx devname
+    85 D82C A5 E4				lda .HI(GENDEV)
+    86 D82E A4 8F				ldy .LO(GENDEV)
+    87 D830 20 86 E4				jsr NEWDEV
+    88 					
+    89 D833 9D 1B 03				sta HATABS+1, x
+    90 D836 98					tya
+    91 D837 9D 1A 03				sta HATABS, x
+    92 						
+    93 						; TODO: device-specific init
+    94 						
+    95 D83A 60					rts
+    96 				;-------------------------------------------------------------------------	
+    97
+    98 				;-------------------------------------------------------------------------	
+    99 D83B			open_vector			
+   100 D83B 38					sec
+   101 D83C 60					rts
+   102
+   103 D83D A0 01		close_vector	ldy #1
+   104 D83F 38					sec
+   105 D840 60					rts
+   106
+   107 D841			get_vector	
+   108 D841 38					sec
+   109 D842 60					rts
+   110
+   111 D843			put_vector	
+   112 D843 38					sec
+   113 D844 60					rts
+   114
+   115 D845			status_vector
+   116 D845 38					sec
+   117 D846 60					rts
+   118
+   119 D847			special_vector
+   120 D847 38					sec
+   121 D848 60					rts
+   122
+   123 				;-------------------------------------------------------------------------	
+   124 D849					.local text
+   125 D849 54 61 6E 67 65 6E + 		.byte 'TangentAudio R:Fi PBI Handler 2017 Steve Richardson'
+   126 						.endl
+   127 						
