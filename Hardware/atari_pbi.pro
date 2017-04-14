@@ -1,4 +1,4 @@
-update=4/3/2017 8:46:48 AM
+update=4/14/2017 9:34:51 AM
 version=1
 last_client=kicad
 [pcbnew]
@@ -40,9 +40,8 @@ version=1
 LibDir=
 [eeschema/libraries]
 LibName1=74xx
-LibName2=atari_pbi-cache
-LibName3=atari_xl_pbi
-LibName4=altera_max10
-LibName5=power
-LibName6=device
-LibName7=conn
+LibName2=atari_xl_pbi
+LibName3=altera_max10
+LibName4=power
+LibName5=device
+LibName6=conn

@@ -1,0 +1,71 @@
+EESchema Schematic File Version 2
+LIBS:74xx
+LIBS:atari_xl_pbi
+LIBS:altera_max10
+LIBS:power
+LIBS:device
+LIBS:conn
+EELAYER 25 0
+EELAYER END
+$Descr B 17000 11000
+encoding utf-8
+Sheet 4 5
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L 10M08SAE144xxx U?
+U 1 1 58F0E4FF
+P 12200 1300
+AR Path="/58E06319/58F0E4FF" Ref="U?"  Part="1" 
+AR Path="/58F0E1E3/58F0E4FF" Ref="U?"  Part="1" 
+F 0 "U?" H 12300 1350 60  0000 C CNN
+F 1 "10M08SAE144xxx" H 12600 -250 60  0000 C CNN
+F 2 "" H 12200 1300 60  0001 C CNN
+F 3 "" H 12200 1300 60  0001 C CNN
+	1    12200 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L 10M08SAE144xxx U?
+U 6 1 58F0E506
+P 8650 1300
+AR Path="/58E06319/58F0E506" Ref="U?"  Part="6" 
+AR Path="/58F0E1E3/58F0E506" Ref="U?"  Part="6" 
+F 0 "U?" H 8750 1350 60  0000 C CNN
+F 1 "10M08SAE144xxx" H 9050 -250 60  0000 C CNN
+F 2 "" H 8650 1300 60  0001 C CNN
+F 3 "" H 8650 1300 60  0001 C CNN
+	6    8650 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L 10M08SAE144xxx U?
+U 5 1 58F0E50D
+P 8650 3250
+AR Path="/58E06319/58F0E50D" Ref="U?"  Part="5" 
+AR Path="/58F0E1E3/58F0E50D" Ref="U?"  Part="5" 
+F 0 "U?" H 8750 3300 60  0000 C CNN
+F 1 "10M08SAE144xxx" H 9050 1700 60  0000 C CNN
+F 2 "" H 8650 3250 60  0001 C CNN
+F 3 "" H 8650 3250 60  0001 C CNN
+	5    8650 3250
+	1    0    0    -1  
+$EndComp
+Wire Notes Line
+	7350 900  15600 900 
+Wire Notes Line
+	7350 5100 7350 900 
+Text Notes 7400 1050 0    60   ~ 0
+EVAL ARDUINO HDR
+Wire Notes Line
+	7350 5100 15600 5100
+Wire Notes Line
+	15600 5100 15600 900 
+$EndSCHEMATC
