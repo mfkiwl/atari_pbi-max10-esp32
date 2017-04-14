@@ -18,6 +18,8 @@ NDEVREQ = $0248 ; activated PBI device
 
 HATABS = $031A
 
+DEVREG = $D100
+
 devname = 'R'
 
 
@@ -60,35 +62,43 @@ init_vector	lda DEVMASK		; get known PBI devices
 		ora NDEVREQ		; OR in the current device request bit
 		sta DEVMASK		; store the devices back 
 
-; Earl Rice method (ANTIC JAN-APR 1985)
-;		ldx #0
-;search
-;		lda HATABS, x
-;		beq found	; found a spot (=0)
-;		inx
-;		inx
-;		inx
-;		cpx #36		; length of HATABS
-;		bcc search
-;		rts		; no room in HATABS
-;found
-;		lda 'R'
-;		sta HATABS, x
-;		inx
-;		
-;		lda .LO(GENDEV)
-;		lda .HI(GENDEV)
-;		sta HATABS + 2, x
-
-		;; roland scholz method
-		ldx devname
-		lda .HI(GENDEV)
-		ldy .LO(GENDEV)
-		jsr NEWDEV
-	
-		sta HATABS+1, x
-		tya
+; Earl Rice method (ANTIC JAN-APR 1985) - seems to populate HATABS properly
+		ldx #0
+search
+		lda HATABS, x
+		beq found	; found a spot (=0)
+		inx
+		inx
+		inx
+		cpx #36		; length of HATABS
+		bcc search
+		rts		; no room in HATABS
+found
+		lda #devname
 		sta HATABS, x
+		inx
+		
+		lda #<GENDEV
+		sta HATABS, x
+		inx
+		lda #>GENDEV
+		sta HATABS, x
+
+
+		;; roland scholz/fjc method
+		;; not yet functional for some reason
+		;ldx #devname
+		;ldy #<GENDEV
+		;lda #>GENDEV
+		;jsr NEWDEV		; returns: N = 1 - failed, C = 0 - success, C =1 - entry already exists
+	
+		;sta HATABS+1, x
+		;tya
+		;sta HATABS, x
+
+
+		lda #01			; turn on an LED
+		sta DEVREG
 		
 		; TODO: device-specific init
 		
@@ -97,26 +107,39 @@ init_vector	lda DEVMASK		; get known PBI devices
 
 ;-------------------------------------------------------------------------	
 open_vector			
+		lda #08			; turn on an LED
+		sta DEVREG
 		sec
 		rts
 
-close_vector	ldy #1
+close_vector	
+		lda #08			; turn on an LED
+		sta DEVREG
+		ldy #1
 		sec
 		rts
 
 get_vector	
+		lda #08			; turn on an LED
+		sta DEVREG
 		sec
 		rts
 
 put_vector	
+		lda #08			; turn on an LED
+		sta DEVREG
 		sec
 		rts
 
 status_vector
+		lda #08			; turn on an LED
+		sta DEVREG
 		sec
 		rts
 
 special_vector
+		lda #08			; turn on an LED
+		sta DEVREG
 		sec
 		rts
 

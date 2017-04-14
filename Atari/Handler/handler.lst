@@ -20,110 +20,131 @@ Source: C:\Users\steve\Documents\GitHub\atari_pbi\Atari\Handler\handler.asm
     18
     19 = 031A			HATABS = $031A
     20
-    21 = 0052			devname = 'R'
+    21 = D100			DEVREG = $D100
     22
-    23
-    24 				;-------------------------------------------------------------------------	
-    25 				; PBI table (D800-D81C)
-    26 						org $D800
-    27
-    28 D800 EF BE		pbi_table	.word $BEEF		; ROM checksum - ignored
-    29 D802 00					.byte $00		; ROM revision - ignored
-    30 D803 80					.byte $80		; Signature Byte ($80)
-    31 D804 00					.byte $00		; device type
-    32 D805 4C 1D D8				jmp io_vector		; I/O vector
-    33 D808 4C 1F D8				jmp irq_vector		; IRQ vector
-    34 D80B 91					.byte $91		; Signature Byte ($91)
-    35 D80C 52					.byte devname		; device name (ASCII char)
-    36 									; note: all HATABS entries below are -1
-    37 D80D 3A D8				.word open_vector-1	; HATABS - open 
-    38 D80F 3C D8				.word close_vector-1	; HATABS - close
-    39 D811 40 D8				.word get_vector-1	; HATABS - get byte
-    40 D813 42 D8				.word put_vector-1	; HATABS - put byte
-    41 D815 44 D8				.word status_vector-1	; HATABS - status
-    42 D817 46 D8				.word special_vector-1	; HATABS - special
-    43 D819 4C 21 D8				jmp init_vector		; initialization vector
-    44 D81C 00					.byte $00		; unused
-    45
-    46 				;-------------------------------------------------------------------------	
+    23 = 0052			devname = 'R'
+    24
+    25
+    26 				;-------------------------------------------------------------------------	
+    27 				; PBI table (D800-D81C)
+    28 						org $D800
+    29
+    30 D800 EF BE		pbi_table	.word $BEEF		; ROM checksum - ignored
+    31 D802 00					.byte $00		; ROM revision - ignored
+    32 D803 80					.byte $80		; Signature Byte ($80)
+    33 D804 00					.byte $00		; device type
+    34 D805 4C 1D D8				jmp io_vector		; I/O vector
+    35 D808 4C 1F D8				jmp irq_vector		; IRQ vector
+    36 D80B 91					.byte $91		; Signature Byte ($91)
+    37 D80C 52					.byte devname		; device name (ASCII char)
+    38 									; note: all HATABS entries below are -1
+    39 D80D 4F D8				.word open_vector-1	; HATABS - open 
+    40 D80F 56 D8				.word close_vector-1	; HATABS - close
+    41 D811 5F D8				.word get_vector-1	; HATABS - get byte
+    42 D813 66 D8				.word put_vector-1	; HATABS - put byte
+    43 D815 6D D8				.word status_vector-1	; HATABS - status
+    44 D817 74 D8				.word special_vector-1	; HATABS - special
+    45 D819 4C 21 D8				jmp init_vector		; initialization vector
+    46 D81C 00					.byte $00		; unused
     47
-    48 				; not implementing now	
-    49 D81D 38			io_vector	sec			
-    50 D81E 60					rts
-    51
-    52 				; no IRQ handling yet
-    53 D81F 38			irq_vector	sec
-    54 D820 60					rts
-    55
-    56 				;-------------------------------------------------------------------------	
-    57 				; device is registered to OS by setting the appropriate bit in DEVMASK
-    58 				; and the CIO handler is registered in the HATABS table by calling the NEWDEV routine
-    59 D821 AD 47 02		init_vector	lda DEVMASK		; get known PBI devices
-    60 D824 0D 48 02				ora NDEVREQ		; OR in the current device request bit
-    61 D827 8D 47 02				sta DEVMASK		; store the devices back 
-    62
-    63 				; Earl Rice method (ANTIC JAN-APR 1985)
-    64 				;		ldx #0
-    65 				;search
-    66 				;		lda HATABS, x
-    67 				;		beq found	; found a spot (=0)
-    68 				;		inx
-    69 				;		inx
-    70 				;		inx
-    71 				;		cpx #36		; length of HATABS
-    72 				;		bcc search
-    73 				;		rts		; no room in HATABS
-    74 				;found
-    75 				;		lda 'R'
-    76 				;		sta HATABS, x
-    77 				;		inx
-    78 				;		
-    79 				;		lda .LO(GENDEV)
-    80 				;		lda .HI(GENDEV)
-    81 				;		sta HATABS + 2, x
-    82
-    83 						;; roland scholz method
-    84 D82A A6 52				ldx devname
-    85 D82C A5 E4				lda .HI(GENDEV)
-    86 D82E A4 8F				ldy .LO(GENDEV)
-    87 D830 20 86 E4				jsr NEWDEV
-    88 					
-    89 D833 9D 1B 03				sta HATABS+1, x
-    90 D836 98					tya
-    91 D837 9D 1A 03				sta HATABS, x
-    92 						
-    93 						; TODO: device-specific init
-    94 						
-    95 D83A 60					rts
-    96 				;-------------------------------------------------------------------------	
+    48 				;-------------------------------------------------------------------------	
+    49
+    50 				; not implementing now	
+    51 D81D 38			io_vector	sec			
+    52 D81E 60					rts
+    53
+    54 				; no IRQ handling yet
+    55 D81F 38			irq_vector	sec
+    56 D820 60					rts
+    57
+    58 				;-------------------------------------------------------------------------	
+    59 				; device is registered to OS by setting the appropriate bit in DEVMASK
+    60 				; and the CIO handler is registered in the HATABS table by calling the NEWDEV routine
+    61 D821 AD 47 02		init_vector	lda DEVMASK		; get known PBI devices
+    62 D824 0D 48 02				ora NDEVREQ		; OR in the current device request bit
+    63 D827 8D 47 02				sta DEVMASK		; store the devices back 
+    64
+    65 				; Earl Rice method (ANTIC JAN-APR 1985)
+    66 D82A A2 00				ldx #0
+    67 D82C			search
+    68 D82C BD 1A 03				lda HATABS, x
+    69 D82F F0 08				beq found	; found a spot (=0)
+    70 D831 E8					inx
+    71 D832 E8					inx
+    72 D833 E8					inx
+    73 D834 E0 24				cpx #36		; length of HATABS
+    74 D836 90 F4				bcc search
+    75 D838 60					rts		; no room in HATABS
+    76 D839			found
+    77 D839 A9 52				lda #devname
+    78 D83B 9D 1A 03				sta HATABS, x
+    79 D83E E8					inx
+    80 						
+    81 D83F A9 8F				lda #<GENDEV
+    82 D841 9D 1A 03				sta HATABS, x
+    83 D844 E8					inx
+    84 D845 A9 E4				lda #>GENDEV
+    85 D847 9D 1A 03				sta HATABS, x
+    86
+    87 						;; roland scholz method
+    88 						;ldx #devname
+    89 						;ldy #<GENDEV
+    90 						;lda #>GENDEV
+    91 						;jsr NEWDEV		; returns: N = 1 - failed, C = 0 - success, C =1 - entry already exists
+    92 					
+    93 						;sta HATABS+1, x
+    94 						;tya
+    95 						;sta HATABS, x
+    96
     97
-    98 				;-------------------------------------------------------------------------	
-    99 D83B			open_vector			
-   100 D83B 38					sec
-   101 D83C 60					rts
-   102
-   103 D83D A0 01		close_vector	ldy #1
-   104 D83F 38					sec
-   105 D840 60					rts
-   106
-   107 D841			get_vector	
-   108 D841 38					sec
-   109 D842 60					rts
-   110
-   111 D843			put_vector	
-   112 D843 38					sec
-   113 D844 60					rts
-   114
-   115 D845			status_vector
-   116 D845 38					sec
-   117 D846 60					rts
-   118
-   119 D847			special_vector
-   120 D847 38					sec
-   121 D848 60					rts
-   122
-   123 				;-------------------------------------------------------------------------	
-   124 D849					.local text
-   125 D849 54 61 6E 67 65 6E + 		.byte 'TangentAudio R:Fi PBI Handler 2017 Steve Richardson'
-   126 						.endl
-   127 						
+    98 D84A A9 01				lda #01			; turn on an LED
+    99 D84C 8D 00 D1				sta DEVREG
+   100 						
+   101 						; TODO: device-specific init
+   102 						
+   103 D84F 60					rts
+   104 				;-------------------------------------------------------------------------	
+   105
+   106 				;-------------------------------------------------------------------------	
+   107 D850			open_vector			
+   108 D850 A9 08				lda #08			; turn on an LED
+   109 D852 8D 00 D1				sta DEVREG
+   110 D855 38					sec
+   111 D856 60					rts
+   112
+   113 D857			close_vector	
+   114 D857 A9 08				lda #08			; turn on an LED
+   115 D859 8D 00 D1				sta DEVREG
+   116 D85C A0 01				ldy #1
+   117 D85E 38					sec
+   118 D85F 60					rts
+   119
+   120 D860			get_vector	
+   121 D860 A9 08				lda #08			; turn on an LED
+   122 D862 8D 00 D1				sta DEVREG
+   123 D865 38					sec
+   124 D866 60					rts
+   125
+   126 D867			put_vector	
+   127 D867 A9 08				lda #08			; turn on an LED
+   128 D869 8D 00 D1				sta DEVREG
+   129 D86C 38					sec
+   130 D86D 60					rts
+   131
+   132 D86E			status_vector
+   133 D86E A9 08				lda #08			; turn on an LED
+   134 D870 8D 00 D1				sta DEVREG
+   135 D873 38					sec
+   136 D874 60					rts
+   137
+   138 D875			special_vector
+   139 D875 A9 08				lda #08			; turn on an LED
+   140 D877 8D 00 D1				sta DEVREG
+   141 D87A 38					sec
+   142 D87B 60					rts
+   143
+   144 				;-------------------------------------------------------------------------	
+   145 D87C					.local text
+   146 D87C 54 61 6E 67 65 6E + 		.byte 'TangentAudio R:Fi PBI Handler 2017 Steve Richardson'
+   147 						.endl
+   148 						
