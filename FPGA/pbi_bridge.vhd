@@ -20,6 +20,7 @@ entity pbi_bridge is
 		n_led3		: OUT		std_logic := '1';						-- LED3 for test
 		n_led4		: OUT		std_logic := '1';						-- LED4 for test
 		n_led5		: OUT		std_logic := '1';						-- LED5 for test (enabled when PBI device selected)
+		dip_sw		: IN		std_logic_vector(4 downto 0);		-- DIP switches on eval (for PBI device ID)
 		clk_57		: IN		std_logic;								-- 57.28MHz oscillator from external PLL (32 * PHI2)
 		phi2			: IN		std_logic;								-- Atari PHI2 clock (1.79MHz NTSC, 1.77MHz PAL)
 		phi2_early	: BUFFER	std_logic;								-- shortened PHI2 cycle completion signal
@@ -58,7 +59,7 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL hw_sel : std_logic_vector(7 downto 0) := X"00";
 	
 	-- constant to hold our device address in hw_sel (single bit set)
-	CONSTANT PBI_ADDR : std_logic_vector(7 downto 0) := X"80";
+	SIGNAL PBI_ADDR : std_logic_vector(7 downto 0) := X"00";
 
 	-- counter used to tick off cycles of the 50MHz clock after rising edge of PHI2
 	SIGNAL clk_counter : std_logic_vector(3 downto 0) := X"0";
@@ -104,6 +105,29 @@ u0 : component pbi_rom
 	);
 
 
+process (dip_sw)
+begin
+	if (dip_sw = "00001") then
+		PBI_ADDR <= X"01";
+	elsif (dip_sw = "00010") then
+		PBI_ADDR <= X"02";
+	elsif (dip_sw = "00011") then
+		PBI_ADDR <= X"04";
+	elsif (dip_sw = "00100") then
+		PBI_ADDR <= X"08";
+	elsif (dip_sw = "00101") then
+		PBI_ADDR <= X"10";
+	elsif (dip_sw = "00110") then
+		PBI_ADDR <= X"20";
+	elsif (dip_sw = "00111") then
+		PBI_ADDR <= X"40";
+	elsif (dip_sw = "01000") then
+		PBI_ADDR <= X"80";
+	else
+		PBI_ADDR <= X"00";
+	end if;
+end process;
+	
 -- LED outputs from latch
 process (led_latch)
 begin
