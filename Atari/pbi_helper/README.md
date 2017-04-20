@@ -1,14 +1,15 @@
 
-PBI helper utility by Steve Richardson
-Utilities to help develop and test PBI devices
-----------------------------------------------
+PBI Helper Utilities by Steve Richardson
+-----------------------------------------
+
+![screenshot](https://github.com/tangentaudio/atari_pbi/blob/master/Atari/pbi_helper/pbi_helper.png)
 
 - dumps out the contents of HATABS and highlights PBI devices
 - shows the contents of some PBI shadow registers
 - allows simple keyboard manipulation of D1FF and D100 registers for testing
 
 
-Written in C using the cc65 cross compiler (
+Written in C using the cc65 cross compiler
 
 Building & using
 ----------------
