@@ -3,8 +3,8 @@ JedecChain;
 	FileRevision(JESD32A);
 	DefaultMfr(6E);
 
-	P ActionCode(Ign)
-		Device PartName(10M08SAE144) MfrSpec(OpMask(0) Child_OpMask(2 0 3) FullPath("C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/output_files/pbi_bridge.pof"));
+	P ActionCode(Cfg)
+		Device PartName(10M08SAE144) Path("C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/output_files/") File("pbi_bridge.pof") MfrSpec(OpMask(3) Child_OpMask(2 3 3));
 
 ChainEnd;
 
