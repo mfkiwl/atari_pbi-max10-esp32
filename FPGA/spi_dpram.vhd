@@ -11,6 +11,7 @@
 --
 --
 -- 2017MAY01 - Epoch
+-- 2017MAY04 - start of heavy reworking of original example
 --
 -------------------------------------------------------------------------------------------------------------------------------
 
@@ -36,39 +37,42 @@ USE work.ram_package.ALL;
 
 ENTITY spi_dpram IS
 	GENERIC (
-		cpol			: STD_LOGIC := '0';  -- spi clock polarity mode
-		cpha			: STD_LOGIC := '0';  -- spi clock phase mode
-		d_width			: INTEGER := 8		 -- spi bus register data width in bits
+		cpol				: STD_LOGIC := '0';  -- spi clock polarity mode
+		cpha				: STD_LOGIC := '0';  -- spi clock phase mode
+		d_width			: INTEGER := ram_width		 -- spi bus register data width (bits) = RAM data bus width
 	);
 		
 	PORT(
-		p_clk			: IN		std_logic;			-- parallel memory interface, clock
-		p_wr_data		: IN		byte;				-- parallel memory interface, data to write
-		p_rd_data 		: OUT		byte;				-- parallel memory interface, data to read
-		p_we    		: IN		std_logic;			-- parallel memory interface, write enable
+		p_clk				: IN		std_logic;			-- parallel memory interface, clock
+		p_wr_data		: IN		byte;					-- parallel memory interface, data to write
+		p_rd_data 		: OUT		byte;					-- parallel memory interface, data to read
+		p_we    			: IN		std_logic;			-- parallel memory interface, write enable
 
-		p_wr_addr		: IN		address_vector;		-- parallel memory interface, address to write
-		p_rd_addr		: IN		address_vector;		-- parallel memory interface, address to read
+		p_wr_addr		: IN		address_vector;	-- parallel memory interface, address to write
+		p_rd_addr		: IN		address_vector;	-- parallel memory interface, address to read
 		
 		reset_n      	: IN		STD_LOGIC;  		-- SPI bus, active low reset
 		ss_n         	: IN		STD_LOGIC;  		-- SPI bus, active low slave select
 		sclk         	: IN		STD_LOGIC;  		-- SPI bus, clock from master
 		mosi         	: IN		STD_LOGIC;  		-- SPI bus, master out slave in
-		miso         	: OUT		STD_LOGIC := 'Z'; 	-- SPI bus, master in slave out
+		miso         	: OUT		STD_LOGIC := 'Z'; -- SPI bus, master in slave out
 
-		busy         	: OUT		STD_LOGIC := '0';  	-- busy signal to logic ('1' during transaction)
+		busy         	: OUT		STD_LOGIC := '0'; -- busy signal to logic ('1' during transaction)
 		
 		rx_req       	: IN		STD_LOGIC;  		--'1' while busy = '0' moves data to the rx_data output
+
 		st_load_en   	: IN		STD_LOGIC;  		-- asynchronous load enable
 		st_load_trdy 	: IN		STD_LOGIC;  		-- asynchronous trdy load input
 		st_load_rrdy 	: IN		STD_LOGIC;  		-- asynchronous rrdy load input
 		st_load_roe  	: IN		STD_LOGIC;  		-- asynchronous roe load input
-		tx_load_en   	: IN		STD_LOGIC;  		-- asynchronous transmit buffer load enable
-		tx_load_data 	: IN		STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);  -- asynchronous tx data to load
-		trdy         	: BUFFER	STD_LOGIC := '0';  	-- transmit ready bit
-		rrdy         	: BUFFER	STD_LOGIC := '0';  	-- receive ready bit
-		roe          	: BUFFER	STD_LOGIC := '0';  	-- receive overrun error bit
-		rx_data      	: OUT		STD_LOGIC_VECTOR(d_width-1 DOWNTO 0) := (OTHERS => '0');  -- receive register output to logic
+
+		trdy         	: BUFFER	STD_LOGIC := '0'; -- transmit ready bit
+		rrdy         	: BUFFER	STD_LOGIC := '0'; -- receive ready bit
+		roe          	: BUFFER	STD_LOGIC := '0'; -- receive overrun error bit
+
+--		tx_load_en   	: IN		STD_LOGIC;  		-- asynchronous transmit buffer load enable
+--		tx_load_data 	: IN		STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);  -- asynchronous tx data to load
+--		rx_data      	: OUT		STD_LOGIC_VECTOR(d_width-1 DOWNTO 0) := (OTHERS => '0');  -- receive register output to logic
 	);
 END spi_dpram;
 
@@ -76,42 +80,57 @@ ARCHITECTURE logic OF spi_dpram IS
 	SIGNAL ram_from_master 		: RAM;				-- dual port RAM that holds data coming from SPI master
 	SIGNAL ram_to_master 		: RAM;				-- dual port RAM that holds data to be sent to SPI master
 	
-	SIGNAL s_wr_addr			: address_vector := (OTHERS => '0');	-- address to be written on SPI port of RAM
-	SIGNAL s_rd_addr			: address_vector := (OTHERS => '0'); 	-- address to be read on SPI port of RAM
+	SIGNAL s_wr_addr			: address_vector := (OTHERS => '0');	-- RAM address to be written on SPI port of RAM
+	SIGNAL s_rd_addr			: address_vector := (OTHERS => '0'); 	-- RAM address to be read on SPI port of RAM
 	
-	SIGNAL mode    				: STD_LOGIC;  --groups modes by clock polarity relation to data
-	SIGNAL clk     				: STD_LOGIC;  --clock
+	SIGNAL mode    				: STD_LOGIC;  		-- groups modes by clock polarity relation to data
+	SIGNAL clk     				: STD_LOGIC;  		-- clock, normalized to be independent of external spi clock polarity
+	
 	SIGNAL bit_cnt 				: STD_LOGIC_VECTOR(d_width+8 DOWNTO 0);  --'1' for active transaction bit
-	SIGNAL wr_add  				: STD_LOGIC;  --address of register to write ('0' = receive, '1' = status)
-	SIGNAL rd_add  				: STD_LOGIC;  --address of register to read ('0' = transmit, '1' = status)
-		
-	SIGNAL rx_buf  : STD_LOGIC_VECTOR(d_width-1 DOWNTO 0) := (OTHERS => '0');  --receiver buffer
+	
+--	SIGNAL wr_add  				: STD_LOGIC;  --address of register to write ('0' = receive, '1' = status)
+--	SIGNAL rd_add  				: STD_LOGIC;  --address of register to read ('0' = transmit, '1' = status)
+--	SIGNAL rx_buf  : STD_LOGIC_VECTOR(d_width-1 DOWNTO 0) := (OTHERS => '0');  --receiver buffer
 	SIGNAL tx_buf  : STD_LOGIC_VECTOR(d_width-1 DOWNTO 0) := (OTHERS => '0');  --transmit buffer
 	
 BEGIN
   busy <= NOT ss_n;  --high during transactions
   
-  --adjust clock so writes are on rising edge and reads on falling edge
+  -- adjust clock so writes are on rising edge and reads on falling edge
   mode <= cpol XOR cpha;  --'1' for modes that write on rising edge
   WITH mode SELECT
     clk <= sclk WHEN '1',
            NOT sclk WHEN OTHERS;
 
-  --keep track of miso/mosi bit counts for data alignmnet
+  -- bit count
+  -- todo: remove address stuff (all the d_width+8 junk) - rework for d_width bits only
   PROCESS(ss_n, clk)
   BEGIN
     IF(ss_n = '1' OR reset_n = '0') THEN                         --this slave is not selected or being reset
-	   bit_cnt <= (conv_integer(NOT cpha) => '1', OTHERS => '0'); --reset miso/mosi bit count
+
+		-- reset miso/mosi bit count - sets one bit to be active depending on the phase
+		-- cpha=0: bit_cnt(1)=1, others=0 - e.g. "0000000000000010"
+		-- cpha=1: bit_cnt(0)=1, others=0 - e.g. "0000000000000001"
+		bit_cnt <= (conv_integer(NOT cpha) => '1', OTHERS => '0'); 
+	
     ELSE                                                         --this slave is selected
       IF(rising_edge(clk)) THEN                                  --new bit on miso/mosi
-        bit_cnt <= bit_cnt(d_width+8-1 DOWNTO 0) & '0';          --shift active bit indicator
-      END IF;
+       
+		   -- shift active bit indicator left 1 and insert 0 at right
+			-- e.g. before rising edge bit_cnt="0000000000000010"
+			--                                   ^^^^^^^^^^^^^^^ copy these bits (MSB-1 downto 0)
+			--       after rising edge bit_cnt="0000000000000100"
+			--                                                 ^ concatenate '0'
+			bit_cnt <= bit_cnt(d_width+8-1 DOWNTO 0) & '0';          
+		END IF;
     END IF;
   END PROCESS;
 
   PROCESS(ss_n, clk, st_load_en, tx_load_en, rx_req)
   BEGIN
   
+	 /* todo: rework all of this - status and control will be done with a separate SPI chip select
+	 
     --write address register ('0' for receive, '1' for status)
     IF(bit_cnt(1) = '1' AND falling_edge(clk)) THEN
       wr_add <= mosi;
@@ -154,46 +173,52 @@ BEGIN
     ELSIF(wr_add = '1' AND bit_cnt(11) = '1' AND falling_edge(clk)) THEN
       roe <= mosi;  --new value written by spi bus
     END IF;
-    
-    --receive registers
-    --write to the receive register from master
+    */
+	 
+	 
+    -- mosi input
+	 -- write to the dual port RAM at the write address and auto-increment the write address after full byte clocked in
     IF(reset_n = '0') THEN
-      rx_buf <= (OTHERS => '0');
+		s_wr_addr <= (OTHERS => '0');
     ELSE
       FOR i IN 0 TO d_width-1 LOOP          
         IF(wr_add = '0' AND bit_cnt(i+9) = '1' AND falling_edge(clk)) THEN
-          rx_buf(d_width-1-i) <= mosi;
+          ram_from_master(s_wr_addr)(d_width-1-i) <= mosi;
         END IF;
       END LOOP;
-    END IF;
-    --fulfill user logic request for receive data
-    IF(reset_n = '0') THEN
-      rx_data <= (OTHERS => '0');
-    ELSIF(ss_n = '1' AND rx_req = '1') THEN  
-      rx_data <= rx_buf;
+		s_wr_addr <= s_wr_addr + 1;
     END IF;
 
-    --transmit registers
+	 
+    -- transmit buffer
     IF(reset_n = '0') THEN
       tx_buf <= (OTHERS => '0');
-    ELSIF(ss_n = '1' AND tx_load_en = '1') THEN  --load transmit register from user logic
-      tx_buf <= tx_load_data;
+		s_rd_addr <= (OTHERS => '0');
+    ELSIF(ss_n = '1') THEN  
+      -- load transmit buffer from dual port RAM at the current read address, and auto-increment the read address
+		tx_buf <= ram_to_master(s_rd_addr);
+		s_rd_addr <= s_rd_addr + 1;
+		
     ELSIF(rd_add = '0' AND bit_cnt(7 DOWNTO 0) = "00000000" AND bit_cnt(d_width+8) = '0' AND rising_edge(clk)) THEN
-      tx_buf(d_width-1 DOWNTO 0) <= tx_buf(d_width-2 DOWNTO 0) & tx_buf(d_width-1);  --shift through tx data
+      -- rot left tx buffer every rising clock edge
+		tx_buf(d_width-1 DOWNTO 0) <= tx_buf(d_width-2 DOWNTO 0) & tx_buf(d_width-1);  
     END IF;
 
-    --miso output register
-    IF(ss_n = '1' OR reset_n = '0') THEN           --no transaction occuring or reset
+    -- miso output
+    IF(ss_n = '1' OR reset_n = '0') THEN
+		-- no transaction occuring or reset
       miso <= 'Z';
-    ELSIF(rd_add = '1' AND rising_edge(clk)) THEN  --write status register to master
-      CASE bit_cnt(10 DOWNTO 8) IS
+    ELSIF(rd_add = '1' AND rising_edge(clk)) THEN  
+      -- write status register to master
+		CASE bit_cnt(10 DOWNTO 8) IS
         WHEN "001" => miso <= trdy;
         WHEN "010" => miso <= rrdy;
         WHEN "100" => miso <= roe;
         WHEN OTHERS => NULL;
       END CASE;
     ELSIF(rd_add = '0' AND bit_cnt(7 DOWNTO 0) = "00000000" AND bit_cnt(d_width+8) = '0' AND rising_edge(clk)) THEN
-      miso <= tx_buf(d_width-1);                  --send transmit register data to master
+      -- send transmit buffer data to master (MSB is shifted through, above)
+		miso <= tx_buf(d_width-1);
     END IF;
     
   END PROCESS;
