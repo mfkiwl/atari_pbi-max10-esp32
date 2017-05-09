@@ -19,37 +19,41 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
 PACKAGE ram_package IS
-   CONSTANT ram_width : INTEGER := 8;
-   CONSTANT ram_depth : INTEGER := 512;
-   
-   TYPE word IS ARRAY(0 to ram_width - 1) of std_logic;
-   TYPE ram IS ARRAY(0 to ram_depth - 1) of word;
-   SUBTYPE address_vector IS INTEGER RANGE 0 to ram_depth - 1;
-	
-	TYPE byte is ARRAY(7 downto 0) of bit;
+	TYPE byte is ARRAY(7 downto 0) of std_logic;
 END ram_package;
 
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
-USE ieee.std_logic_arith.all;
+USE ieee.std_logic_arith.ALL;
+USE ieee.std_logic_unsigned.ALL;
 USE work.ram_package.ALL;
+
 
 ENTITY spi_dpram IS
 	GENERIC (
 		cpol				: STD_LOGIC := '0';  -- spi clock polarity mode
 		cpha				: STD_LOGIC := '0';  -- spi clock phase mode
-		d_width			: INTEGER := ram_width		 -- spi bus register data width (bits) = RAM data bus width
+		spi_hdr_bits	: INTEGER := 24;		-- count of bits in the SPI header
+		RAM_DATA_WIDTH	: INTEGER := 8;		-- data bus width of the dual port RAM
+		RAM_ADDR_WIDTH : INTEGER := 8			-- address bus width of the dual port RAM
 	);
 		
 	PORT(
 		p_clk				: IN		std_logic;			-- parallel memory interface, clock
-		p_wr_data		: IN		byte;					-- parallel memory interface, data to write
-		p_rd_data 		: OUT		byte;					-- parallel memory interface, data to read
+		p_wr_data		: IN		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, data to write
+		p_rd_data 		: OUT		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, data to read
 		p_we    			: IN		std_logic;			-- parallel memory interface, write enable
 
-		p_wr_addr		: IN		address_vector;	-- parallel memory interface, address to write
-		p_rd_addr		: IN		address_vector;	-- parallel memory interface, address to read
+		p_wr_addr		: IN		INTEGER RANGE 0 to 2**RAM_ADDR_WIDTH-1;	-- parallel memory interface, address to write
+		p_rd_addr		: IN		INTEGER RANGE 0 to 2**RAM_ADDR_WIDTH-1;	-- parallel memory interface, address to read
+		
+		r_sdcr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- SDCR - Slave Data Control Register (written by Atari)
+		r_stbycr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- STBYCR - Slave Transfer Byte Count Register (written by Atari)
+		r_stbkcr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- STBKCR - Slave Transfer Bank Count Register (written by Atari)
+		r_sdsr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- SDSR - Slave Data Status Register (written by state machine & ESP32)
+		r_mtbycr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- MTBYCR - Master Transfer Byte Count Register (written by ESP32)
+		r_mtbkcr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- MTBKCR - Master Transfer Bank Count Register (written by ESP32)
 		
 		reset_n      	: IN		STD_LOGIC;  		-- SPI bus, active low reset
 		ss_n         	: IN		STD_LOGIC;  		-- SPI bus, active low slave select
@@ -57,206 +61,120 @@ ENTITY spi_dpram IS
 		mosi         	: IN		STD_LOGIC;  		-- SPI bus, master out slave in
 		miso         	: OUT		STD_LOGIC := 'Z'; -- SPI bus, master in slave out
 
-		busy         	: OUT		STD_LOGIC := '0'; -- busy signal to logic ('1' during transaction)
-		
-		rx_req       	: IN		STD_LOGIC;  		--'1' while busy = '0' moves data to the rx_data output
-
-		st_load_en   	: IN		STD_LOGIC;  		-- asynchronous load enable
-		st_load_trdy 	: IN		STD_LOGIC;  		-- asynchronous trdy load input
-		st_load_rrdy 	: IN		STD_LOGIC;  		-- asynchronous rrdy load input
-		st_load_roe  	: IN		STD_LOGIC;  		-- asynchronous roe load input
-
-		trdy         	: BUFFER	STD_LOGIC := '0'; -- transmit ready bit
-		rrdy         	: BUFFER	STD_LOGIC := '0'; -- receive ready bit
-		roe          	: BUFFER	STD_LOGIC := '0'; -- receive overrun error bit
-
---		tx_load_en   	: IN		STD_LOGIC;  		-- asynchronous transmit buffer load enable
---		tx_load_data 	: IN		STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);  -- asynchronous tx data to load
---		rx_data      	: OUT		STD_LOGIC_VECTOR(d_width-1 DOWNTO 0) := (OTHERS => '0');  -- receive register output to logic
+		busy         	: OUT		STD_LOGIC := '0' -- busy signal to logic ('1' during transaction)
 	);
 END spi_dpram;
 
 ARCHITECTURE logic OF spi_dpram IS
-	SIGNAL ram_from_master 		: RAM;				-- dual port RAM that holds data coming from SPI master
-	SIGNAL ram_to_master 		: RAM;				-- dual port RAM that holds data to be sent to SPI master
+	subtype word_t is std_logic_vector((RAM_DATA_WIDTH-1) downto 0);
+	type memory_t is array(2**RAM_ADDR_WIDTH-1 downto 0) of word_t;
 	
-	SIGNAL s_wr_addr			: address_vector := (OTHERS => '0');	-- RAM address to be written on SPI port of RAM
-	SIGNAL s_rd_addr			: address_vector := (OTHERS => '0'); 	-- RAM address to be read on SPI port of RAM
+	shared variable ram_from_master 		: memory_t;				-- dual port RAM that holds data coming from SPI master
+	shared variable ram_to_master 		: memory_t;				-- dual port RAM that holds data to be sent to SPI master
+	
+	SIGNAL s_wr_addr			: INTEGER RANGE 0 to 2**RAM_ADDR_WIDTH-1 := 0;	-- RAM address to be written on SPI port of RAM
+	SIGNAL s_rd_addr			: INTEGER RANGE 0 to 2**RAM_ADDR_WIDTH-1 := 0; 	-- RAM address to be read on SPI port of RAM
 	
 	SIGNAL mode    				: STD_LOGIC;  		-- groups modes by clock polarity relation to data
 	SIGNAL clk     				: STD_LOGIC;  		-- clock, normalized to be independent of external spi clock polarity
 	
-	SIGNAL bit_cnt 				: STD_LOGIC_VECTOR(d_width+8 DOWNTO 0);  --'1' for active transaction bit
+	SIGNAL bit_cnt 				: STD_LOGIC_VECTOR (RAM_ADDR_WIDTH DOWNTO 0) := (OTHERS => '0'); -- enough for 2x RAM width
 	
---	SIGNAL wr_add  				: STD_LOGIC;  --address of register to write ('0' = receive, '1' = status)
---	SIGNAL rd_add  				: STD_LOGIC;  --address of register to read ('0' = transmit, '1' = status)
---	SIGNAL rx_buf  : STD_LOGIC_VECTOR(d_width-1 DOWNTO 0) := (OTHERS => '0');  --receiver buffer
-	SIGNAL tx_buf  : STD_LOGIC_VECTOR(d_width-1 DOWNTO 0) := (OTHERS => '0');  --transmit buffer
+	SIGNAL bit_cnt8				: INTEGER RANGE 0 to 7;
+	
+	SIGNAL tx_buf  : STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');  --transmit buffer
 	
 BEGIN
   busy <= NOT ss_n;  --high during transactions
   
   -- adjust clock so writes are on rising edge and reads on falling edge
-  mode <= cpol XOR cpha;  --'1' for modes that write on rising edge
+  --'1' for modes that write on rising edge
+  mode <= cpol XOR cpha;
   WITH mode SELECT
     clk <= sclk WHEN '1',
            NOT sclk WHEN OTHERS;
 
-  -- bit count
-  -- todo: remove address stuff (all the d_width+8 junk) - rework for d_width bits only
+  -- bit counter
   PROCESS(ss_n, clk)
   BEGIN
-    IF(ss_n = '1' OR reset_n = '0') THEN                         --this slave is not selected or being reset
-
-		-- reset miso/mosi bit count - sets one bit to be active depending on the phase
-		-- cpha=0: bit_cnt(1)=1, others=0 - e.g. "0000000000000010"
-		-- cpha=1: bit_cnt(0)=1, others=0 - e.g. "0000000000000001"
-		bit_cnt <= (conv_integer(NOT cpha) => '1', OTHERS => '0'); 
-	
-    ELSE                                                         --this slave is selected
-      IF(rising_edge(clk)) THEN                                  --new bit on miso/mosi
-       
-		   -- shift active bit indicator left 1 and insert 0 at right
-			-- e.g. before rising edge bit_cnt="0000000000000010"
-			--                                   ^^^^^^^^^^^^^^^ copy these bits (MSB-1 downto 0)
-			--       after rising edge bit_cnt="0000000000000100"
-			--                                                 ^ concatenate '0'
-			bit_cnt <= bit_cnt(d_width+8-1 DOWNTO 0) & '0';          
+    IF(ss_n = '1' OR reset_n = '0') THEN
+		-- reset miso/mosi bit count
+		bit_cnt <= (OTHERS => '0');
+    ELSE
+      IF(rising_edge(clk)) THEN
+			-- increment bit count
+			bit_cnt <= bit_cnt + 1;
 		END IF;
     END IF;
+	 
+	 bit_cnt8 <= conv_integer(unsigned(bit_cnt(2 DOWNTO 0)));
+	 
   END PROCESS;
 
-  PROCESS(ss_n, clk, st_load_en, tx_load_en, rx_req)
+  PROCESS(ss_n, clk)
   BEGIN
-  
-	 /* todo: rework all of this - status and control will be done with a separate SPI chip select
-	 
-    --write address register ('0' for receive, '1' for status)
-    IF(bit_cnt(1) = '1' AND falling_edge(clk)) THEN
-      wr_add <= mosi;
-    END IF;
-
-    --read address register ('0' for transmit, '1' for status)
-    IF(bit_cnt(2) = '1' AND falling_edge(clk)) THEN
-      rd_add <= mosi;
-    END IF;
-    
-    --trdy register
-    IF((ss_n = '1' AND st_load_en = '1' AND st_load_trdy = '0') OR reset_n = '0') THEN  
-      trdy <= '0';   --cleared by user logic or reset
-    ELSIF(ss_n = '1' AND ((st_load_en = '1' AND st_load_trdy = '1') OR tx_load_en = '1')) THEN
-      trdy <= '1';   --set when tx buffer written or set by user logic                                  
-    ELSIF(wr_add = '1' AND bit_cnt(9) = '1' AND falling_edge(clk)) THEN
-      trdy <= mosi;  --new value written over spi bus
-    ELSIF(rd_add = '0' AND bit_cnt(d_width+8) = '1' AND falling_edge(clk)) THEN
-      trdy <= '0';   --clear when transmit buffer read
-    END IF;
-    
-    --rrdy register
-    IF((ss_n = '1' AND ((st_load_en = '1' AND st_load_rrdy = '0') OR rx_req = '1')) OR reset_n = '0') THEN
-      rrdy <= '0';   --cleared by user logic or rx_data has been requested or reset
-    ELSIF(ss_n = '1' AND st_load_en = '1' AND st_load_rrdy = '1') THEN
-      rrdy <= '1';   --set when set by user logic
-    ELSIF(wr_add = '1' AND bit_cnt(10) = '1' AND falling_edge(clk)) THEN
-      rrdy <= mosi;  --new value written over spi bus
-    ELSIF(wr_add = '0' AND bit_cnt(d_width+8) = '1' AND falling_edge(clk)) THEN
-      rrdy <= '1';   --set when new data received
-    END IF;
-    
-    --roe register
-    IF((ss_n = '1' AND st_load_en = '1' AND st_load_roe = '0') OR reset_n = '0') THEN
-      roe <= '0';   --cleared by user logic or reset
-    ELSIF(ss_n = '1' AND st_load_en = '1' AND st_load_roe = '1') THEN
-      roe <= '1';   --set by user logic
-    ELSIF(rrdy = '1' AND wr_add = '0' AND bit_cnt(d_width+8) = '1' AND falling_edge(clk)) THEN
-      roe <= '1';   --set by actual overrun
-    ELSIF(wr_add = '1' AND bit_cnt(11) = '1' AND falling_edge(clk)) THEN
-      roe <= mosi;  --new value written by spi bus
-    END IF;
-    */
-	 
-	 
-    -- mosi input
-	 -- write to the dual port RAM at the write address and auto-increment the write address after full byte clocked in
-    IF(reset_n = '0') THEN
-		s_wr_addr <= (OTHERS => '0');
+    -- MOSI input
+    IF(reset_n = '0' OR ss_n = '1' OR bit_cnt <= spi_hdr_bits-1 ) THEN
+		s_wr_addr <= 0;
     ELSE
-      FOR i IN 0 TO d_width-1 LOOP          
-        IF(wr_add = '0' AND bit_cnt(i+9) = '1' AND falling_edge(clk)) THEN
-          ram_from_master(s_wr_addr)(d_width-1-i) <= mosi;
-        END IF;
-      END LOOP;
-		s_wr_addr <= s_wr_addr + 1;
-    END IF;
+		IF (falling_edge(clk)) THEN
+			IF (bit_cnt >= 0 AND bit_cnt <= 7) THEN
+				-- 1st header byte: SDSR
+				r_sdsr(bit_cnt8) <= mosi;
+			ELSIF (bit_cnt >= 8 AND bit_cnt <= 15) THEN
+				-- 2nd header byte: MTBYCR
+				r_mtbycr(bit_cnt8) <= mosi;
+			ELSIF (bit_cnt >= 16 AND bit_cnt <= 23) THEN
+				-- 3rd header byte: MTBKCR
+				r_mtbkcr(bit_cnt8) <= mosi;
+			ELSIF (bit_cnt >= spi_hdr_bits) THEN
+			-- write to the dual port RAM at the write address
+				ram_from_master(s_wr_addr)(bit_cnt8) := mosi;
+			END IF;
+		END IF;
 
-	 
-    -- transmit buffer
-    IF(reset_n = '0') THEN
+		-- auto-increment the write address after full byte clocked in
+		IF (rising_edge(clk) AND bit_cnt > spi_hdr_bits-1 AND bit_cnt(2 DOWNTO 0) = "111") THEN
+			s_wr_addr <= s_wr_addr + 1;
+		END IF;
+	END IF;
+	
+    -- transmit buffer for MISO output
+    IF(reset_n = '0' OR ss_n = '1' OR bit_cnt <= spi_hdr_bits-1) THEN
       tx_buf <= (OTHERS => '0');
-		s_rd_addr <= (OTHERS => '0');
-    ELSIF(ss_n = '1') THEN  
-      -- load transmit buffer from dual port RAM at the current read address, and auto-increment the read address
-		tx_buf <= ram_to_master(s_rd_addr);
-		s_rd_addr <= s_rd_addr + 1;
-		
-    ELSIF(rd_add = '0' AND bit_cnt(7 DOWNTO 0) = "00000000" AND bit_cnt(d_width+8) = '0' AND rising_edge(clk)) THEN
-      -- rot left tx buffer every rising clock edge
-		tx_buf(d_width-1 DOWNTO 0) <= tx_buf(d_width-2 DOWNTO 0) & tx_buf(d_width-1);  
+		s_rd_addr <= 0;
+    ELSE
+		IF (falling_edge(clk)) THEN
+			IF (bit_cnt >= 0 AND bit_cnt <= 7) THEN
+				-- 1st header byte: SDCR
+				tx_buf <= r_sdcr;
+			ELSIF (bit_cnt >= 8 AND bit_cnt <= 15) THEN
+				-- 2nd header byte: STBYCR
+				tx_buf <= r_stbycr;
+			ELSIF (bit_cnt >= 16 AND bit_cnt <= 23) THEN
+				-- 3rd header byte: STBKCR
+				tx_buf <= r_stbkcr;
+			ELSIF (bit_cnt >= spi_hdr_bits) THEN
+				-- load transmit buffer from dual port RAM at the current read address
+				tx_buf <= ram_to_master(s_rd_addr);
+			END IF;
+		END IF;
+
+		-- increment the read address
+		IF (rising_edge(clk) AND bit_cnt > spi_hdr_bits-1 AND bit_cnt(2 DOWNTO 0) = "111") THEN
+			s_rd_addr <= s_rd_addr + 1;
+		END IF;
     END IF;
 
-    -- miso output
+    -- MISO output
     IF(ss_n = '1' OR reset_n = '0') THEN
 		-- no transaction occuring or reset
       miso <= 'Z';
-    ELSIF(rd_add = '1' AND rising_edge(clk)) THEN  
-      -- write status register to master
-		CASE bit_cnt(10 DOWNTO 8) IS
-        WHEN "001" => miso <= trdy;
-        WHEN "010" => miso <= rrdy;
-        WHEN "100" => miso <= roe;
-        WHEN OTHERS => NULL;
-      END CASE;
-    ELSIF(rd_add = '0' AND bit_cnt(7 DOWNTO 0) = "00000000" AND bit_cnt(d_width+8) = '0' AND rising_edge(clk)) THEN
-      -- send transmit buffer data to master (MSB is shifted through, above)
-		miso <= tx_buf(d_width-1);
+    ELSIF(rising_edge(clk) AND bit_cnt >= spi_hdr_bits-1) THEN
+      -- send transmit buffer data bit to master
+		miso <= tx_buf(bit_cnt8);
     END IF;
     
   END PROCESS;
 END logic;
 
-
-
-/*
-ENTITY ram_dual IS
-   PORT
-   (
-      clock1 : IN   std_logic;
-      clock2 : IN   std_logic;
-      data   : IN   word;
-      write_address: IN  address_vector;
-      read_address:  IN  address_vector;
-      we     : IN   std_logic;
-      q      : OUT  word
-   );
-END ram_dual;
-
-ARCHITECTURE rtl OF ram_dual IS
-   SIGNAL ram_block : RAM;
- 
-BEGIN
-   PROCESS (clock1)
-   BEGIN
-      IF (clock1'event AND clock1 = '1') THEN
-         IF (we = '1') THEN
-            ram_block(write_address) <= data;
-         END IF;
-      END IF;
-   END PROCESS;
-   PROCESS (clock2)
-   BEGIN
-      IF (clock2'event AND clock2 = '1') THEN
-         q <= ram_block(read_address);
-      END IF;
-   END PROCESS;
-END rtl;
-*/
