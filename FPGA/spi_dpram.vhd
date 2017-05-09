@@ -30,13 +30,16 @@ ENTITY spi_dpram IS
 	);
 		
 	PORT(
-		p_clk				: IN		std_logic;			-- parallel memory interface, clock
-		p_wr_data		: IN		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, data to write
-		p_rd_data 		: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, data to read
-		p_we    			: IN		std_logic;			-- parallel memory interface, write enable
-
-		p_wr_addr		: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface, address to write
-		p_rd_addr		: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface, address to read
+		p_clk				: IN		STD_LOGIC;			-- parallel memory interface, clock
+		p_rw				: IN		STD_LOGIC;			-- parallel memory interface, read/write
+		
+		p_master_en		: IN		STD_LOGIC;			-- parallel memory interface, master enable
+		p_master_data	: INOUT	STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, master data
+		p_master_addr	: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface, master address
+		
+		p_slave_en		: IN		STD_LOGIC;			-- parallel memory interface, slave enable
+		p_slave_addr	: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface,  slave address
+		p_slave_data 	: INOUT	STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, slave data
 		
 		r_sdcr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- SDCR - Slave Data Control Register (written by Atari)
 		r_stbycr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- STBYCR - Slave Transfer Byte Count Register (written by Atari)

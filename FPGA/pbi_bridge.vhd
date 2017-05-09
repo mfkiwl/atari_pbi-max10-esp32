@@ -56,7 +56,6 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	-- 0xD1FF          : HW_SEL REGISTER
 	-- 0xD100 - 0xD1FE : PBI DEVICE REGISTERS
 	SIGNAL dev_reg_act : boolean := false;
-	SIGNAL dev_ram_act : boolean := false;
 	SIGNAL dev_rom_act : boolean := false;
 	SIGNAL hw_sel_act : boolean := false;
 
@@ -92,6 +91,11 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	
 	SIGNAL spi_busy		:		STD_LOGIC;
 	
+	SIGNAL slave_ram_en	:		STD_LOGIC := '0';
+	SIGNAL slave_data		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL master_ram_en :		STD_LOGIC := '0';
+	SIGNAL master_data		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	
 	-- Altera ALTUFM component for PBI Flash ROM space
 	COMPONENT pbi_rom IS
 		PORT (
@@ -116,11 +120,13 @@ ARCHITECTURE behavior OF pbi_bridge IS
 		PORT
 		(
 			p_clk				:	 IN STD_LOGIC;
-			p_wr_data		:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			p_rd_data		:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-			p_we				:	 IN STD_LOGIC;
-			p_wr_addr		:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			p_rd_addr		:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_rw				:	 IN STD_LOGIC;
+			p_master_en		:	 IN STD_LOGIC;
+			p_master_data	:	 INOUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_master_addr	:	 IN STD_LOGIC_VECTOR(ram_addr_width-1 DOWNTO 0);
+			p_slave_en		:	 IN STD_LOGIC;
+			p_slave_addr	:	 IN STD_LOGIC_VECTOR(ram_addr_width-1 DOWNTO 0);
+			p_slave_data	:	 INOUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_sdcr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_stbycr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_stbkcr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -155,11 +161,15 @@ u0 : component pbi_rom
 -- SPI Dual Port RAM signal & pin mapping
 u1	: component spi_dpram
 	port map (
-			p_clk				=> '0',
-			p_wr_data		=> X"00",
-			p_we				=> '0',
-			p_wr_addr		=> X"00",
-			p_rd_addr		=> X"00",
+			p_clk				=>		phi2_early,
+			p_rw				=>		rw,
+			p_master_en		=>		master_ram_en,
+			p_master_data	=>		master_data,
+			p_master_addr	=>	 	addr_latch(7 DOWNTO 0),
+			p_slave_en		=>		slave_ram_en,
+			p_slave_addr	=>	 	addr_latch(7 DOWNTO 0),
+			p_slave_data	=>		slave_data,
+
 			reset_n			=> n_reset,
 			
 			ss_n				=> spi_ss_n,
@@ -167,7 +177,6 @@ u1	: component spi_dpram
 			mosi				=> spi_mosi,
 			miso				=> spi_miso,
 			busy				=> spi_busy,
-
 	
 			r_sdcr			=> reg_sdcr,
 			r_stbycr			=> reg_stbycr,
@@ -268,7 +277,7 @@ begin
 end process;
 
 
-process (n_reset, phi2, phi2_early, rw, rw_latch, hw_sel, addr_latch, dev_rom_act, dev_ram_act, hw_sel_act,
+process (n_reset, phi2, phi2_early, rw, rw_latch, hw_sel, addr_latch, dev_rom_act, hw_sel_act,
 			dev_reg_act, addr, data, flash_data_latch, PBI_ADDR, reg_sdcr, reg_stbycr, reg_stbkcr, reg_sdsr, reg_mtbycr,
 			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs)
 begin
@@ -283,9 +292,10 @@ begin
 		addr_latch <= X"FFFF";
 		rw_latch <= '0';
 		dev_rom_act <= false;
-		dev_ram_act <= false;
 		hw_sel_act <= false;
 		dev_reg_act <= false;
+		master_ram_en <= '0';
+		slave_ram_en <= '0';
 		
 		data <= "ZZZZZZZZ";
 		led_latch <= "00000";
@@ -313,9 +323,20 @@ begin
 			-- using 'addr' and not 'addr_latch' because data may not be latched yet at rising edge of PHI2
 			-- but we trust addr to be stable
 			dev_rom_act <= (addr >= X"D800" AND addr <= X"DFFF");
-			dev_ram_act <= (addr >= X"D600" AND addr <= X"D7FF");
 			hw_sel_act <= (addr = X"D1FF");
 			dev_reg_act <= (addr >= X"D100" AND addr <= X"D1FE");
+			
+			if (addr >= X"D600" AND addr <= X"D6FF") then
+				master_ram_en <= '1';
+			else
+				master_ram_en <= '0';
+			end if;
+			
+			if (addr >= X"D700" AND addr <= X"D7FF") then
+				slave_ram_en <= '1';
+			else
+				slave_ram_en <= '0';
+			end if;
 
 			-- set data bus transceiver direction and output enables on rising edge of phi2
 			if ((hw_sel = PBI_ADDR AND addr >= X"D800" AND addr <= X"DFFF") OR
@@ -364,14 +385,22 @@ begin
 					data <= X"FF";
 				end if;
 				
-			elsif (dev_ram_act) then
-				-- device RAM
+			elsif (master_ram_en = '1') then
+				-- SPI master dual port RAM window
 				n_mpd <= '1';
 				n_extsel <= '1';
-				n_data_oe <= '1';			-- temporarily disabled
-		
-				-- (note: test output, will eventually be connected to RAM)
-				data <= X"44";
+				n_data_oe <= '0';
+
+				data <= master_data;
+				
+			elsif (slave_ram_en = '1') then
+				-- SPI slave dual port RAM window
+				n_mpd <= '1';
+				n_extsel <= '1';
+				n_data_oe <= '0';
+
+				data <= slave_data;
+				
 			elsif (dev_rom_act) then
 				-- device ROM
 				n_mpd <= '0';
@@ -411,26 +440,32 @@ begin
 				if (hw_sel_act) then
 					-- hw_sel register write (latched on falling edge of phi2_early)
 					hw_sel <= data;
-				
-					-- device register write (latched on falling edge of phi2_early)
-					if (addr_latch = X"D100") then
-						reg_sdcr <= data;
-					elsif (addr_latch = X"D101") then
-						reg_stbycr <= data;
-					elsif (addr_latch = X"D102") then
-						reg_stbkcr <= data;
-					elsif (addr_latch = X"D120") then
-						reg_mrbs <= data;
-					elsif (addr_latch = X"D121") then
-						reg_srbs <= data;
-					elsif (addr_latch = X"D122") then
-						reg_fbs <= data;
-					elsif (addr_latch = X"D130") then
-						led_latch(3 downto 0) <= data(3 downto 0);
-					end if;
 					
-		--		elsif (dev_ram_act AND hw_sel = PBI_ADDR) then
-					-- TODO: device RAM (buffer) write (latched on falling edge of phi2_early)
+				elsif (hw_sel = PBI_ADDR) then 
+					if (master_ram_en = '1') then
+						-- master RAM write (latched on falling edge of phi2_early)
+						master_data <= data;
+					elsif (slave_ram_en = '1') then
+						-- slave RAM write (latched on falling edge of phi2_early)
+						slave_data <= data;
+					elsif (dev_reg_act) then
+						-- device register write (latched on falling edge of phi2_early)
+						if (addr_latch = X"D100") then
+							reg_sdcr <= data;
+						elsif (addr_latch = X"D101") then
+							reg_stbycr <= data;
+						elsif (addr_latch = X"D102") then
+							reg_stbkcr <= data;
+						elsif (addr_latch = X"D120") then
+							reg_mrbs <= data;
+						elsif (addr_latch = X"D121") then
+							reg_srbs <= data;
+						elsif (addr_latch = X"D122") then
+							reg_fbs <= data;
+						elsif (addr_latch = X"D130") then
+							led_latch(3 downto 0) <= data(3 downto 0);
+						end if;
+					end if;
 				end if;
 			end if;
 		end if;
