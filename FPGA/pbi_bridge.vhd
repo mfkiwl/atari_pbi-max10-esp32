@@ -162,7 +162,7 @@ u0 : component pbi_rom
 u1	: component spi_dpram
 	port map (
 			p_clk				=>		phi2_early,
-			p_rw				=>		rw,
+			p_rw				=>		rw_latch,
 			p_master_en		=>		master_ram_en,
 			p_master_data	=>		master_data,
 			p_master_addr	=>	 	addr_latch(7 DOWNTO 0),
@@ -279,7 +279,7 @@ end process;
 
 process (n_reset, phi2, phi2_early, rw, rw_latch, hw_sel, addr_latch, dev_rom_act, hw_sel_act,
 			dev_reg_act, addr, data, flash_data_latch, PBI_ADDR, reg_sdcr, reg_stbycr, reg_stbkcr, reg_sdsr, reg_mtbycr,
-			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs)
+			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs, master_ram_en, master_data, slave_ram_en, slave_data)
 begin
 	if (n_reset = '0') then
 		n_rdy <= '1';
@@ -326,13 +326,13 @@ begin
 			hw_sel_act <= (addr = X"D1FF");
 			dev_reg_act <= (addr >= X"D100" AND addr <= X"D1FE");
 			
-			if (addr >= X"D600" AND addr <= X"D6FF") then
+			if (hw_sel = PBI_ADDR AND addr >= X"D600" AND addr <= X"D6FF") then
 				master_ram_en <= '1';
 			else
 				master_ram_en <= '0';
 			end if;
 			
-			if (addr >= X"D700" AND addr <= X"D7FF") then
+			if (hw_sel = PBI_ADDR AND addr >= X"D700" AND addr <= X"D7FF") then
 				slave_ram_en <= '1';
 			else
 				slave_ram_en <= '0';
@@ -444,10 +444,10 @@ begin
 				elsif (hw_sel = PBI_ADDR) then 
 					if (master_ram_en = '1') then
 						-- master RAM write (latched on falling edge of phi2_early)
-						master_data <= data;
+						--master_data <= data;
 					elsif (slave_ram_en = '1') then
 						-- slave RAM write (latched on falling edge of phi2_early)
-						slave_data <= data;
+						--slave_data <= data;
 					elsif (dev_reg_act) then
 						-- device register write (latched on falling edge of phi2_early)
 						if (addr_latch = X"D100") then

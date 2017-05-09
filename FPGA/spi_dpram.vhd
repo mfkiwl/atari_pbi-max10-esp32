@@ -62,8 +62,9 @@ ARCHITECTURE logic OF spi_dpram IS
 	subtype word_t is std_logic_vector((RAM_DATA_WIDTH-1) downto 0);
 	type memory_t is array(2**RAM_ADDR_WIDTH-1 downto 0) of word_t;
 	
-	shared variable ram_from_master 		: memory_t;				-- dual port RAM that holds data coming from SPI master
-	shared variable ram_to_master 		: memory_t;				-- dual port RAM that holds data to be sent to SPI master
+	SIGNAL ram_from_master 		: memory_t;				-- dual port RAM that holds data coming from SPI master
+	SIGNAL ram_to_master 		: memory_t;				-- dual port RAM that holds data to be sent to SPI master
+
 	
 	SIGNAL s_wr_addr			: INTEGER RANGE 0 to 2**RAM_ADDR_WIDTH-1 := 0;	-- RAM address to be written on SPI port of RAM
 	SIGNAL s_rd_addr			: INTEGER RANGE 0 to 2**RAM_ADDR_WIDTH-1 := 0; 	-- RAM address to be read on SPI port of RAM
@@ -72,23 +73,23 @@ ARCHITECTURE logic OF spi_dpram IS
 	SIGNAL clk     				: STD_LOGIC;  		-- clock, normalized to be independent of external spi clock polarity
 	
 	SIGNAL bit_cnt 				: STD_LOGIC_VECTOR (RAM_ADDR_WIDTH DOWNTO 0) := (OTHERS => '0'); -- enough for 2x RAM width
-	
 	SIGNAL bit_cnt8				: INTEGER RANGE 0 to 7;
 	
-	SIGNAL tx_buf  : STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');  --transmit buffer
+	SIGNAL tx_buf  : STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');  -- transmit buffer
 	
 BEGIN
-  busy <= NOT ss_n;  --high during transactions
-  
-  -- adjust clock so writes are on rising edge and reads on falling edge
-  --'1' for modes that write on rising edge
-  mode <= cpol XOR cpha;
-  WITH mode SELECT
-    clk <= sclk WHEN '1',
-           NOT sclk WHEN OTHERS;
+	busy <= NOT ss_n;  --high during transactions
 
+	-- adjust clock so writes are on rising edge and reads on falling edge
+	--'1' for modes that write on rising edge
+	mode <= cpol XOR cpha;
+	WITH mode SELECT
+		clk <= sclk WHEN '1',
+			NOT sclk WHEN OTHERS;
+
+			  
   -- bit counter
-  PROCESS(ss_n, clk, reset_n, bit_cnt)
+  PROCESS(ss_n, reset_n, bit_cnt, clk)
   BEGIN
     IF(ss_n = '1' OR reset_n = '0') THEN
 		-- reset miso/mosi bit count
@@ -104,9 +105,50 @@ BEGIN
 	 
   END PROCESS;
 
-  PROCESS(ss_n, clk, reset_n, bit_cnt)
+  PROCESS(ss_n, clk, reset_n, bit_cnt, p_clk, p_rw, p_master_en, p_master_addr, p_master_data, p_slave_en,
+			 p_slave_addr, p_slave_data, ram_from_master, ram_to_master)
   BEGIN
-    -- MOSI input
+
+	IF (reset_n = '0') THEN
+		p_master_data <= "ZZZZZZZZ";
+		p_slave_data <= "ZZZZZZZZ";
+	ELSE
+		-- parallel bus interface to dual port RAM		
+		IF (p_rw = '0') THEN
+			p_master_data <= "ZZZZZZZZ";
+			p_slave_data <= "ZZZZZZZZ";
+			
+			-- WRITE to RAM on parallel bus side of dual port RAM
+			IF (falling_edge(p_clk)) THEN
+				IF (p_master_en = '1') THEN
+					-- master RAM write (latched on falling edge of clk)
+					ram_from_master(conv_integer(unsigned(p_master_addr))) <= p_master_data;
+				END IF;
+				
+				IF (p_slave_en = '1') THEN
+					-- slave RAM write (latched on falling edge of clk)
+					ram_to_master(conv_integer(unsigned(p_slave_addr))) <= p_slave_data;
+				END IF;
+			END IF;
+		ELSE
+			-- READ to RAM on parallel bus side of dual port RAM
+			IF (p_clk = '1') THEN
+				IF (p_master_en = '1') THEN
+					p_master_data <= ram_from_master(conv_integer(unsigned(p_master_addr)));
+				ELSE
+					p_master_data <= "ZZZZZZZZ";
+				END IF;
+				
+				IF (p_slave_en = '1') THEN
+					p_slave_data <= ram_to_master(conv_integer(unsigned(p_slave_addr)));
+				ELSE
+					p_slave_data <= "ZZZZZZZZ";
+				END IF;
+			END IF;
+		END IF;
+	END IF;
+  
+	-- MOSI input
     IF(reset_n = '0' OR ss_n = '1' OR bit_cnt <= spi_hdr_bits-1 ) THEN
 		s_wr_addr <= 0;
     ELSE
@@ -120,9 +162,9 @@ BEGIN
 			ELSIF (bit_cnt >= 16 AND bit_cnt <= 23) THEN
 				-- 3rd header byte: MTBKCR
 				r_mtbkcr(bit_cnt8) <= mosi;
-			ELSIF (bit_cnt >= spi_hdr_bits) THEN
-			-- write to the dual port RAM at the write address
-				ram_from_master(s_wr_addr)(bit_cnt8) := mosi;
+			ELSE
+				-- write to the dual port RAM at the write address
+				--ram_from_master(s_wr_addr)(bit_cnt8) <= mosi;
 			END IF;
 		END IF;
 
