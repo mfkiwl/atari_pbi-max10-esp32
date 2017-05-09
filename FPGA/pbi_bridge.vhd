@@ -34,7 +34,12 @@ entity pbi_bridge is
 		n_extsel		: OUT		std_logic := '1';						-- EXTernal SELect, must set this to 0 to disable Atari internal RAM during PBI access
 		n_mpd			: OUT		std_logic := '1';						-- Math Pack Disable, must set this to 0 to disable Atari floating point ROM (D800-D81C)		
 		n_irq			: OUT		std_logic := '1';						-- Interrupt ReQuest line (requires handshaking on D1FF to identify IRQ source)
-		n_rdy			: OUT		std_logic := '1'						-- Briefly stop CPU (use with extreme caution, ANTIC already uses this)
+		n_rdy			: OUT		std_logic := '1';						-- Briefly stop CPU (use with extreme caution, ANTIC already uses this)
+
+		spi_clk		: IN		std_logic;								-- SPI clock from master
+		spi_ss_n		: IN		std_logic;								-- SPI slave select
+		spi_mosi		: IN		std_logic;								-- SPI Master Out / Slave In
+		spi_miso		: OUT		std_logic := 'Z'						-- SPI Master In / Slave Out
 	);
 end pbi_bridge;
 
@@ -75,9 +80,21 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL flash_bank : std_logic_vector(5 downto 0) := "000000";
 	SIGNAL flash_addr : std_logic_vector(14 downto 0) := "000000000000000";
 	
+	-- signals for SPI dual port RAM interface
+	SIGNAL reg_sdcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL reg_stbycr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL reg_stbkcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL reg_sdsr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL reg_mtbycr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL reg_mtbkcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL reg_mrbs		:		STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL reg_srbs		:		STD_LOGIC_VECTOR(7 DOWNTO 0);
+	
+	SIGNAL spi_busy		:		STD_LOGIC;
+	
 	-- Altera ALTUFM component for PBI Flash ROM space
-	component pbi_rom is
-		port (
+	COMPONENT pbi_rom IS
+		PORT (
 			clock                   : in  std_logic                     := 'X';             -- clk
 			reset_n                 : in  std_logic                     := 'X';             -- reset_n
 			avmm_data_addr          : in  std_logic_vector(14 downto 0) := (others => 'X'); -- address
@@ -87,8 +104,39 @@ ARCHITECTURE behavior OF pbi_bridge IS
 			avmm_data_readdatavalid : out std_logic;                                        -- readdatavalid
 			avmm_data_burstcount    : in  std_logic_vector(3 downto 0)  := (others => 'X')  -- burstcount
 		);
-	end component pbi_rom;
+	END COMPONENT pbi_rom;
 
+	-- SPI interface with dual port RAM transfer buffers
+	COMPONENT spi_dpram
+		GENERIC ( 	cpol : BIT := '0';
+						cpha : BIT := '0';
+						spi_hdr_bits : INTEGER := 24;
+						RAM_DATA_WIDTH : INTEGER := 8;
+						RAM_ADDR_WIDTH : INTEGER := 8 );
+		PORT
+		(
+			p_clk				:	 IN STD_LOGIC;
+			p_wr_data		:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_rd_data		:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_we				:	 IN STD_LOGIC;
+			p_wr_addr		:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_rd_addr		:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_sdcr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_stbycr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_stbkcr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_sdsr			:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_mtbycr			:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_mtbkcr			:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			reset_n			:	 IN STD_LOGIC;
+			ss_n				:	 IN STD_LOGIC;
+			sclk				:	 IN STD_LOGIC;
+			mosi				:	 IN STD_LOGIC;
+			miso				:	 OUT STD_LOGIC;
+			busy				:	 OUT STD_LOGIC
+		);
+	END COMPONENT;
+
+	
 BEGIN
 
 -- Altera ALTUFM signal & pin mapping
@@ -104,7 +152,34 @@ u0 : component pbi_rom
 		avmm_data_burstcount    		=> X"1"   								-- burstcount (set to 1 for parallel access)
 	);
 
+-- SPI Dual Port RAM signal & pin mapping
+u1	: component spi_dpram
+	port map (
+			p_clk				=> '0',
+			p_wr_data		=> X"00",
+			p_we				=> '0',
+			p_wr_addr		=> X"00",
+			p_rd_addr		=> X"00",
+			reset_n			=> n_reset,
+			
+			ss_n				=> spi_ss_n,
+			sclk				=> spi_clk,
+			mosi				=> spi_mosi,
+			miso				=> spi_miso,
+			busy				=> spi_busy,
 
+	
+			r_sdcr			=> reg_sdcr,
+			r_stbycr			=> reg_stbycr,
+			r_stbkcr			=> reg_stbkcr,
+			r_sdsr			=> reg_sdsr,
+			r_mtbycr			=> reg_mtbycr,
+			r_mtbkcr			=> reg_mtbkcr
+	);
+
+	
+-- DIP switch to set PBI address
+-- address is set as binary value 1-8 and translated to single bit select
 process (dip_sw)
 begin
 	if (dip_sw = "00001") then
@@ -259,12 +334,32 @@ begin
 		if (phi2 = '1' AND rw_latch = '1' AND hw_sel = PBI_ADDR) then
 			-- READ of an address in our PBI device address space
 			if (dev_reg_act) then 
+				
 				-- device registers
 				n_mpd <= '1';
 				n_extsel <= '1';
-				n_data_oe <= '1';			-- temporarily disabled
-				-- (note: test output, will eventually be connected to registers)
-				data <= X"22";
+				n_data_oe <= '0';
+				
+				if (addr_latch = X"D100") then
+					data <= reg_sdcr;
+				elsif (addr_latch = X"D101") then
+					data <= reg_stbycr;
+				elsif (addr_latch = X"D102") then
+					data <= reg_stbkcr;
+				elsif (addr_latch = X"D110") then
+					data <= reg_sdsr;
+				elsif (addr_latch = X"D111") then
+					data <= reg_mtbycr;
+				elsif (addr_latch = X"D112") then
+					data <= reg_mtbkcr;
+				elsif (addr_latch = X"D120") then
+					data <= reg_mrbs;
+				elsif (addr_latch = X"D121") then
+					data <= reg_srbs;
+				else
+					data <= X"FF";
+				end if;
+				
 			elsif (dev_ram_act) then
 				-- device RAM
 				n_mpd <= '1';
@@ -313,9 +408,20 @@ begin
 					-- hw_sel register write (latched on falling edge of phi2_early)
 					hw_sel <= data;
 				
-				elsif (dev_reg_act  AND hw_sel = PBI_ADDR) then
 					-- device register write (latched on falling edge of phi2_early)
-					led_latch(3 downto 0) <= data(3 downto 0);
+					if (addr_latch = X"D100") then
+						reg_sdcr <= data;
+					elsif (addr_latch = X"D101") then
+						reg_stbycr <= data;
+					elsif (addr_latch = X"D102") then
+						reg_stbkcr <= data;
+					elsif (addr_latch = X"D120") then
+						reg_mrbs <= data;
+					elsif (addr_latch = X"D121") then
+						reg_srbs <= data;
+					elsif (addr_latch = X"D130") then
+						led_latch(3 downto 0) <= data(3 downto 0);
+					end if;
 					
 		--		elsif (dev_ram_act AND hw_sel = PBI_ADDR) then
 					-- TODO: device RAM (buffer) write (latched on falling edge of phi2_early)

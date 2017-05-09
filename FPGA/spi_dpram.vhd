@@ -17,18 +17,8 @@
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
-
-PACKAGE ram_package IS
-	TYPE byte is ARRAY(7 downto 0) of std_logic;
-END ram_package;
-
-
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_arith.ALL;
 USE ieee.std_logic_unsigned.ALL;
-USE work.ram_package.ALL;
-
 
 ENTITY spi_dpram IS
 	GENERIC (
@@ -45,8 +35,8 @@ ENTITY spi_dpram IS
 		p_rd_data 		: OUT		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, data to read
 		p_we    			: IN		std_logic;			-- parallel memory interface, write enable
 
-		p_wr_addr		: IN		INTEGER RANGE 0 to 2**RAM_ADDR_WIDTH-1;	-- parallel memory interface, address to write
-		p_rd_addr		: IN		INTEGER RANGE 0 to 2**RAM_ADDR_WIDTH-1;	-- parallel memory interface, address to read
+		p_wr_addr		: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface, address to write
+		p_rd_addr		: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface, address to read
 		
 		r_sdcr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- SDCR - Slave Data Control Register (written by Atari)
 		r_stbycr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- STBYCR - Slave Transfer Byte Count Register (written by Atari)
@@ -95,7 +85,7 @@ BEGIN
            NOT sclk WHEN OTHERS;
 
   -- bit counter
-  PROCESS(ss_n, clk)
+  PROCESS(ss_n, clk, reset_n, bit_cnt)
   BEGIN
     IF(ss_n = '1' OR reset_n = '0') THEN
 		-- reset miso/mosi bit count
@@ -111,7 +101,7 @@ BEGIN
 	 
   END PROCESS;
 
-  PROCESS(ss_n, clk)
+  PROCESS(ss_n, clk, reset_n, bit_cnt)
   BEGIN
     -- MOSI input
     IF(reset_n = '0' OR ss_n = '1' OR bit_cnt <= spi_hdr_bits-1 ) THEN
