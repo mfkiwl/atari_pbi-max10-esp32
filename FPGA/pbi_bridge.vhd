@@ -92,9 +92,11 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL spi_busy		:		STD_LOGIC;
 	
 	SIGNAL slave_ram_en	:		STD_LOGIC := '0';
-	SIGNAL slave_data		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL slave_din		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL slave_dout		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL master_ram_en :		STD_LOGIC := '0';
-	SIGNAL master_data		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL master_din		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL master_dout	:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	
 	-- Altera ALTUFM component for PBI Flash ROM space
 	COMPONENT pbi_rom IS
@@ -122,11 +124,13 @@ ARCHITECTURE behavior OF pbi_bridge IS
 			p_clk				:	 IN STD_LOGIC;
 			p_rw				:	 IN STD_LOGIC;
 			p_master_en		:	 IN STD_LOGIC;
-			p_master_data	:	 INOUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			p_master_addr	:	 IN STD_LOGIC_VECTOR(ram_addr_width-1 DOWNTO 0);
+			p_master_din	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_master_dout	:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			p_slave_en		:	 IN STD_LOGIC;
 			p_slave_addr	:	 IN STD_LOGIC_VECTOR(ram_addr_width-1 DOWNTO 0);
-			p_slave_data	:	 INOUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_slave_din		:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_slave_dout	:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_sdcr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_stbycr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_stbkcr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -164,11 +168,14 @@ u1	: component spi_dpram
 			p_clk				=>		phi2_early,
 			p_rw				=>		rw_latch,
 			p_master_en		=>		master_ram_en,
-			p_master_data	=>		master_data,
 			p_master_addr	=>	 	addr_latch(7 DOWNTO 0),
+			p_master_din	=>		master_din,
+			p_master_dout	=>		master_dout,
 			p_slave_en		=>		slave_ram_en,
 			p_slave_addr	=>	 	addr_latch(7 DOWNTO 0),
-			p_slave_data	=>		slave_data,
+			p_slave_din		=>		slave_din,
+			p_slave_dout	=>		slave_dout,
+		
 
 			reset_n			=> n_reset,
 			
@@ -279,7 +286,7 @@ end process;
 
 process (n_reset, phi2, phi2_early, rw, rw_latch, hw_sel, addr_latch, dev_rom_act, hw_sel_act,
 			dev_reg_act, addr, data, flash_data_latch, PBI_ADDR, reg_sdcr, reg_stbycr, reg_stbkcr, reg_sdsr, reg_mtbycr,
-			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs, master_ram_en, master_data, slave_ram_en, slave_data)
+			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs, master_ram_en, master_din, master_dout, slave_ram_en, slave_din, slave_dout)
 begin
 	if (n_reset = '0') then
 		n_rdy <= '1';
@@ -391,7 +398,7 @@ begin
 				n_extsel <= '1';
 				n_data_oe <= '0';
 
-				data <= master_data;
+				data <= master_dout;
 				
 			elsif (slave_ram_en = '1') then
 				-- SPI slave dual port RAM window
@@ -399,7 +406,7 @@ begin
 				n_extsel <= '1';
 				n_data_oe <= '0';
 
-				data <= slave_data;
+				data <= slave_dout;
 				
 			elsif (dev_rom_act) then
 				-- device ROM
@@ -444,10 +451,10 @@ begin
 				elsif (hw_sel = PBI_ADDR) then 
 					if (master_ram_en = '1') then
 						-- master RAM write (latched on falling edge of phi2_early)
-						--master_data <= data;
+						master_din <= data;
 					elsif (slave_ram_en = '1') then
 						-- slave RAM write (latched on falling edge of phi2_early)
-						--slave_data <= data;
+						slave_din <= data;
 					elsif (dev_reg_act) then
 						-- device register write (latched on falling edge of phi2_early)
 						if (addr_latch = X"D100") then

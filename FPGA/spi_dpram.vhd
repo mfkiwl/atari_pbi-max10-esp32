@@ -34,12 +34,14 @@ ENTITY spi_dpram IS
 		p_rw				: IN		STD_LOGIC;			-- parallel memory interface, read/write
 		
 		p_master_en		: IN		STD_LOGIC;			-- parallel memory interface, master enable
-		p_master_data	: INOUT	STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, master data
 		p_master_addr	: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface, master address
+		p_master_din	: IN		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, master data
+		p_master_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, master data
 		
 		p_slave_en		: IN		STD_LOGIC;			-- parallel memory interface, slave enable
 		p_slave_addr	: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface,  slave address
-		p_slave_data 	: INOUT	STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, slave data
+		p_slave_din		: IN		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, slave data
+		p_slave_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, slave data
 		
 		r_sdcr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- SDCR - Slave Data Control Register (written by Atari)
 		r_stbycr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- STBYCR - Slave Transfer Byte Count Register (written by Atari)
@@ -59,25 +61,83 @@ ENTITY spi_dpram IS
 END spi_dpram;
 
 ARCHITECTURE logic OF spi_dpram IS
-	subtype word_t is std_logic_vector((RAM_DATA_WIDTH-1) downto 0);
-	type memory_t is array(2**RAM_ADDR_WIDTH-1 downto 0) of word_t;
-	
-	SIGNAL ram_from_master 		: memory_t;				-- dual port RAM that holds data coming from SPI master
-	SIGNAL ram_to_master 		: memory_t;				-- dual port RAM that holds data to be sent to SPI master
-
-	
-	SIGNAL s_wr_addr			: INTEGER RANGE 0 to 2**RAM_ADDR_WIDTH-1 := 0;	-- RAM address to be written on SPI port of RAM
-	SIGNAL s_rd_addr			: INTEGER RANGE 0 to 2**RAM_ADDR_WIDTH-1 := 0; 	-- RAM address to be read on SPI port of RAM
+	SIGNAL s_wr_addr			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');	-- RAM address to be written on SPI port of RAM
+	SIGNAL s_rd_addr			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0'); 	-- RAM address to be read on SPI port of RAM
 	
 	SIGNAL mode    				: STD_LOGIC;  		-- groups modes by clock polarity relation to data
 	SIGNAL clk     				: STD_LOGIC;  		-- clock, normalized to be independent of external spi clock polarity
 	
 	SIGNAL bit_cnt 				: STD_LOGIC_VECTOR (RAM_ADDR_WIDTH DOWNTO 0) := (OTHERS => '0'); -- enough for 2x RAM width
 	SIGNAL bit_cnt8				: INTEGER RANGE 0 to 7;
+
+	SIGNAL master_ram_clk		: STD_LOGIC;
+	SIGNAL slave_ram_clk			: STD_LOGIC;
 	
+	SIGNAL master_wren			: STD_LOGIC;
+	SIGNAL slave_rden				: STD_LOGIC;
+	
+	SIGNAL slave_tx_buf			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');
+		
 	SIGNAL tx_buf  : STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');  -- transmit buffer
+	SIGNAL rx_buf  : STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');  -- receive buffer
+
+	component dpram
+		PORT
+		(
+			address_a		: IN STD_LOGIC_VECTOR (13 DOWNTO 0);
+			address_b		: IN STD_LOGIC_VECTOR (13 DOWNTO 0);
+			clock_a			: IN STD_LOGIC  := '1';
+			clock_b			: IN STD_LOGIC ;
+			data_a			: IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+			data_b			: IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+			rden_a			: IN STD_LOGIC  := '1';
+			rden_b			: IN STD_LOGIC  := '1';
+			wren_a			: IN STD_LOGIC  := '0';
+			wren_b			: IN STD_LOGIC  := '0';
+			q_a				: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+			q_b				: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+		);
+	end component;
 	
 BEGIN
+	-- a side is SPI, b side is parallel
+	
+	dpram_master : dpram PORT MAP (
+			address_a(13 DOWNTO 8)  => "000000",
+			address_a(7 DOWNTO 0)	=> s_wr_addr,
+			clock_a		=> master_ram_clk,
+			data_a	 	=> rx_buf,
+			wren_a	 	=> master_wren,
+			--q_a	 		=> q_a_sig,
+			--rden_a	 	=> rden_a_sig,
+
+			address_b(13 DOWNTO 8)  => "000000",
+			address_b(7 DOWNTO 0)	=> p_master_addr,
+			clock_b		=> (NOT p_clk),
+			data_b	 	=> p_master_din,
+			rden_b	 	=> (p_master_en AND p_rw),
+			wren_b	 	=> (p_master_en AND NOT p_rw),
+			q_b	 		=> p_master_dout
+		);
+
+	dpram_slave : dpram PORT MAP (
+			address_a(13 DOWNTO 8)  => "000000",
+			address_a(7 DOWNTO 0)	=> s_rd_addr,
+			clock_a		=> slave_ram_clk,
+			q_a	 		=> slave_tx_buf,
+			rden_a	 	=> slave_rden,
+			data_a	 	=> X"FF",
+			wren_a	 	=> '0',
+
+			address_b(13 DOWNTO 8)  => "000000",
+			address_b(7 DOWNTO 0)	=> p_slave_addr,
+			clock_b		=> (NOT p_clk),
+			data_b	 	=> p_slave_din,
+			rden_b	 	=> (p_slave_en AND p_rw),
+			wren_b	 	=> (p_slave_en AND NOT p_rw),
+			q_b	 		=> p_slave_dout
+		);
+
 	busy <= NOT ss_n;  --high during transactions
 
 	-- adjust clock so writes are on rising edge and reads on falling edge
@@ -105,52 +165,13 @@ BEGIN
 	 
   END PROCESS;
 
-  PROCESS(ss_n, clk, reset_n, bit_cnt, p_clk, p_rw, p_master_en, p_master_addr, p_master_data, p_slave_en,
-			 p_slave_addr, p_slave_data, ram_from_master, ram_to_master)
+  PROCESS(ss_n, clk, reset_n, bit_cnt, p_clk, p_rw, p_master_en, p_master_addr, p_master_din, p_slave_en,
+			 p_slave_addr, p_slave_din)
   BEGIN
-
-	IF (reset_n = '0') THEN
-		p_master_data <= "ZZZZZZZZ";
-		p_slave_data <= "ZZZZZZZZ";
-	ELSE
-		-- parallel bus interface to dual port RAM		
-		IF (p_rw = '0') THEN
-			p_master_data <= "ZZZZZZZZ";
-			p_slave_data <= "ZZZZZZZZ";
-			
-			-- WRITE to RAM on parallel bus side of dual port RAM
-			IF (falling_edge(p_clk)) THEN
-				IF (p_master_en = '1') THEN
-					-- master RAM write (latched on falling edge of clk)
-					ram_from_master(conv_integer(unsigned(p_master_addr))) <= p_master_data;
-				END IF;
-				
-				IF (p_slave_en = '1') THEN
-					-- slave RAM write (latched on falling edge of clk)
-					ram_to_master(conv_integer(unsigned(p_slave_addr))) <= p_slave_data;
-				END IF;
-			END IF;
-		ELSE
-			-- READ to RAM on parallel bus side of dual port RAM
-			IF (p_clk = '1') THEN
-				IF (p_master_en = '1') THEN
-					p_master_data <= ram_from_master(conv_integer(unsigned(p_master_addr)));
-				ELSE
-					p_master_data <= "ZZZZZZZZ";
-				END IF;
-				
-				IF (p_slave_en = '1') THEN
-					p_slave_data <= ram_to_master(conv_integer(unsigned(p_slave_addr)));
-				ELSE
-					p_slave_data <= "ZZZZZZZZ";
-				END IF;
-			END IF;
-		END IF;
-	END IF;
   
 	-- MOSI input
     IF(reset_n = '0' OR ss_n = '1' OR bit_cnt <= spi_hdr_bits-1 ) THEN
-		s_wr_addr <= 0;
+		s_wr_addr <= (OTHERS => '0');
     ELSE
 		IF (falling_edge(clk)) THEN
 			IF (bit_cnt >= 0 AND bit_cnt <= 7) THEN
@@ -163,8 +184,8 @@ BEGIN
 				-- 3rd header byte: MTBKCR
 				r_mtbkcr(bit_cnt8) <= mosi;
 			ELSE
-				-- write to the dual port RAM at the write address
-				--ram_from_master(s_wr_addr)(bit_cnt8) <= mosi;
+				-- write to the rx buffer
+				rx_buf(bit_cnt8) <= mosi;
 			END IF;
 		END IF;
 
@@ -177,7 +198,7 @@ BEGIN
     -- transmit buffer for MISO output
     IF(reset_n = '0' OR ss_n = '1' OR bit_cnt <= spi_hdr_bits-1) THEN
       tx_buf <= (OTHERS => '0');
-		s_rd_addr <= 0;
+		s_rd_addr <= (OTHERS => '0');
     ELSE
 		IF (falling_edge(clk)) THEN
 			IF (bit_cnt >= 0 AND bit_cnt <= 7) THEN
@@ -191,7 +212,7 @@ BEGIN
 				tx_buf <= r_stbkcr;
 			ELSIF (bit_cnt >= spi_hdr_bits) THEN
 				-- load transmit buffer from dual port RAM at the current read address
-				tx_buf <= ram_to_master(s_rd_addr);
+				tx_buf <= slave_tx_buf;
 			END IF;
 		END IF;
 

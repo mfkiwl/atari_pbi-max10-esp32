@@ -44,6 +44,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "spi_miso",
+					"strict" : false
+				},
+				{
 					"name" : "data[0]",
 					"strict" : false
 				},
@@ -116,26 +120,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "addr[11]",
-					"strict" : false
-				},
-				{
-					"name" : "addr[12]",
-					"strict" : false
-				},
-				{
-					"name" : "addr[14]",
-					"strict" : false
-				},
-				{
-					"name" : "addr[15]",
-					"strict" : false
-				},
-				{
-					"name" : "addr[13]",
-					"strict" : false
-				},
-				{
 					"name" : "addr[0]",
 					"strict" : false
 				},
@@ -172,7 +156,39 @@
 					"strict" : false
 				},
 				{
+					"name" : "addr[11]",
+					"strict" : false
+				},
+				{
+					"name" : "addr[12]",
+					"strict" : false
+				},
+				{
+					"name" : "addr[14]",
+					"strict" : false
+				},
+				{
+					"name" : "addr[15]",
+					"strict" : false
+				},
+				{
+					"name" : "addr[13]",
+					"strict" : false
+				},
+				{
 					"name" : "rw",
+					"strict" : false
+				},
+				{
+					"name" : "spi_clk",
+					"strict" : false
+				},
+				{
+					"name" : "spi_ss_n",
+					"strict" : false
+				},
+				{
+					"name" : "spi_mosi",
 					"strict" : false
 				}
 			]
