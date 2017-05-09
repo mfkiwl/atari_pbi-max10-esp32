@@ -6,8 +6,8 @@
 -- the Atari PBI controls one side of these dual port RAMs to write/read data, and uses a few control signals tied to Atari
 -- port registers to control the process
 --
--- based on a SPI slave example by Scott Larson, https://eewiki.net/pages/viewpage.action?pageId=7569477 and modified for
--- the dual port RAM interface by Steve Richardson (tangentaudio@gmail.com)
+-- originally based on a SPI slave example by Scott Larson, https://eewiki.net/pages/viewpage.action?pageId=7569477
+-- heavily modified for dual port RAM interface and protocol changes by Steve Richardson (tangentaudio@gmail.com)
 --
 --
 -- 2017MAY01 - Epoch
@@ -32,7 +32,7 @@ ENTITY spi_dpram IS
 	PORT(
 		p_clk				: IN		std_logic;			-- parallel memory interface, clock
 		p_wr_data		: IN		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, data to write
-		p_rd_data 		: OUT		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, data to read
+		p_rd_data 		: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, data to read
 		p_we    			: IN		std_logic;			-- parallel memory interface, write enable
 
 		p_wr_addr		: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface, address to write

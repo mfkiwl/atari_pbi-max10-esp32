@@ -77,18 +77,18 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL flash_read_valid : std_logic := '0';
 	SIGNAL flash_data : std_logic_vector(31 downto 0) := X"FFFFFFFF";
 	SIGNAL flash_data_latch : std_logic_vector(31 downto 0) := X"FFFFFFFF";
-	SIGNAL flash_bank : std_logic_vector(5 downto 0) := "000000";
 	SIGNAL flash_addr : std_logic_vector(14 downto 0) := "000000000000000";
 	
 	-- signals for SPI dual port RAM interface
-	SIGNAL reg_sdcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
-	SIGNAL reg_stbycr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
-	SIGNAL reg_stbkcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
-	SIGNAL reg_sdsr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
-	SIGNAL reg_mtbycr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
-	SIGNAL reg_mtbkcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0);
-	SIGNAL reg_mrbs		:		STD_LOGIC_VECTOR(7 DOWNTO 0);
-	SIGNAL reg_srbs		:		STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL reg_sdcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_stbycr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_stbkcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_sdsr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_mtbycr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_mtbkcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_mrbs		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_srbs		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_fbs			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	
 	SIGNAL spi_busy		:		STD_LOGIC;
 	
@@ -144,8 +144,8 @@ u0 : component pbi_rom
 	port map (
 		clock                   		=> clk_57,             				-- clk
 		reset_n                 		=> n_reset,            				-- reset
-		avmm_data_addr(14 downto 9)   => flash_bank, 						-- data.address[14:9] (64 total 512 x 32-bit banks selectable)
-		avmm_data_addr(8 downto 0)   	=> addr_latch(10 downto 2),  		-- data.address[ 8:0] (512 x 32-bit words bank size)
+		avmm_data_addr(14 DOWNTO 9)   => reg_fbs(5 DOWNTO 0), 						-- data.address[14:9] (64 total 512 x 32-bit banks selectable)
+		avmm_data_addr(8 DOWNTO 0)   	=> addr_latch(10 DOWNTO 2),  		-- data.address[ 8:0] (512 x 32-bit words bank size)
 		avmm_data_read          		=> flash_read,      					-- start read signal
 		avmm_data_readdata      		=> flash_data,  						-- flash data bus
 		avmm_data_readdatavalid 		=> flash_read_valid, 				-- flash data read is valid
@@ -268,7 +268,9 @@ begin
 end process;
 
 
-process (n_reset, phi2, phi2_early, rw, rw_latch, hw_sel, addr_latch, dev_rom_act, dev_ram_act, hw_sel_act, dev_reg_act, addr, data, flash_data_latch)
+process (n_reset, phi2, phi2_early, rw, rw_latch, hw_sel, addr_latch, dev_rom_act, dev_ram_act, hw_sel_act,
+			dev_reg_act, addr, data, flash_data_latch, PBI_ADDR, reg_sdcr, reg_stbycr, reg_stbkcr, reg_sdsr, reg_mtbycr,
+			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs)
 begin
 	if (n_reset = '0') then
 		n_rdy <= '1';
@@ -356,6 +358,8 @@ begin
 					data <= reg_mrbs;
 				elsif (addr_latch = X"D121") then
 					data <= reg_srbs;
+				elsif (addr_latch = X"D122") then
+					data <= reg_fbs;
 				else
 					data <= X"FF";
 				end if;
@@ -419,6 +423,8 @@ begin
 						reg_mrbs <= data;
 					elsif (addr_latch = X"D121") then
 						reg_srbs <= data;
+					elsif (addr_latch = X"D122") then
+						reg_fbs <= data;
 					elsif (addr_latch = X"D130") then
 						led_latch(3 downto 0) <= data(3 downto 0);
 					end if;
