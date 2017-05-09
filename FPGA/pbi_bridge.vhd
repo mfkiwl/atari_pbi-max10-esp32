@@ -137,6 +137,8 @@ ARCHITECTURE behavior OF pbi_bridge IS
 			r_sdsr			:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_mtbycr			:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_mtbkcr			:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_mrbs			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_srbs			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			reset_n			:	 IN STD_LOGIC;
 			ss_n				:	 IN STD_LOGIC;
 			sclk				:	 IN STD_LOGIC;
@@ -190,7 +192,9 @@ u1	: component spi_dpram
 			r_stbkcr			=> reg_stbkcr,
 			r_sdsr			=> reg_sdsr,
 			r_mtbycr			=> reg_mtbycr,
-			r_mtbkcr			=> reg_mtbkcr
+			r_mtbkcr			=> reg_mtbkcr,
+			r_mrbs			=> reg_mrbs,
+			r_srbs			=> reg_srbs
 	);
 
 	

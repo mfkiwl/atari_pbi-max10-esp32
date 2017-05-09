@@ -43,12 +43,15 @@ ENTITY spi_dpram IS
 		p_slave_din		: IN		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, slave data
 		p_slave_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, slave data
 		
-		r_sdcr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- SDCR - Slave Data Control Register (written by Atari)
-		r_stbycr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- STBYCR - Slave Transfer Byte Count Register (written by Atari)
-		r_stbkcr			: IN		STD_LOGIC_VECTOR(7 downto 0);					-- STBKCR - Slave Transfer Bank Count Register (written by Atari)
-		r_sdsr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- SDSR - Slave Data Status Register (written by state machine & ESP32)
-		r_mtbycr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- MTBYCR - Master Transfer Byte Count Register (written by ESP32)
-		r_mtbkcr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- MTBKCR - Master Transfer Bank Count Register (written by ESP32)
+		r_sdcr			: IN		STD_LOGIC_VECTOR(7 downto 0);		-- SDCR - Slave Data Control Register (written by Atari)
+		r_stbycr			: IN		STD_LOGIC_VECTOR(7 downto 0);		-- STBYCR - Slave Transfer Byte Count Register (written by Atari)
+		r_stbkcr			: IN		STD_LOGIC_VECTOR(7 downto 0);		-- STBKCR - Slave Transfer Bank Count Register (written by Atari)
+		r_sdsr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');	-- SDSR - Slave Data Status Register (written by state machine & ESP32)
+		r_mtbycr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');	-- MTBYCR - Master Transfer Byte Count Register (written by ESP32)
+		r_mtbkcr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');	-- MTBKCR - Master Transfer Bank Count Register (written by ESP32)
+		
+		r_mrbs			: IN		STD_LOGIC_VECTOR(7 downto 0);
+		r_srbs			: IN		STD_LOGIC_VECTOR(7 downto 0);
 		
 		reset_n      	: IN		STD_LOGIC;  		-- SPI bus, active low reset
 		ss_n         	: IN		STD_LOGIC;  		-- SPI bus, active low slave select
@@ -61,22 +64,24 @@ ENTITY spi_dpram IS
 END spi_dpram;
 
 ARCHITECTURE logic OF spi_dpram IS
-	SIGNAL s_wr_addr			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');	-- RAM address to be written on SPI port of RAM
+	SIGNAL s_wr_bank			: STD_LOGIC_VECTOR(5 downto 0) := (OTHERS => '0');		-- RAM bank to be written on SPI port of RAM
+	SIGNAL s_wr_addr			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- RAM address to be written on SPI port of RAM
+	SIGNAL s_rd_bank			: STD_LOGIC_VECTOR(5 downto 0) := (OTHERS => '0');		-- RAM bank to be read on SPI port of RAM
 	SIGNAL s_rd_addr			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0'); 	-- RAM address to be read on SPI port of RAM
 	
-	SIGNAL mode    				: STD_LOGIC;  		-- groups modes by clock polarity relation to data
-	SIGNAL clk     				: STD_LOGIC;  		-- clock, normalized to be independent of external spi clock polarity
+	SIGNAL mode    			: STD_LOGIC;  		-- groups modes by clock polarity relation to data
+	SIGNAL clk     			: STD_LOGIC;  		-- clock, normalized to be independent of external spi clock polarity
 	
-	SIGNAL bit_cnt 				: STD_LOGIC_VECTOR (RAM_ADDR_WIDTH DOWNTO 0) := (OTHERS => '0'); -- enough for 2x RAM width
-	SIGNAL bit_cnt8				: INTEGER RANGE 0 to 7;
+	SIGNAL bit_cnt 			: STD_LOGIC_VECTOR (RAM_ADDR_WIDTH DOWNTO 0) := (OTHERS => '0'); -- enough for 2x RAM width
+	SIGNAL bit_cnt8			: INTEGER RANGE 0 to 7;
 
-	SIGNAL master_ram_clk		: STD_LOGIC;
-	SIGNAL slave_ram_clk			: STD_LOGIC;
+	SIGNAL master_ram_clk	: STD_LOGIC;
+	SIGNAL slave_ram_clk		: STD_LOGIC;
 	
-	SIGNAL master_wren			: STD_LOGIC;
-	SIGNAL slave_rden				: STD_LOGIC;
+	SIGNAL master_wren		: STD_LOGIC;
+	SIGNAL slave_rden			: STD_LOGIC;
 	
-	SIGNAL slave_tx_buf			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');
+	SIGNAL slave_tx_buf		: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');
 		
 	SIGNAL tx_buf  : STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');  -- transmit buffer
 	SIGNAL rx_buf  : STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');  -- receive buffer
@@ -100,10 +105,11 @@ ARCHITECTURE logic OF spi_dpram IS
 	end component;
 	
 BEGIN
-	-- a side is SPI, b side is parallel
+	-- "A" side of RAM is SPI interface (to ESP32)
+	--	"B" side of RAM is parallel interface (to Atari PBI)
 	
 	dpram_master : dpram PORT MAP (
-			address_a(13 DOWNTO 8)  => "000000",
+			address_a(13 DOWNTO 8)  => s_wr_bank,
 			address_a(7 DOWNTO 0)	=> s_wr_addr,
 			clock_a		=> master_ram_clk,
 			data_a	 	=> rx_buf,
@@ -111,7 +117,7 @@ BEGIN
 			--q_a	 		=> q_a_sig,
 			--rden_a	 	=> rden_a_sig,
 
-			address_b(13 DOWNTO 8)  => "000000",
+			address_b(13 DOWNTO 8)  => r_mrbs(5 DOWNTO 0),
 			address_b(7 DOWNTO 0)	=> p_master_addr,
 			clock_b		=> (NOT p_clk),
 			data_b	 	=> p_master_din,
@@ -121,7 +127,7 @@ BEGIN
 		);
 
 	dpram_slave : dpram PORT MAP (
-			address_a(13 DOWNTO 8)  => "000000",
+			address_a(13 DOWNTO 8)  => s_rd_bank,
 			address_a(7 DOWNTO 0)	=> s_rd_addr,
 			clock_a		=> slave_ram_clk,
 			q_a	 		=> slave_tx_buf,
@@ -129,7 +135,7 @@ BEGIN
 			data_a	 	=> X"FF",
 			wren_a	 	=> '0',
 
-			address_b(13 DOWNTO 8)  => "000000",
+			address_b(13 DOWNTO 8)  => r_srbs(5 DOWNTO 0),
 			address_b(7 DOWNTO 0)	=> p_slave_addr,
 			clock_b		=> (NOT p_clk),
 			data_b	 	=> p_slave_din,
@@ -138,6 +144,7 @@ BEGIN
 			q_b	 		=> p_slave_dout
 		);
 
+		
 	busy <= NOT ss_n;  --high during transactions
 
 	-- adjust clock so writes are on rising edge and reads on falling edge
@@ -149,19 +156,31 @@ BEGIN
 
 			  
   -- bit counter
-  PROCESS(ss_n, reset_n, bit_cnt, clk)
+  PROCESS(ss_n, reset_n, bit_cnt, bit_cnt8, clk)
   BEGIN
     IF(ss_n = '1' OR reset_n = '0') THEN
 		-- reset miso/mosi bit count
 		bit_cnt <= (OTHERS => '0');
     ELSE
-      IF(rising_edge(clk)) THEN
+      IF(falling_edge(clk)) THEN
 			-- increment bit count
 			bit_cnt <= bit_cnt + 1;
 		END IF;
     END IF;
 	 
 	 bit_cnt8 <= conv_integer(unsigned(bit_cnt(2 DOWNTO 0)));
+	 
+	 IF (bit_cnt8 = 7 AND clk = '1') THEN
+		master_ram_clk <= '1';
+	 ELSE
+		master_ram_clk <= '0';
+	 END IF;
+	 
+	 IF (bit_cnt8 = 0 AND clk = '0') THEN
+		slave_ram_clk <= '1';
+	ELSE
+		slave_ram_clk <= '0';
+	END IF;
 	 
   END PROCESS;
 
@@ -172,20 +191,25 @@ BEGIN
 	-- MOSI input
     IF(reset_n = '0' OR ss_n = '1' OR bit_cnt <= spi_hdr_bits-1 ) THEN
 		s_wr_addr <= (OTHERS => '0');
+		master_wren <= '0';
     ELSE
 		IF (falling_edge(clk)) THEN
 			IF (bit_cnt >= 0 AND bit_cnt <= 7) THEN
 				-- 1st header byte: SDSR
 				r_sdsr(bit_cnt8) <= mosi;
+				master_wren <= '0';
 			ELSIF (bit_cnt >= 8 AND bit_cnt <= 15) THEN
 				-- 2nd header byte: MTBYCR
 				r_mtbycr(bit_cnt8) <= mosi;
+				master_wren <= '0';
 			ELSIF (bit_cnt >= 16 AND bit_cnt <= 23) THEN
 				-- 3rd header byte: MTBKCR
 				r_mtbkcr(bit_cnt8) <= mosi;
+				master_wren <= '0';
 			ELSE
 				-- write to the rx buffer
 				rx_buf(bit_cnt8) <= mosi;
+				master_wren <= '1';
 			END IF;
 		END IF;
 
@@ -199,20 +223,25 @@ BEGIN
     IF(reset_n = '0' OR ss_n = '1' OR bit_cnt <= spi_hdr_bits-1) THEN
       tx_buf <= (OTHERS => '0');
 		s_rd_addr <= (OTHERS => '0');
+		slave_rden <= '0';
     ELSE
 		IF (falling_edge(clk)) THEN
 			IF (bit_cnt >= 0 AND bit_cnt <= 7) THEN
 				-- 1st header byte: SDCR
 				tx_buf <= r_sdcr;
+				slave_rden <= '0';
 			ELSIF (bit_cnt >= 8 AND bit_cnt <= 15) THEN
 				-- 2nd header byte: STBYCR
 				tx_buf <= r_stbycr;
+				slave_rden <= '0';
 			ELSIF (bit_cnt >= 16 AND bit_cnt <= 23) THEN
 				-- 3rd header byte: STBKCR
 				tx_buf <= r_stbkcr;
+				slave_rden <= '0';
 			ELSIF (bit_cnt >= spi_hdr_bits) THEN
 				-- load transmit buffer from dual port RAM at the current read address
 				tx_buf <= slave_tx_buf;
+				slave_rden <= '1';
 			END IF;
 		END IF;
 
@@ -226,7 +255,7 @@ BEGIN
     IF(ss_n = '1' OR reset_n = '0') THEN
 		-- no transaction occuring or reset
       miso <= 'Z';
-    ELSIF(rising_edge(clk) AND bit_cnt >= spi_hdr_bits-1) THEN
+    ELSIF(rising_edge(clk)) THEN
       -- send transmit buffer data bit to master
 		miso <= tx_buf(bit_cnt8);
     END IF;
