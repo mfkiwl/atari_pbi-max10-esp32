@@ -1,8 +1,8 @@
 /*<simulation_settings>
-<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off pbi_bridge -c pbi_bridge --vector_source="C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/Waveform1.vwf" --testbench_file="C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim/Waveform1.vwf.vht"</ftestbench_cmd>
-<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off pbi_bridge -c pbi_bridge --vector_source="C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/Waveform1.vwf" --testbench_file="C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim/Waveform1.vwf.vht"</ttestbench_cmd>
-<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory="C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim/" pbi_bridge -c pbi_bridge</fnetlist_cmd>
-<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=vhdl --output_directory="C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim/" pbi_bridge -c pbi_bridge</tnetlist_cmd>
+<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off pbi_bridge -c pbi_bridge --vector_source="C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/Waveform1.vwf" --testbench_file="C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim/Waveform1.vwf.vht"</ftestbench_cmd>
+<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off pbi_bridge -c pbi_bridge --vector_source="C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/Waveform1.vwf" --testbench_file="C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim/Waveform1.vwf.vht"</ttestbench_cmd>
+<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory="C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim/" pbi_bridge -c pbi_bridge</fnetlist_cmd>
+<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=vhdl --output_directory="C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim/" pbi_bridge -c pbi_bridge</tnetlist_cmd>
 <modelsim_script>onerror {exit -code 1}
 vlib work
 vcom -work work pbi_bridge.vho
@@ -20,14 +20,6 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
-
-
-
-
-
-
-
-
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -46,14 +38,6 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
-
-
-
-
-
-
-
-
 </modelsim_script_timing>
 <hdl_lang>vhdl</hdl_lang>
 </simulation_settings>*/
@@ -64,7 +48,7 @@ the Block Editor! File corruption is VERY likely to occur.
 */
 
 /*
-Copyright (C) 2016  Intel Corporation. All rights reserved.
+Copyright (C) 2017  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -702,7 +686,7 @@ SIGNAL("dev_rom_act")
 	PARENT = "";
 }
 
-SIGNAL("clk_50")
+SIGNAL("clk_57")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
@@ -1365,7 +1349,7 @@ TRANSITION_LIST("dev_rom_act")
 	}
 }
 
-TRANSITION_LIST("clk_50")
+TRANSITION_LIST("clk_57")
 {
 	NODE
 	{
@@ -1402,7 +1386,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "clk_50";
+	CHANNEL = "clk_57";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 1;

@@ -19,7 +19,7 @@
 -- the top level entity of the current Quartus project .The user can use this   
 -- testbench to simulate his design using a third-party simulation tool .       
 -- *****************************************************************************
--- Generated on "05/10/2017 10:53:29"
+-- Generated on "05/10/2017 11:14:02"
                                                              
 -- Vhdl Test Bench(with test vectors) for design  :          pbi_bridge
 -- 
@@ -128,6 +128,24 @@ BEGIN
 	n_reset <= '0';
 WAIT;
 END PROCESS t_prcs_n_reset;
+
+-- clk_57
+t_prcs_clk_57: PROCESS
+BEGIN
+	clk_57 <= '1';
+	WAIT FOR 1000 ps;
+	FOR i IN 1 TO 499
+	LOOP
+		clk_57 <= '0';
+		WAIT FOR 10000 ps;
+		clk_57 <= '1';
+		WAIT FOR 10000 ps;
+	END LOOP;
+	clk_57 <= '0';
+	WAIT FOR 10000 ps;
+	clk_57 <= '1';
+WAIT;
+END PROCESS t_prcs_clk_57;
 
 -- phi2
 t_prcs_phi2: PROCESS

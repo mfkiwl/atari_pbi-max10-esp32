@@ -91,10 +91,10 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	
 	SIGNAL slave_ram_en	:		STD_LOGIC := '0';
 	SIGNAL slave_din		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL slave_dout		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL slave_dout		:		STD_LOGIC_VECTOR(7 DOWNTO 0);
 	SIGNAL master_ram_en :		STD_LOGIC := '0';
 	SIGNAL master_din		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL master_dout	:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL master_dout	:		STD_LOGIC_VECTOR(7 DOWNTO 0);
 	
 	-- Altera ALTUFM component for PBI Flash ROM space
 	-- See https://www.altera.com/en_US/pdfs/literature/hb/max-10/ug_m10_ufm.pdf
@@ -113,8 +113,8 @@ ARCHITECTURE behavior OF pbi_bridge IS
 
 	-- SPI interface with dual port RAM transfer buffers
 	COMPONENT spi_dpram
-		GENERIC ( 	cpol : BIT := '0';
-						cpha : BIT := '0';
+		GENERIC ( 	cpol : STD_LOGIC := '0';
+						cpha : STD_LOGIC := '0';
 						spi_hdr_bits : INTEGER := 24;
 						RAM_DATA_WIDTH : INTEGER := 8;
 						RAM_ADDR_WIDTH : INTEGER := 8 );

@@ -40,7 +40,7 @@ ENTITY spi_dpram IS
 		
 		p_slave_en		: IN		STD_LOGIC;			-- parallel memory interface, slave enable
 		p_slave_addr	: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface,  slave address
-		p_slave_din		: IN		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, slave data
+		p_slave_din		: IN		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, slave data
 		p_slave_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, slave data
 		
 		r_sdcr			: IN		STD_LOGIC_VECTOR(7 downto 0);		-- SDCR - Slave Data Control Register (written by Atari)
@@ -54,7 +54,9 @@ ENTITY spi_dpram IS
 		r_mrbs			: IN		STD_LOGIC_VECTOR(7 downto 0);
 		r_srbs			: IN		STD_LOGIC_VECTOR(7 downto 0);
 
-		reset_n      	: IN		STD_LOGIC;  		-- SPI bus, active low reset
+		reset_n      	: IN		STD_LOGIC;  		-- active low reset
+		
+		
 		ss_n         	: IN		STD_LOGIC;  		-- SPI bus, active low slave select
 		sclk         	: IN		STD_LOGIC;  		-- SPI bus, clock from master
 		mosi         	: IN		STD_LOGIC;  		-- SPI bus, master out slave in
@@ -64,9 +66,9 @@ END spi_dpram;
 
 ARCHITECTURE logic OF spi_dpram IS
 	SIGNAL busy					: STD_LOGIC;
-	SIGNAL s_wr_bank			: STD_LOGIC_VECTOR(5 downto 0) := (OTHERS => '0');		-- RAM bank to be written on SPI port of RAM
+	SIGNAL s_wr_bank			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- RAM bank to be written on SPI port of RAM
 	SIGNAL s_wr_addr			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- RAM address to be written on SPI port of RAM
-	SIGNAL s_rd_bank			: STD_LOGIC_VECTOR(5 downto 0) := (OTHERS => '0');		-- RAM bank to be read on SPI port of RAM
+	SIGNAL s_rd_bank			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- RAM bank to be read on SPI port of RAM
 	SIGNAL s_rd_addr			: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0'); 	-- RAM address to be read on SPI port of RAM
 	
 	SIGNAL mode    			: STD_LOGIC;  		-- groups modes by clock polarity relation to data
@@ -87,6 +89,12 @@ ARCHITECTURE logic OF spi_dpram IS
 	SIGNAL rx_buf  : STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');  -- receive buffer
 
 	SIGNAL shadow_sdsr 		: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');
+
+	SIGNAL p_clk_n				: STD_LOGIC;
+	SIGNAL p_master_rden		: STD_LOGIC;
+	SIGNAL p_master_wren		: STD_LOGIC;
+	SIGNAL p_slave_rden		: STD_LOGIC;
+	SIGNAL p_slave_wren		: STD_LOGIC;
 	
 	component dpram
 		PORT
@@ -107,11 +115,19 @@ ARCHITECTURE logic OF spi_dpram IS
 	end component;
 	
 BEGIN
+	-- these are to satisfy Altera ModelSim which does not like assignments in component instantiation
+	-- similar error to https://www.altera.com/support/support-resources/knowledge-base/solutions/rd03312005_587.html
+	p_clk_n <= (NOT p_clk);
+	p_master_rden <= (p_master_en AND p_rw);
+	p_master_wren <= 	(p_master_en AND NOT p_rw);
+	p_slave_rden <= (p_slave_en AND p_rw);
+	p_slave_wren <= 	(p_slave_en AND NOT p_rw);
+	
 	-- "A" side of RAM is SPI interface (to ESP32)
 	--	"B" side of RAM is parallel interface (to Atari PBI)
 	
 	dpram_master : dpram PORT MAP (
-			address_a(13 DOWNTO 8)  => s_wr_bank,
+			address_a(13 DOWNTO 8)  => s_wr_bank(5 DOWNTO 0),
 			address_a(7 DOWNTO 0)	=> s_wr_addr,
 			clock_a		=> master_ram_clk,
 			data_a	 	=> rx_buf,
@@ -121,15 +137,16 @@ BEGIN
 
 			address_b(13 DOWNTO 8)  => r_mrbs(5 DOWNTO 0),
 			address_b(7 DOWNTO 0)	=> p_master_addr,
-			clock_b		=> (NOT p_clk),
+			
+			clock_b		=> p_clk_n,
 			data_b	 	=> p_master_din,
-			rden_b	 	=> (p_master_en AND p_rw),
-			wren_b	 	=> (p_master_en AND NOT p_rw),
+			rden_b	 	=> p_master_rden,
+			wren_b	 	=> p_master_wren,
 			q_b	 		=> p_master_dout
 		);
 
 	dpram_slave : dpram PORT MAP (
-			address_a(13 DOWNTO 8)  => s_rd_bank,
+			address_a(13 DOWNTO 8)  => s_rd_bank(5 DOWNTO 0),
 			address_a(7 DOWNTO 0)	=> s_rd_addr,
 			clock_a		=> slave_ram_clk,
 			q_a	 		=> slave_tx_buf,
@@ -139,10 +156,10 @@ BEGIN
 
 			address_b(13 DOWNTO 8)  => r_srbs(5 DOWNTO 0),
 			address_b(7 DOWNTO 0)	=> p_slave_addr,
-			clock_b		=> (NOT p_clk),
+			clock_b		=> p_clk_n,
 			data_b	 	=> p_slave_din,
-			rden_b	 	=> (p_slave_en AND p_rw),
-			wren_b	 	=> (p_slave_en AND NOT p_rw),
+			rden_b	 	=> p_slave_rden,
+			wren_b	 	=> p_slave_wren,
 			q_b	 		=> p_slave_dout
 		);
 
