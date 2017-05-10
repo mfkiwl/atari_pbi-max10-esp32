@@ -3,7 +3,7 @@
 preplace inst pbi_rom.onchip_flash_0 -pg 1 -lvl 1 -y 30
 preplace inst pbi_rom -pg 1 -lvl 1 -y 40 -regy -20
 preplace netloc EXPORT<net_container>pbi_rom</net_container>(SLAVE)pbi_rom.data,(SLAVE)onchip_flash_0.data) 1 0 1 NJ
-preplace netloc EXPORT<net_container>pbi_rom</net_container>(SLAVE)pbi_rom.clk,(SLAVE)onchip_flash_0.clk) 1 0 1 NJ
+preplace netloc EXPORT<net_container>pbi_rom</net_container>(SLAVE)onchip_flash_0.clk,(SLAVE)pbi_rom.clk) 1 0 1 NJ
 preplace netloc EXPORT<net_container>pbi_rom</net_container>(SLAVE)onchip_flash_0.nreset,(SLAVE)pbi_rom.nreset) 1 0 1 NJ
 levelinfo -pg 1 0 50 210
 levelinfo -hier pbi_rom 60 100 200

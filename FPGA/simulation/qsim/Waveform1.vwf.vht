@@ -1,4 +1,4 @@
--- Copyright (C) 2016  Intel Corporation. All rights reserved.
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
 -- Your use of Intel Corporation's design tools, logic functions 
 -- and other software and tools, and its AMPP partner logic 
 -- functions, and any output files from any of the foregoing 
@@ -19,7 +19,7 @@
 -- the top level entity of the current Quartus project .The user can use this   
 -- testbench to simulate his design using a third-party simulation tool .       
 -- *****************************************************************************
--- Generated on "05/09/2017 20:11:28"
+-- Generated on "05/09/2017 20:58:51"
                                                              
 -- Vhdl Test Bench(with test vectors) for design  :          pbi_bridge
 -- 

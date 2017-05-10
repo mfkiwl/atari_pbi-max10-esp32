@@ -1,4 +1,4 @@
--- Copyright (C) 2016  Intel Corporation. All rights reserved.
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
 -- Your use of Intel Corporation's design tools, logic functions 
 -- and other software and tools, and its AMPP partner logic 
 -- functions, and any output files from any of the foregoing 
@@ -15,9 +15,9 @@
 
 -- VENDOR "Altera"
 -- PROGRAM "Quartus Prime"
--- VERSION "Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition"
+-- VERSION "Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition"
 
--- DATE "05/09/2017 20:11:29"
+-- DATE "05/09/2017 20:58:53"
 
 -- 
 -- Device: Altera 10M08SAE144C8G Package EQFP144
@@ -435,7 +435,7 @@ SIGNAL \u1|LessThan2~0_combout\ : std_logic;
 SIGNAL \Equal14~0_combout\ : std_logic;
 SIGNAL \Equal14~1_combout\ : std_logic;
 SIGNAL \reg_stbkcr[0]~0_combout\ : std_logic;
-SIGNAL \u1|tx_buf[6]~0_combout\ : std_logic;
+SIGNAL \u1|tx_buf[0]~0_combout\ : std_logic;
 SIGNAL \reg_sdcr[0]~1_combout\ : std_logic;
 SIGNAL \u1|tx_buf~1_combout\ : std_logic;
 SIGNAL \u1|master_wren~0_combout\ : std_logic;
@@ -557,8 +557,8 @@ SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_input_reg[0]~0_co
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~12_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|data_count~8_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|data_count~4_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|data_count[1]~10_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|data_count[1]~5_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|data_count[2]~10_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|data_count[2]~5_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|data_count~7_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|data_count~6_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|LessThan2~0_combout\ : std_logic;
@@ -578,7 +578,7 @@ SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add4~7\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add4~8_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~6_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~7_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[2]~13_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[3]~13_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|data_count~9_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_read_valid_state~q\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[0]~9_combout\ : std_logic;
@@ -595,7 +595,7 @@ SIGNAL \u0|onchip_flash_0|avmm_data_controller|read_state~17_combout\ : std_logi
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|read_state~21_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_ADDR~q\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector12~0_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector12~1_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector5~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector5~1_combout\ : std_logic;
@@ -614,8 +614,8 @@ SIGNAL \u0|onchip_flash_0|avmm_data_controller|enable_arclk_neg_pos_reg~q\ : std
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_arclk~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector6~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|enable_drclk_neg_pos_reg~q\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector12~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector7~1_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector7~2_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|read_drclk_en~q\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|enable_drclk_neg_reg~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|enable_drclk_neg_reg~q\ : std_logic;
@@ -629,14 +629,17 @@ SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_xe_ye~combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_se_neg_reg~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_se_neg_reg~q\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~0_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~1\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~2_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector37~0_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~3\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~4_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~1_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector36~1_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~5\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~6_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector35~0_combout\ : std_logic;
@@ -665,26 +668,32 @@ SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~21\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~22_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector27~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~23\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector26~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~25\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~27\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]~1_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector25~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector25~1_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector26~0_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector26~1_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~27\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|Selector38~1_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~1_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~1_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~2_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~2_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~3_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~3_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~4_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~4_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~5_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~5_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~6_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~6_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~7_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~7_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~8_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~8_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_read_addr[9]~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_read_addr[14]~1_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_read_addr[11]~2_combout\ : std_logic;
@@ -694,29 +703,40 @@ SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_read_addr[13]~4_combout\ : 
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_read_addr[12]~5_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|LessThan0~1_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~0_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~9_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~1\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~2_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~10_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~3\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~4_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~11_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~5\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~6_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~12_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~7\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~8_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~13_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~9\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~10_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~14_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~11\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~12_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~15_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~1_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~2_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[16]~0_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~0_combout\ : std_logic;
+SIGNAL \flash_data_latch[16]~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~0_combout\ : std_logic;
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[8]~1_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[0]~2_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~1_combout\ : std_logic;
+SIGNAL \flash_data_latch[8]~1_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~2_combout\ : std_logic;
+SIGNAL \flash_data_latch[0]~2_combout\ : std_logic;
 SIGNAL \data[0]~24_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[24]~3_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~3_combout\ : std_logic;
+SIGNAL \flash_data_latch[24]~3_combout\ : std_logic;
 SIGNAL \data[0]~25_combout\ : std_logic;
 SIGNAL \data[0]~26_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|rden_decode_b|eq_node[1]~1_combout\ : std_logic;
@@ -737,11 +757,15 @@ SIGNAL \data[1]~34_combout\ : std_logic;
 SIGNAL \data[1]~35_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a1~PORTBDATAOUT0\ : std_logic;
 SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a1~PORTBDATAOUT0\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[9]~4_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[17]~5_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[1]~6_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~4_combout\ : std_logic;
+SIGNAL \flash_data_latch[9]~4_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~5_combout\ : std_logic;
+SIGNAL \flash_data_latch[17]~5_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~6_combout\ : std_logic;
+SIGNAL \flash_data_latch[1]~6_combout\ : std_logic;
 SIGNAL \data[1]~36_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[25]~7_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~7_combout\ : std_logic;
+SIGNAL \flash_data_latch[25]~7_combout\ : std_logic;
 SIGNAL \data[1]~37_combout\ : std_logic;
 SIGNAL \data[1]~38_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a9~PORTBDATAOUT0\ : std_logic;
@@ -757,11 +781,15 @@ SIGNAL \data[2]~44_combout\ : std_logic;
 SIGNAL \data[2]~45_combout\ : std_logic;
 SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a2~PORTBDATAOUT0\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a2~PORTBDATAOUT0\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[18]~8_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[10]~9_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[2]~10_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~8_combout\ : std_logic;
+SIGNAL \flash_data_latch[18]~8_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~9_combout\ : std_logic;
+SIGNAL \flash_data_latch[10]~9_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~10_combout\ : std_logic;
+SIGNAL \flash_data_latch[2]~10_combout\ : std_logic;
 SIGNAL \data[2]~46_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[26]~11_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~11_combout\ : std_logic;
+SIGNAL \flash_data_latch[26]~11_combout\ : std_logic;
 SIGNAL \data[2]~47_combout\ : std_logic;
 SIGNAL \data[2]~48_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a10~PORTBDATAOUT0\ : std_logic;
@@ -776,11 +804,15 @@ SIGNAL \data[3]~54_combout\ : std_logic;
 SIGNAL \data[3]~55_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a3~PORTBDATAOUT0\ : std_logic;
 SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a3~PORTBDATAOUT0\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[11]~12_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[19]~13_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[3]~14_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~12_combout\ : std_logic;
+SIGNAL \flash_data_latch[11]~12_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~13_combout\ : std_logic;
+SIGNAL \flash_data_latch[19]~13_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~14_combout\ : std_logic;
+SIGNAL \flash_data_latch[3]~14_combout\ : std_logic;
 SIGNAL \data[3]~56_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[27]~15_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~15_combout\ : std_logic;
+SIGNAL \flash_data_latch[27]~15_combout\ : std_logic;
 SIGNAL \data[3]~57_combout\ : std_logic;
 SIGNAL \data[3]~58_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a11~PORTBDATAOUT0\ : std_logic;
@@ -796,11 +828,15 @@ SIGNAL \data[4]~64_combout\ : std_logic;
 SIGNAL \data[4]~65_combout\ : std_logic;
 SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a4~PORTBDATAOUT0\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a4~PORTBDATAOUT0\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[20]~16_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[12]~17_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[4]~18_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~16_combout\ : std_logic;
+SIGNAL \flash_data_latch[20]~16_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~17_combout\ : std_logic;
+SIGNAL \flash_data_latch[12]~17_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~18_combout\ : std_logic;
+SIGNAL \flash_data_latch[4]~18_combout\ : std_logic;
 SIGNAL \data[4]~66_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[28]~19_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~19_combout\ : std_logic;
+SIGNAL \flash_data_latch[28]~19_combout\ : std_logic;
 SIGNAL \data[4]~67_combout\ : std_logic;
 SIGNAL \data[4]~68_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a12~PORTBDATAOUT0\ : std_logic;
@@ -815,11 +851,15 @@ SIGNAL \data[5]~74_combout\ : std_logic;
 SIGNAL \data[5]~75_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a5~PORTBDATAOUT0\ : std_logic;
 SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a5~PORTBDATAOUT0\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[13]~20_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[21]~21_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[5]~22_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~20_combout\ : std_logic;
+SIGNAL \flash_data_latch[13]~20_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~21_combout\ : std_logic;
+SIGNAL \flash_data_latch[21]~21_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~22_combout\ : std_logic;
+SIGNAL \flash_data_latch[5]~22_combout\ : std_logic;
 SIGNAL \data[5]~76_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[29]~23_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~23_combout\ : std_logic;
+SIGNAL \flash_data_latch[29]~23_combout\ : std_logic;
 SIGNAL \data[5]~77_combout\ : std_logic;
 SIGNAL \data[5]~78_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a13~PORTBDATAOUT0\ : std_logic;
@@ -835,11 +875,15 @@ SIGNAL \data[6]~84_combout\ : std_logic;
 SIGNAL \data[6]~85_combout\ : std_logic;
 SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a6~PORTBDATAOUT0\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a6~PORTBDATAOUT0\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[22]~24_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[14]~25_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[6]~26_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~24_combout\ : std_logic;
+SIGNAL \flash_data_latch[22]~24_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~25_combout\ : std_logic;
+SIGNAL \flash_data_latch[14]~25_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~26_combout\ : std_logic;
+SIGNAL \flash_data_latch[6]~26_combout\ : std_logic;
 SIGNAL \data[6]~86_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[30]~27_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~27_combout\ : std_logic;
+SIGNAL \flash_data_latch[30]~27_combout\ : std_logic;
 SIGNAL \data[6]~87_combout\ : std_logic;
 SIGNAL \data[6]~88_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a14~PORTBDATAOUT0\ : std_logic;
@@ -855,11 +899,15 @@ SIGNAL \data[7]~94_combout\ : std_logic;
 SIGNAL \data[7]~95_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a7~PORTBDATAOUT0\ : std_logic;
 SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a7~PORTBDATAOUT0\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[15]~28_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[23]~29_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[7]~30_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~28_combout\ : std_logic;
+SIGNAL \flash_data_latch[15]~28_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~29_combout\ : std_logic;
+SIGNAL \flash_data_latch[23]~29_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~30_combout\ : std_logic;
+SIGNAL \flash_data_latch[7]~30_combout\ : std_logic;
 SIGNAL \data[7]~96_combout\ : std_logic;
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[31]~31_combout\ : std_logic;
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~31_combout\ : std_logic;
+SIGNAL \flash_data_latch[31]~31_combout\ : std_logic;
 SIGNAL \data[7]~97_combout\ : std_logic;
 SIGNAL \data[7]~98_combout\ : std_logic;
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a15~PORTBDATAOUT0\ : std_logic;
@@ -877,36 +925,38 @@ SIGNAL \data_dir~reg0_q\ : std_logic;
 SIGNAL \n_data_oe~1_combout\ : std_logic;
 SIGNAL \n_extsel~0_combout\ : std_logic;
 SIGNAL \n_extsel~1_combout\ : std_logic;
-SIGNAL flash_data_latch : std_logic_vector(31 DOWNTO 0);
-SIGNAL \u0|onchip_flash_0|altera_onchip_flash_block|drdout\ : std_logic_vector(31 DOWNTO 0);
-SIGNAL \u1|bit_cnt\ : std_logic_vector(8 DOWNTO 0);
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\ : std_logic_vector(22 DOWNTO 0);
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg\ : std_logic_vector(3 DOWNTO 0);
-SIGNAL \u1|s_rd_addr\ : std_logic_vector(7 DOWNTO 0);
+SIGNAL \u0|onchip_flash_0|altera_onchip_flash_block|drdout\ : std_logic_vector(31 DOWNTO 0);
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\ : std_logic_vector(22 DOWNTO 0);
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg\ : std_logic_vector(3 DOWNTO 0);
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_ardin_align_reg\ : std_logic_vector(0 DOWNTO 0);
+SIGNAL addr_latch : std_logic_vector(15 DOWNTO 0);
+SIGNAL \u1|bit_cnt\ : std_logic_vector(8 DOWNTO 0);
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|data_count\ : std_logic_vector(2 DOWNTO 0);
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_ardin_align_backup_reg\ : std_logic_vector(0 DOWNTO 0);
-SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_ardin_align_reg\ : std_logic_vector(0 DOWNTO 0);
+SIGNAL flash_data_latch : std_logic_vector(31 DOWNTO 0);
+SIGNAL \u1|s_rd_addr\ : std_logic_vector(7 DOWNTO 0);
 SIGNAL led_latch : std_logic_vector(4 DOWNTO 0);
-SIGNAL hw_sel : std_logic_vector(7 DOWNTO 0);
-SIGNAL addr_latch : std_logic_vector(15 DOWNTO 0);
-SIGNAL clk_counter : std_logic_vector(3 DOWNTO 0);
-SIGNAL reg_fbs : std_logic_vector(7 DOWNTO 0);
 SIGNAL \u1|tx_buf\ : std_logic_vector(7 DOWNTO 0);
+SIGNAL hw_sel : std_logic_vector(7 DOWNTO 0);
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\ : std_logic_vector(22 DOWNTO 0);
+SIGNAL \u1|rx_buf\ : std_logic_vector(7 DOWNTO 0);
+SIGNAL clk_counter : std_logic_vector(3 DOWNTO 0);
 SIGNAL reg_sdcr : std_logic_vector(7 DOWNTO 0);
+SIGNAL reg_fbs : std_logic_vector(7 DOWNTO 0);
 SIGNAL reg_srbs : std_logic_vector(7 DOWNTO 0);
 SIGNAL reg_mrbs : std_logic_vector(7 DOWNTO 0);
 SIGNAL reg_stbkcr : std_logic_vector(7 DOWNTO 0);
-SIGNAL \u1|rx_buf\ : std_logic_vector(7 DOWNTO 0);
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|out_address_reg_b\ : std_logic_vector(0 DOWNTO 0);
 SIGNAL reg_stbycr : std_logic_vector(7 DOWNTO 0);
-SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|decode3|eq_node\ : std_logic_vector(1 DOWNTO 0);
+SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|decode3|eq_node\ : std_logic_vector(1 DOWNTO 0);
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_input_reg\ : std_logic_vector(3 DOWNTO 0);
 SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|out_address_reg_b\ : std_logic_vector(0 DOWNTO 0);
-SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|decode3|eq_node\ : std_logic_vector(1 DOWNTO 0);
 SIGNAL master_din : std_logic_vector(7 DOWNTO 0);
 SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|address_reg_b\ : std_logic_vector(0 DOWNTO 0);
+SIGNAL \u1|dpram_slave|altsyncram_component|auto_generated|decode3|eq_node\ : std_logic_vector(1 DOWNTO 0);
 SIGNAL slave_din : std_logic_vector(7 DOWNTO 0);
+SIGNAL \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\ : std_logic_vector(31 DOWNTO 0);
 SIGNAL \u1|dpram_master|altsyncram_component|auto_generated|address_reg_b\ : std_logic_vector(0 DOWNTO 0);
 SIGNAL \u0|onchip_flash_0|avmm_data_controller|read_ctrl_count\ : std_logic_vector(2 DOWNTO 0);
 SIGNAL \ALT_INV_spi_clk~input_o\ : std_logic;
@@ -949,11 +999,13 @@ ww_devoe <= devoe;
 ww_devclrn <= devclrn;
 ww_devpor <= devpor;
 
-\u0|onchip_flash_0|altera_onchip_flash_block|ufm_block_ARDIN_bus\ <= (\~GND~combout\ & \~GND~combout\ & \~GND~combout\ & \~GND~combout\ & \~GND~combout\ & \~GND~combout\ & \~GND~combout\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(15) & 
-\u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(14) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(13) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(12) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(11)
-& \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(10) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(9) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(8) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(7)
-& \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(6) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(5) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(4) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(3)
-& \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(2) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(1) & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(0));
+\u0|onchip_flash_0|altera_onchip_flash_block|ufm_block_ARDIN_bus\ <= (\~GND~combout\ & \~GND~combout\ & \~GND~combout\ & \~GND~combout\ & \~GND~combout\ & \~GND~combout\ & \~GND~combout\ & 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(15) & \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(14) & \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(13) & 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(12) & \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(11) & \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(10) & 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(9) & \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(8) & \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(7) & 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(6) & \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(5) & \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(4) & 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(3) & \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(2) & \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(1) & 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(0));
 
 \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(0) <= \u0|onchip_flash_0|altera_onchip_flash_block|ufm_block_DRDOUT_bus\(0);
 \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(1) <= \u0|onchip_flash_0|altera_onchip_flash_block|ufm_block_DRDOUT_bus\(1);
@@ -3792,9 +3844,9 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => reg_stbkcr(6));
 
-\u1|tx_buf[6]~0\ : fiftyfivenm_lcell_comb
+\u1|tx_buf[0]~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf[6]~0_combout\ = (\u1|bit_cnt\(4)) # (!\u1|LessThan0~0_combout\)
+-- \u1|tx_buf[0]~0_combout\ = (\u1|bit_cnt\(4)) # (!\u1|LessThan0~0_combout\)
 
 -- pragma translate_off
 GENERIC MAP (
@@ -3804,7 +3856,7 @@ GENERIC MAP (
 PORT MAP (
 	dataa => \u1|bit_cnt\(4),
 	datad => \u1|LessThan0~0_combout\,
-	combout => \u1|tx_buf[6]~0_combout\);
+	combout => \u1|tx_buf[0]~0_combout\);
 
 \reg_sdcr[0]~1\ : fiftyfivenm_lcell_comb
 -- Equation(s):
@@ -3838,7 +3890,7 @@ PORT MAP (
 
 \u1|tx_buf~1\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~1_combout\ = (\u1|LessThan2~0_combout\ & ((\u1|tx_buf[6]~0_combout\ & (reg_stbkcr(6))) # (!\u1|tx_buf[6]~0_combout\ & ((reg_sdcr(6)))))) # (!\u1|LessThan2~0_combout\ & (((\u1|tx_buf[6]~0_combout\))))
+-- \u1|tx_buf~1_combout\ = (\u1|LessThan2~0_combout\ & ((\u1|tx_buf[0]~0_combout\ & (reg_stbkcr(6))) # (!\u1|tx_buf[0]~0_combout\ & ((reg_sdcr(6)))))) # (!\u1|LessThan2~0_combout\ & (((\u1|tx_buf[0]~0_combout\))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -3848,7 +3900,7 @@ GENERIC MAP (
 PORT MAP (
 	dataa => \u1|LessThan2~0_combout\,
 	datab => reg_stbkcr(6),
-	datac => \u1|tx_buf[6]~0_combout\,
+	datac => \u1|tx_buf[0]~0_combout\,
 	datad => reg_sdcr(6),
 	combout => \u1|tx_buf~1_combout\);
 
@@ -4731,7 +4783,7 @@ PORT MAP (
 
 \u1|tx_buf~3\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~3_combout\ = (\u1|tx_buf[6]~0_combout\ & (((!\u1|LessThan2~0_combout\)))) # (!\u1|tx_buf[6]~0_combout\ & ((\u1|LessThan2~0_combout\ & ((reg_sdcr(5)))) # (!\u1|LessThan2~0_combout\ & (reg_stbycr(5)))))
+-- \u1|tx_buf~3_combout\ = (\u1|tx_buf[0]~0_combout\ & (((!\u1|LessThan2~0_combout\)))) # (!\u1|tx_buf[0]~0_combout\ & ((\u1|LessThan2~0_combout\ & ((reg_sdcr(5)))) # (!\u1|LessThan2~0_combout\ & (reg_stbycr(5)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -4739,7 +4791,7 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \u1|tx_buf[6]~0_combout\,
+	dataa => \u1|tx_buf[0]~0_combout\,
 	datab => reg_stbycr(5),
 	datac => \u1|LessThan2~0_combout\,
 	datad => reg_sdcr(5),
@@ -4818,7 +4870,7 @@ PORT MAP (
 
 \u1|tx_buf~4\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~4_combout\ = (\u1|tx_buf[6]~0_combout\ & ((\u1|tx_buf~3_combout\ & ((\u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a5~portadataout\))) # (!\u1|tx_buf~3_combout\ & (reg_stbkcr(5))))) # (!\u1|tx_buf[6]~0_combout\ & 
+-- \u1|tx_buf~4_combout\ = (\u1|tx_buf[0]~0_combout\ & ((\u1|tx_buf~3_combout\ & ((\u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a5~portadataout\))) # (!\u1|tx_buf~3_combout\ & (reg_stbkcr(5))))) # (!\u1|tx_buf[0]~0_combout\ & 
 -- (((\u1|tx_buf~3_combout\))))
 
 -- pragma translate_off
@@ -4828,7 +4880,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	dataa => reg_stbkcr(5),
-	datab => \u1|tx_buf[6]~0_combout\,
+	datab => \u1|tx_buf[0]~0_combout\,
 	datac => \u1|tx_buf~3_combout\,
 	datad => \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a5~portadataout\,
 	combout => \u1|tx_buf~4_combout\);
@@ -4891,7 +4943,7 @@ PORT MAP (
 
 \u1|tx_buf~5\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~5_combout\ = (\u1|LessThan2~0_combout\ & ((\u1|tx_buf[6]~0_combout\ & (reg_stbkcr(4))) # (!\u1|tx_buf[6]~0_combout\ & ((reg_sdcr(4)))))) # (!\u1|LessThan2~0_combout\ & (((\u1|tx_buf[6]~0_combout\))))
+-- \u1|tx_buf~5_combout\ = (\u1|LessThan2~0_combout\ & ((\u1|tx_buf[0]~0_combout\ & (reg_stbkcr(4))) # (!\u1|tx_buf[0]~0_combout\ & ((reg_sdcr(4)))))) # (!\u1|LessThan2~0_combout\ & (((\u1|tx_buf[0]~0_combout\))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -4901,7 +4953,7 @@ GENERIC MAP (
 PORT MAP (
 	dataa => \u1|LessThan2~0_combout\,
 	datab => reg_stbkcr(4),
-	datac => \u1|tx_buf[6]~0_combout\,
+	datac => \u1|tx_buf[0]~0_combout\,
 	datad => reg_sdcr(4),
 	combout => \u1|tx_buf~5_combout\);
 
@@ -5067,7 +5119,7 @@ PORT MAP (
 
 \u1|tx_buf~7\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~7_combout\ = (\u1|LessThan2~0_combout\ & ((\u1|tx_buf[6]~0_combout\ & (reg_stbkcr(7))) # (!\u1|tx_buf[6]~0_combout\ & ((reg_sdcr(7)))))) # (!\u1|LessThan2~0_combout\ & (((\u1|tx_buf[6]~0_combout\))))
+-- \u1|tx_buf~7_combout\ = (\u1|LessThan2~0_combout\ & ((\u1|tx_buf[0]~0_combout\ & (reg_stbkcr(7))) # (!\u1|tx_buf[0]~0_combout\ & ((reg_sdcr(7)))))) # (!\u1|LessThan2~0_combout\ & (((\u1|tx_buf[0]~0_combout\))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -5077,7 +5129,7 @@ GENERIC MAP (
 PORT MAP (
 	dataa => \u1|LessThan2~0_combout\,
 	datab => reg_stbkcr(7),
-	datac => \u1|tx_buf[6]~0_combout\,
+	datac => \u1|tx_buf[0]~0_combout\,
 	datad => reg_sdcr(7),
 	combout => \u1|tx_buf~7_combout\);
 
@@ -5243,7 +5295,7 @@ PORT MAP (
 
 \u1|tx_buf~9\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~9_combout\ = (\u1|LessThan2~0_combout\ & ((\u1|tx_buf[6]~0_combout\ & (reg_stbkcr(2))) # (!\u1|tx_buf[6]~0_combout\ & ((reg_sdcr(2)))))) # (!\u1|LessThan2~0_combout\ & (((\u1|tx_buf[6]~0_combout\))))
+-- \u1|tx_buf~9_combout\ = (\u1|LessThan2~0_combout\ & ((\u1|tx_buf[0]~0_combout\ & (reg_stbkcr(2))) # (!\u1|tx_buf[0]~0_combout\ & ((reg_sdcr(2)))))) # (!\u1|LessThan2~0_combout\ & (((\u1|tx_buf[0]~0_combout\))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -5253,7 +5305,7 @@ GENERIC MAP (
 PORT MAP (
 	dataa => \u1|LessThan2~0_combout\,
 	datab => reg_stbkcr(2),
-	datac => \u1|tx_buf[6]~0_combout\,
+	datac => \u1|tx_buf[0]~0_combout\,
 	datad => reg_sdcr(2),
 	combout => \u1|tx_buf~9_combout\);
 
@@ -5403,7 +5455,7 @@ PORT MAP (
 
 \u1|tx_buf~11\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~11_combout\ = (\u1|tx_buf[6]~0_combout\ & (((!\u1|LessThan2~0_combout\)))) # (!\u1|tx_buf[6]~0_combout\ & ((\u1|LessThan2~0_combout\ & ((reg_sdcr(1)))) # (!\u1|LessThan2~0_combout\ & (reg_stbycr(1)))))
+-- \u1|tx_buf~11_combout\ = (\u1|tx_buf[0]~0_combout\ & (((!\u1|LessThan2~0_combout\)))) # (!\u1|tx_buf[0]~0_combout\ & ((\u1|LessThan2~0_combout\ & ((reg_sdcr(1)))) # (!\u1|LessThan2~0_combout\ & (reg_stbycr(1)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -5411,7 +5463,7 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \u1|tx_buf[6]~0_combout\,
+	dataa => \u1|tx_buf[0]~0_combout\,
 	datab => reg_stbycr(1),
 	datac => \u1|LessThan2~0_combout\,
 	datad => reg_sdcr(1),
@@ -5490,7 +5542,7 @@ PORT MAP (
 
 \u1|tx_buf~12\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~12_combout\ = (\u1|tx_buf[6]~0_combout\ & ((\u1|tx_buf~11_combout\ & ((\u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a1~portadataout\))) # (!\u1|tx_buf~11_combout\ & (reg_stbkcr(1))))) # (!\u1|tx_buf[6]~0_combout\ & 
+-- \u1|tx_buf~12_combout\ = (\u1|tx_buf[0]~0_combout\ & ((\u1|tx_buf~11_combout\ & ((\u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a1~portadataout\))) # (!\u1|tx_buf~11_combout\ & (reg_stbkcr(1))))) # (!\u1|tx_buf[0]~0_combout\ & 
 -- (((\u1|tx_buf~11_combout\))))
 
 -- pragma translate_off
@@ -5500,7 +5552,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	dataa => reg_stbkcr(1),
-	datab => \u1|tx_buf[6]~0_combout\,
+	datab => \u1|tx_buf[0]~0_combout\,
 	datac => \u1|tx_buf~11_combout\,
 	datad => \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a1~portadataout\,
 	combout => \u1|tx_buf~12_combout\);
@@ -5563,7 +5615,7 @@ PORT MAP (
 
 \u1|tx_buf~13\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~13_combout\ = (\u1|LessThan2~0_combout\ & ((\u1|tx_buf[6]~0_combout\ & (reg_stbkcr(0))) # (!\u1|tx_buf[6]~0_combout\ & ((reg_sdcr(0)))))) # (!\u1|LessThan2~0_combout\ & (((\u1|tx_buf[6]~0_combout\))))
+-- \u1|tx_buf~13_combout\ = (\u1|LessThan2~0_combout\ & ((\u1|tx_buf[0]~0_combout\ & (reg_stbkcr(0))) # (!\u1|tx_buf[0]~0_combout\ & ((reg_sdcr(0)))))) # (!\u1|LessThan2~0_combout\ & (((\u1|tx_buf[0]~0_combout\))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -5573,7 +5625,7 @@ GENERIC MAP (
 PORT MAP (
 	dataa => \u1|LessThan2~0_combout\,
 	datab => reg_stbkcr(0),
-	datac => \u1|tx_buf[6]~0_combout\,
+	datac => \u1|tx_buf[0]~0_combout\,
 	datad => reg_sdcr(0),
 	combout => \u1|tx_buf~13_combout\);
 
@@ -5739,7 +5791,7 @@ PORT MAP (
 
 \u1|tx_buf~15\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~15_combout\ = (\u1|tx_buf[6]~0_combout\ & (((!\u1|LessThan2~0_combout\)))) # (!\u1|tx_buf[6]~0_combout\ & ((\u1|LessThan2~0_combout\ & ((reg_sdcr(3)))) # (!\u1|LessThan2~0_combout\ & (reg_stbycr(3)))))
+-- \u1|tx_buf~15_combout\ = (\u1|tx_buf[0]~0_combout\ & (((!\u1|LessThan2~0_combout\)))) # (!\u1|tx_buf[0]~0_combout\ & ((\u1|LessThan2~0_combout\ & ((reg_sdcr(3)))) # (!\u1|LessThan2~0_combout\ & (reg_stbycr(3)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -5747,7 +5799,7 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \u1|tx_buf[6]~0_combout\,
+	dataa => \u1|tx_buf[0]~0_combout\,
 	datab => reg_stbycr(3),
 	datac => \u1|LessThan2~0_combout\,
 	datad => reg_sdcr(3),
@@ -5826,7 +5878,7 @@ PORT MAP (
 
 \u1|tx_buf~16\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u1|tx_buf~16_combout\ = (\u1|tx_buf[6]~0_combout\ & ((\u1|tx_buf~15_combout\ & ((\u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a3~portadataout\))) # (!\u1|tx_buf~15_combout\ & (reg_stbkcr(3))))) # (!\u1|tx_buf[6]~0_combout\ & 
+-- \u1|tx_buf~16_combout\ = (\u1|tx_buf[0]~0_combout\ & ((\u1|tx_buf~15_combout\ & ((\u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a3~portadataout\))) # (!\u1|tx_buf~15_combout\ & (reg_stbkcr(3))))) # (!\u1|tx_buf[0]~0_combout\ & 
 -- (((\u1|tx_buf~15_combout\))))
 
 -- pragma translate_off
@@ -5836,7 +5888,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	dataa => reg_stbkcr(3),
-	datab => \u1|tx_buf[6]~0_combout\,
+	datab => \u1|tx_buf[0]~0_combout\,
 	datac => \u1|tx_buf~15_combout\,
 	datad => \u1|dpram_slave|altsyncram_component|auto_generated|ram_block1a3~portadataout\,
 	combout => \u1|tx_buf~16_combout\);
@@ -6901,9 +6953,9 @@ PORT MAP (
 	datad => \u0|onchip_flash_0|avmm_data_controller|Equal1~0_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|data_count~4_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|data_count[1]~10\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|data_count[2]~10\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|data_count[1]~10_combout\ = (\u0|onchip_flash_0|avmm_data_controller|data_count~4_combout\) # (((\u0|onchip_flash_0|avmm_data_controller|avmm_readdata_ready~q\ & 
+-- \u0|onchip_flash_0|avmm_data_controller|data_count[2]~10_combout\ = (\u0|onchip_flash_0|avmm_data_controller|data_count~4_combout\) # (((\u0|onchip_flash_0|avmm_data_controller|avmm_readdata_ready~q\ & 
 -- !\u0|onchip_flash_0|avmm_data_controller|avmm_read_valid_state~q\)) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
@@ -6916,7 +6968,7 @@ PORT MAP (
 	datab => \u0|onchip_flash_0|avmm_data_controller|avmm_read_valid_state~q\,
 	datac => \u0|onchip_flash_0|avmm_data_controller|data_count~4_combout\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|data_count[1]~10_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|data_count[2]~10_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|data_count[2]\ : dffeas
 -- pragma translate_off
@@ -6928,14 +6980,14 @@ PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|data_count~8_combout\,
 	sclr => \u0|onchip_flash_0|avmm_data_controller|ALT_INV_reset_n_reg2~q\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|data_count[1]~10_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|data_count[2]~10_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|data_count\(2));
 
-\u0|onchip_flash_0|avmm_data_controller|data_count[1]~5\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|data_count[2]~5\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|data_count[1]~5_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & (\u0|onchip_flash_0|avmm_data_controller|avmm_read_valid_state~q\ & 
+-- \u0|onchip_flash_0|avmm_data_controller|data_count[2]~5_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & (\u0|onchip_flash_0|avmm_data_controller|avmm_read_valid_state~q\ & 
 -- ((\u0|onchip_flash_0|avmm_data_controller|LessThan2~0_combout\) # (\u0|onchip_flash_0|avmm_data_controller|data_count\(2)))))
 
 -- pragma translate_off
@@ -6948,11 +7000,11 @@ PORT MAP (
 	datab => \u0|onchip_flash_0|avmm_data_controller|avmm_read_valid_state~q\,
 	datac => \u0|onchip_flash_0|avmm_data_controller|LessThan2~0_combout\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|data_count\(2),
-	combout => \u0|onchip_flash_0|avmm_data_controller|data_count[1]~5_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|data_count[2]~5_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|data_count~7\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|data_count~7_combout\ = (!\u0|onchip_flash_0|avmm_data_controller|data_count\(0) & \u0|onchip_flash_0|avmm_data_controller|data_count[1]~5_combout\)
+-- \u0|onchip_flash_0|avmm_data_controller|data_count~7_combout\ = (!\u0|onchip_flash_0|avmm_data_controller|data_count\(0) & \u0|onchip_flash_0|avmm_data_controller|data_count[2]~5_combout\)
 
 -- pragma translate_off
 GENERIC MAP (
@@ -6961,7 +7013,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|data_count\(0),
-	datad => \u0|onchip_flash_0|avmm_data_controller|data_count[1]~5_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|data_count[2]~5_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|data_count~7_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|data_count[0]\ : dffeas
@@ -6973,14 +7025,14 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|data_count~7_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|data_count[1]~10_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|data_count[2]~10_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|data_count\(0));
 
 \u0|onchip_flash_0|avmm_data_controller|data_count~6\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|data_count~6_combout\ = (\u0|onchip_flash_0|avmm_data_controller|data_count[1]~5_combout\ & (\u0|onchip_flash_0|avmm_data_controller|data_count\(1) $ (!\u0|onchip_flash_0|avmm_data_controller|data_count\(0))))
+-- \u0|onchip_flash_0|avmm_data_controller|data_count~6_combout\ = (\u0|onchip_flash_0|avmm_data_controller|data_count[2]~5_combout\ & (\u0|onchip_flash_0|avmm_data_controller|data_count\(1) $ (!\u0|onchip_flash_0|avmm_data_controller|data_count\(0))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -6990,7 +7042,7 @@ GENERIC MAP (
 PORT MAP (
 	datab => \u0|onchip_flash_0|avmm_data_controller|data_count\(1),
 	datac => \u0|onchip_flash_0|avmm_data_controller|data_count\(0),
-	datad => \u0|onchip_flash_0|avmm_data_controller|data_count[1]~5_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|data_count[2]~5_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|data_count~6_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|data_count[1]\ : dffeas
@@ -7002,7 +7054,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|data_count~6_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|data_count[1]~10_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|data_count[2]~10_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|data_count\(1));
@@ -7279,9 +7331,9 @@ PORT MAP (
 	datad => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~6_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~7_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[2]~13\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[3]~13\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[2]~13_combout\ = (\u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~7_combout\) # (((\u0|onchip_flash_0|avmm_data_controller|avmm_readdata_ready~q\ & 
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[3]~13_combout\ = (\u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~7_combout\) # (((\u0|onchip_flash_0|avmm_data_controller|avmm_readdata_ready~q\ & 
 -- !\u0|onchip_flash_0|avmm_data_controller|avmm_read_valid_state~q\)) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
@@ -7294,7 +7346,7 @@ PORT MAP (
 	datab => \u0|onchip_flash_0|avmm_data_controller|avmm_read_valid_state~q\,
 	datac => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~7_combout\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[2]~13_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[3]~13_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[3]\ : dffeas
 -- pragma translate_off
@@ -7306,7 +7358,7 @@ PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~12_combout\,
 	sclr => \u0|onchip_flash_0|avmm_data_controller|ALT_INV_reset_n_reg2~q\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[2]~13_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[3]~13_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg\(3));
@@ -7379,7 +7431,7 @@ PORT MAP (
 \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[0]~10\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[0]~10_combout\ = (\u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[0]~14_combout\) # ((\u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg\(0) & 
--- !\u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[2]~13_combout\))
+-- !\u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[3]~13_combout\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -7389,7 +7441,7 @@ GENERIC MAP (
 PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[0]~14_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg\(0),
-	datad => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[2]~13_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[3]~13_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[0]~10_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[0]\ : dffeas
@@ -7432,7 +7484,7 @@ PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~11_combout\,
 	sclr => \u0|onchip_flash_0|avmm_data_controller|ALT_INV_reset_n_reg2~q\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[2]~13_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[3]~13_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg\(1));
@@ -7480,7 +7532,7 @@ PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg~5_combout\,
 	sclr => \u0|onchip_flash_0|avmm_data_controller|ALT_INV_reset_n_reg2~q\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[2]~13_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg[3]~13_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg\(2));
@@ -7603,9 +7655,9 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_ADDR~q\);
 
-\u0|onchip_flash_0|avmm_data_controller|Selector12~0\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|Selector12~1\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector12~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_ADDR~q\) # ((\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_FINAL~q\ & 
+-- \u0|onchip_flash_0|avmm_data_controller|Selector12~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_ADDR~q\) # ((\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_FINAL~q\ & 
 -- !\u0|onchip_flash_0|avmm_data_controller|Selector7~0_combout\))
 
 -- pragma translate_off
@@ -7617,7 +7669,7 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_ADDR~q\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_FINAL~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|Selector7~0_combout\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|Selector12~0_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|Selector12~1_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP\ : dffeas
 -- pragma translate_off
@@ -7627,7 +7679,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|Selector12~0_combout\,
+	d => \u0|onchip_flash_0|avmm_data_controller|Selector12~1_combout\,
 	sclr => \u0|onchip_flash_0|avmm_data_controller|ALT_INV_reset_n_reg2~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -7916,36 +7968,39 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|enable_drclk_neg_pos_reg~q\);
 
-\u0|onchip_flash_0|avmm_data_controller|Selector7~1\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|Selector12~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector7~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_drclk_en~q\ & ((\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_FINAL~q\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector7~0_combout\))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_FINAL~q\ & (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\))))
+-- \u0|onchip_flash_0|avmm_data_controller|Selector12~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_FINAL~q\ & ((\u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg\(3)) # 
+-- ((!\u0|onchip_flash_0|avmm_data_controller|Equal1~0_combout\) # (!\u0|onchip_flash_0|avmm_data_controller|avmm_read_state~q\))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000100010101000",
+	lut_mask => "1000101010101010",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \u0|onchip_flash_0|avmm_data_controller|read_drclk_en~q\,
-	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\,
-	datac => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_FINAL~q\,
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector7~0_combout\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|Selector7~1_combout\);
+	dataa => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_FINAL~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|avmm_burstcount_reg\(3),
+	datac => \u0|onchip_flash_0|avmm_data_controller|avmm_read_state~q\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|Equal1~0_combout\,
+	combout => \u0|onchip_flash_0|avmm_data_controller|Selector12~0_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|Selector7~2\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|Selector7~1\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector7~2_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_READY~q\) # (\u0|onchip_flash_0|avmm_data_controller|Selector7~1_combout\)
+-- \u0|onchip_flash_0|avmm_data_controller|Selector7~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_READY~q\) # ((\u0|onchip_flash_0|avmm_data_controller|read_drclk_en~q\ & 
+-- ((\u0|onchip_flash_0|avmm_data_controller|Selector12~0_combout\) # (\u0|onchip_flash_0|avmm_data_controller|Selector1~0_combout\))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1110111011101110",
+	lut_mask => "1110111011101010",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_READY~q\,
-	datab => \u0|onchip_flash_0|avmm_data_controller|Selector7~1_combout\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|Selector7~2_combout\);
+	datab => \u0|onchip_flash_0|avmm_data_controller|read_drclk_en~q\,
+	datac => \u0|onchip_flash_0|avmm_data_controller|Selector12~0_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|Selector1~0_combout\,
+	combout => \u0|onchip_flash_0|avmm_data_controller|Selector7~1_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|read_drclk_en\ : dffeas
 -- pragma translate_off
@@ -7955,7 +8010,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|Selector7~2_combout\,
+	d => \u0|onchip_flash_0|avmm_data_controller|Selector7~1_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -8145,6 +8200,33 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(0));
 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(0))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(0),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~0_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[0]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(0));
+
 \u0|onchip_flash_0|avmm_data_controller|Add0~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Add0~0_combout\ = \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(1) $ (VCC)
@@ -8175,6 +8257,20 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => reg_fbs(4));
 
+\reg_fbs[1]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_phi2_early~reg0_q\,
+	d => \data[1]~input_o\,
+	ena => \reg_fbs[0]~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => reg_fbs(1));
+
 \u0|onchip_flash_0|avmm_data_controller|Add0~2\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Add0~2_combout\ = (\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(2) & (!\u0|onchip_flash_0|avmm_data_controller|Add0~1\)) # (!\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(2) & 
@@ -8196,7 +8292,7 @@ PORT MAP (
 \u0|onchip_flash_0|avmm_data_controller|Selector37~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Selector37~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~2_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(4)))))
+-- ((!\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(4)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8207,12 +8303,12 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~2_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => addr_latch(4),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector37~0_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & ((\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\ & 
+-- \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & ((\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\ & 
 -- (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\)) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\ & ((\flash_read~q\)))))
 
 -- pragma translate_off
@@ -8225,7 +8321,7 @@ PORT MAP (
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => \flash_read~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[2]\ : dffeas
 -- pragma translate_off
@@ -8236,7 +8332,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector37~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(2));
@@ -8259,10 +8355,44 @@ PORT MAP (
 	combout => \u0|onchip_flash_0|avmm_data_controller|Add0~4_combout\,
 	cout => \u0|onchip_flash_0|avmm_data_controller|Add0~5\);
 
+\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|Add0~22_combout\ & ((\u0|onchip_flash_0|avmm_data_controller|Add0~16_combout\) # 
+-- ((\u0|onchip_flash_0|avmm_data_controller|Add0~18_combout\) # (\u0|onchip_flash_0|avmm_data_controller|Add0~20_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010101010101000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~22_combout\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|Add0~16_combout\,
+	datac => \u0|onchip_flash_0|avmm_data_controller|Add0~18_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|Add0~20_combout\,
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~1_combout\);
+
 \u0|onchip_flash_0|avmm_data_controller|Selector36~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~4_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(5)))))
+-- \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\) # ((\u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\ & 
+-- \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~1_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111110000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\,
+	datac => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~1_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\,
+	combout => \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|Selector36~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|Selector36~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~4_combout\ & 
+-- ((!\u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(5)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8273,8 +8403,8 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~4_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => addr_latch(5),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\);
+	datad => \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\,
+	combout => \u0|onchip_flash_0|avmm_data_controller|Selector36~1_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[3]\ : dffeas
 -- pragma translate_off
@@ -8284,8 +8414,8 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	d => \u0|onchip_flash_0|avmm_data_controller|Selector36~1_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(3));
@@ -8311,7 +8441,7 @@ PORT MAP (
 \u0|onchip_flash_0|avmm_data_controller|Selector35~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Selector35~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~6_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(6)))))
+-- ((!\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(6)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8322,7 +8452,7 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~6_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => addr_latch(6),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector35~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[4]\ : dffeas
@@ -8334,7 +8464,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector35~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(4));
@@ -8360,7 +8490,7 @@ PORT MAP (
 \u0|onchip_flash_0|avmm_data_controller|Selector34~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Selector34~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~8_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(7)))))
+-- ((!\u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(7)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8371,7 +8501,7 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~8_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => addr_latch(7),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector34~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[5]\ : dffeas
@@ -8383,7 +8513,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector34~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(5));
@@ -8409,7 +8539,7 @@ PORT MAP (
 \u0|onchip_flash_0|avmm_data_controller|Selector33~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Selector33~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~10_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(8)))))
+-- ((!\u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(8)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8420,7 +8550,7 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~10_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => addr_latch(8),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector33~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]\ : dffeas
@@ -8432,7 +8562,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector33~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(6));
@@ -8458,7 +8588,7 @@ PORT MAP (
 \u0|onchip_flash_0|avmm_data_controller|Selector32~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Selector32~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~12_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(9)))))
+-- ((!\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(9)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8469,7 +8599,7 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~12_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => addr_latch(9),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector32~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[7]\ : dffeas
@@ -8481,7 +8611,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector32~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(7));
@@ -8507,7 +8637,7 @@ PORT MAP (
 \u0|onchip_flash_0|avmm_data_controller|Selector31~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Selector31~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~14_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(10)))))
+-- ((!\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(10)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8518,7 +8648,7 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~14_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => addr_latch(10),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector31~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[8]\ : dffeas
@@ -8530,7 +8660,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector31~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(8));
@@ -8555,19 +8685,19 @@ PORT MAP (
 
 \u0|onchip_flash_0|avmm_data_controller|Selector30~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector30~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~16_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((reg_fbs(0)))))
+-- \u0|onchip_flash_0|avmm_data_controller|Selector30~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((\u0|onchip_flash_0|avmm_data_controller|Add0~16_combout\ & 
+-- !\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (reg_fbs(0)))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0011000010111000",
+	lut_mask => "0000101011001010",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~16_combout\,
-	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
-	datac => reg_fbs(0),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	dataa => reg_fbs(0),
+	datab => \u0|onchip_flash_0|avmm_data_controller|Add0~16_combout\,
+	datac => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector30~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[9]\ : dffeas
@@ -8579,7 +8709,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector30~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(9));
@@ -8602,35 +8732,21 @@ PORT MAP (
 	combout => \u0|onchip_flash_0|avmm_data_controller|Add0~18_combout\,
 	cout => \u0|onchip_flash_0|avmm_data_controller|Add0~19\);
 
-\reg_fbs[1]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_phi2_early~reg0_q\,
-	d => \data[1]~input_o\,
-	ena => \reg_fbs[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => reg_fbs(1));
-
 \u0|onchip_flash_0|avmm_data_controller|Selector29~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector29~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~18_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((reg_fbs(1)))))
+-- \u0|onchip_flash_0|avmm_data_controller|Selector29~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((\u0|onchip_flash_0|avmm_data_controller|Add0~18_combout\ & 
+-- !\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (reg_fbs(1)))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0011000010111000",
+	lut_mask => "0000101011001010",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~18_combout\,
-	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
-	datac => reg_fbs(1),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	dataa => reg_fbs(1),
+	datab => \u0|onchip_flash_0|avmm_data_controller|Add0~18_combout\,
+	datac => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector29~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[10]\ : dffeas
@@ -8642,7 +8758,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector29~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(10));
@@ -8682,7 +8798,7 @@ PORT MAP (
 \u0|onchip_flash_0|avmm_data_controller|Selector28~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Selector28~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~20_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((reg_fbs(2)))))
+-- ((!\u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((reg_fbs(2)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8693,7 +8809,7 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~20_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => reg_fbs(2),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector28~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[11]\ : dffeas
@@ -8705,7 +8821,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector28~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(11));
@@ -8745,7 +8861,7 @@ PORT MAP (
 \u0|onchip_flash_0|avmm_data_controller|Selector27~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Selector27~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~22_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((reg_fbs(3)))))
+-- ((!\u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((reg_fbs(3)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8756,7 +8872,7 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~22_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => reg_fbs(3),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|Selector36~0_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector27~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[12]\ : dffeas
@@ -8768,7 +8884,7 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector27~0_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(12));
@@ -8791,6 +8907,37 @@ PORT MAP (
 	combout => \u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\,
 	cout => \u0|onchip_flash_0|avmm_data_controller|Add0~25\);
 
+\u0|onchip_flash_0|avmm_data_controller|Selector26~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|Selector26~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((\u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\ & 
+-- !\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (reg_fbs(4)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000101011001010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => reg_fbs(4),
+	datab => \u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\,
+	datac => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	combout => \u0|onchip_flash_0|avmm_data_controller|Selector26~0_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[13]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|Selector26~0_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(13));
+
 \u0|onchip_flash_0|avmm_data_controller|Add0~26\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\ = (\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(14) & (!\u0|onchip_flash_0|avmm_data_controller|Add0~25\)) # (!\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(14) & 
@@ -8809,19 +8956,6 @@ PORT MAP (
 	combout => \u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\,
 	cout => \u0|onchip_flash_0|avmm_data_controller|Add0~27\);
 
-\u0|onchip_flash_0|avmm_data_controller|Add0~28\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\ = !\u0|onchip_flash_0|avmm_data_controller|Add0~27\
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000111100001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	cin => \u0|onchip_flash_0|avmm_data_controller|Add0~27\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\);
-
 \reg_fbs[5]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
@@ -8836,26 +8970,9 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => reg_fbs(5));
 
-\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|Add0~22_combout\ & ((\u0|onchip_flash_0|avmm_data_controller|Add0~16_combout\) # 
--- ((\u0|onchip_flash_0|avmm_data_controller|Add0~18_combout\) # (\u0|onchip_flash_0|avmm_data_controller|Add0~20_combout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010101010101000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~22_combout\,
-	datab => \u0|onchip_flash_0|avmm_data_controller|Add0~16_combout\,
-	datac => \u0|onchip_flash_0|avmm_data_controller|Add0~18_combout\,
-	datad => \u0|onchip_flash_0|avmm_data_controller|Add0~20_combout\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]~1_combout\);
-
 \u0|onchip_flash_0|avmm_data_controller|Selector25~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector25~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]~1_combout\) # 
+-- \u0|onchip_flash_0|avmm_data_controller|Selector25~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~1_combout\) # 
 -- (!\u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (reg_fbs(5)))
 
 -- pragma translate_off
@@ -8867,7 +8984,7 @@ PORT MAP (
 	dataa => reg_fbs(5),
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => \u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\,
-	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]~1_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~1_combout\,
 	combout => \u0|onchip_flash_0|avmm_data_controller|Selector25~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|Selector25~1\ : fiftyfivenm_lcell_comb
@@ -8896,79 +9013,45 @@ GENERIC MAP (
 PORT MAP (
 	clk => \clk_57~input_o\,
 	d => \u0|onchip_flash_0|avmm_data_controller|Selector25~1_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(14));
 
-\u0|onchip_flash_0|avmm_data_controller|Selector26~0\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|Add0~28\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector26~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\) # ((\u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\ & 
--- \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]~1_combout\))
+-- \u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\ = !\u0|onchip_flash_0|avmm_data_controller|Add0~27\
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1111100011111000",
-	sum_lutc_input => "datac")
+	lut_mask => "0000111100001111",
+	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\,
-	datab => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]~1_combout\,
-	datac => \u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|Selector26~0_combout\);
+	cin => \u0|onchip_flash_0|avmm_data_controller|Add0~27\,
+	combout => \u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|Selector26~1\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector26~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((\u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\ & 
--- !\u0|onchip_flash_0|avmm_data_controller|Selector26~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (reg_fbs(4)))
+-- \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\ = (\u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\) # ((\u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\ & 
+-- (\u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\ & \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~1_combout\)))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000101011001010",
+	lut_mask => "1110101010101010",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => reg_fbs(4),
+	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\,
-	datac => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector26~0_combout\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|Selector26~1_combout\);
-
-\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[13]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|Selector26~1_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(13));
+	datac => \u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\,
+	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~1_combout\,
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|Selector38~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\) # ((\u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\ & 
--- \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]~1_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111111110000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~24_combout\,
-	datab => \u0|onchip_flash_0|avmm_data_controller|Add0~26_combout\,
-	datac => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[6]~1_combout\,
-	datad => \u0|onchip_flash_0|avmm_data_controller|Add0~28_combout\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\);
-
-\u0|onchip_flash_0|avmm_data_controller|Selector38~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|Selector38~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~0_combout\ & 
--- ((!\u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(3)))))
+-- \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (\u0|onchip_flash_0|avmm_data_controller|Add0~0_combout\ & 
+-- ((!\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\)))) # (!\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\ & (((!addr_latch(3)))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8979,8 +9062,8 @@ PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|Add0~0_combout\,
 	datab => \u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_SETUP~q\,
 	datac => addr_latch(3),
-	datad => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|Selector38~1_combout\);
+	datad => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	combout => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]\ : dffeas
 -- pragma translate_off
@@ -8990,8 +9073,8 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|Selector38~1_combout\,
-	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~2_combout\,
+	d => \u0|onchip_flash_0|avmm_data_controller|Selector38~0_combout\,
+	ena => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin[1]~3_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(1));
@@ -9026,6 +9109,33 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(1));
 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(1))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(1),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~1_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[1]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~1_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(1));
+
 \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~2\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~2_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\ & (\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(2))) # 
@@ -9055,6 +9165,33 @@ PORT MAP (
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(2));
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~2_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(2))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(2),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~2_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[2]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(2));
 
 \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~3\ : fiftyfivenm_lcell_comb
 -- Equation(s):
@@ -9086,6 +9223,33 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(3));
 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~3_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(3))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(3),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~3_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[3]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~3_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(3));
+
 \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~4\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~4_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\ & (\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(4))) # 
@@ -9115,6 +9279,33 @@ PORT MAP (
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(4));
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~4_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(4))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(4),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~4_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[4]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(4));
 
 \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~5\ : fiftyfivenm_lcell_comb
 -- Equation(s):
@@ -9146,6 +9337,33 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(5));
 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~5_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(5))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(5),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~5_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[5]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~5_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(5));
+
 \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~6\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~6_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\ & (\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(6))) # 
@@ -9175,6 +9393,33 @@ PORT MAP (
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(6));
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~6_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(6))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(6),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~6_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[6]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~6_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(6));
 
 \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~7\ : fiftyfivenm_lcell_comb
 -- Equation(s):
@@ -9206,6 +9451,33 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(7));
 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~7_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(7))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(7),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~7_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[7]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~7_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(7));
+
 \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~8\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|flash_page_addr~8_combout\ = (\u0|onchip_flash_0|avmm_data_controller|read_state.READ_STATE_IDLE~q\ & (\u0|onchip_flash_0|avmm_data_controller|flash_seq_read_ardin\(8))) # 
@@ -9235,6 +9507,33 @@ PORT MAP (
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(8));
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~8_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(8))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(8),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~8_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[8]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~8_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(8));
 
 \u0|onchip_flash_0|avmm_data_controller|flash_read_addr[9]~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
@@ -9397,6 +9696,33 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(9));
 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~9_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(9))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(9),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~9_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[9]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~9_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(9));
+
 \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~2\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~2_combout\ = (\u0|onchip_flash_0|avmm_data_controller|flash_read_addr[10]~3_combout\ & (!\u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~1\)) # 
@@ -9428,6 +9754,33 @@ PORT MAP (
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(10));
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~10_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(10))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(10),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~10_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[10]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~10_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(10));
 
 \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~4\ : fiftyfivenm_lcell_comb
 -- Equation(s):
@@ -9461,6 +9814,33 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(11));
 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~11\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~11_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(11))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(11),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~11_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[11]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~11_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(11));
+
 \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~6\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~6_combout\ = (\u0|onchip_flash_0|avmm_data_controller|flash_read_addr[12]~5_combout\ & (!\u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~5\)) # 
@@ -9492,6 +9872,33 @@ PORT MAP (
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(12));
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~12\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~12_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(12))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(12),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~12_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[12]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~12_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(12));
 
 \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~8\ : fiftyfivenm_lcell_comb
 -- Equation(s):
@@ -9525,6 +9932,33 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(13));
 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~13\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~13_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(13))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(13),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~13_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[13]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~13_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(13));
+
 \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~10\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~10_combout\ = (\u0|onchip_flash_0|avmm_data_controller|flash_read_addr[14]~1_combout\ & (!\u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~9\)) # 
@@ -9557,6 +9991,33 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(14));
 
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~14\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~14_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(14))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(14),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~14_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[14]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~14_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(14));
+
 \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~12\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~12_combout\ = !\u0|onchip_flash_0|avmm_data_controller|address_convertor|Add0~11\
@@ -9583,6 +10044,33 @@ PORT MAP (
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(15));
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~15\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~15_combout\ = (\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\ & \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(15))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
+	datab => \u0|onchip_flash_0|avmm_data_controller|flash_page_addr\(15),
+	combout => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~15_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg[15]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg~15_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|flash_addr_wire_neg_reg\(15));
 
 \u0|onchip_flash_0|altera_onchip_flash_block|ufm_block\ : fiftyfivenm_unvm
 -- pragma translate_off
@@ -9621,7 +10109,7 @@ PORT MAP (
 
 \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~0_combout\ = ((!reg_fbs(0) & (!reg_fbs(2) & !reg_fbs(1)))) # (!reg_fbs(5))
+-- \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~0_combout\ = ((!reg_fbs(0) & (!reg_fbs(1) & !reg_fbs(2)))) # (!reg_fbs(5))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9630,14 +10118,14 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	dataa => reg_fbs(0),
-	datab => reg_fbs(2),
-	datac => reg_fbs(1),
+	datab => reg_fbs(1),
+	datac => reg_fbs(2),
 	datad => reg_fbs(5),
 	combout => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~1\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~0_combout\) # ((!reg_fbs(3)) # (!reg_fbs(4)))
+-- \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~1_combout\ = (\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~0_combout\) # ((!reg_fbs(4)) # (!reg_fbs(3)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9646,8 +10134,8 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~0_combout\,
-	datac => reg_fbs(4),
-	datad => reg_fbs(3),
+	datac => reg_fbs(3),
+	datad => reg_fbs(4),
 	combout => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~1_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~2\ : fiftyfivenm_lcell_comb
@@ -9681,19 +10169,46 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[16]~0\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[16]~0_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(16) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~0_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(16)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(16),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[16]~0_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~0_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[16]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(16));
+
+\flash_data_latch[16]~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[16]~0_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(16)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(16),
+	combout => \flash_data_latch[16]~0_combout\);
 
 \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
@@ -9734,25 +10249,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[16]~0_combout\,
+	d => \flash_data_latch[16]~0_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(16));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[8]~1\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~1\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[8]~1_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(8) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~1_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(8)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(8),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[8]~1_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~1_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[8]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~1_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(8));
+
+\flash_data_latch[8]~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[8]~1_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(8)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(8),
+	combout => \flash_data_latch[8]~1_combout\);
 
 \flash_data_latch[8]\ : dffeas
 -- pragma translate_off
@@ -9762,25 +10304,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[8]~1_combout\,
+	d => \flash_data_latch[8]~1_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(8));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[0]~2\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~2\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[0]~2_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(0) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~2_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(0)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(0),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[0]~2_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~2_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[0]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(0));
+
+\flash_data_latch[0]~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[0]~2_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(0)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(0),
+	combout => \flash_data_latch[0]~2_combout\);
 
 \flash_data_latch[0]\ : dffeas
 -- pragma translate_off
@@ -9790,7 +10359,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[0]~2_combout\,
+	d => \flash_data_latch[0]~2_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -9812,19 +10381,46 @@ PORT MAP (
 	datad => flash_data_latch(0),
 	combout => \data[0]~24_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[24]~3\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~3\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[24]~3_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(24) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~3_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(24)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(24),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[24]~3_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~3_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[24]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~3_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(24));
+
+\flash_data_latch[24]~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[24]~3_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(24)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(24),
+	combout => \flash_data_latch[24]~3_combout\);
 
 \flash_data_latch[24]\ : dffeas
 -- pragma translate_off
@@ -9834,7 +10430,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[24]~3_combout\,
+	d => \flash_data_latch[24]~3_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -10332,19 +10928,46 @@ PORT MAP (
 	portadataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a1_PORTADATAOUT_bus\,
 	portbdataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a1_PORTBDATAOUT_bus\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[9]~4\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~4\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[9]~4_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(9) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~4_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(9)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(9),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[9]~4_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~4_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[9]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(9));
+
+\flash_data_latch[9]~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[9]~4_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(9)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(9),
+	combout => \flash_data_latch[9]~4_combout\);
 
 \flash_data_latch[9]\ : dffeas
 -- pragma translate_off
@@ -10354,25 +10977,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[9]~4_combout\,
+	d => \flash_data_latch[9]~4_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(9));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[17]~5\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~5\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[17]~5_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(17) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~5_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(17)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(17),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[17]~5_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~5_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[17]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~5_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(17));
+
+\flash_data_latch[17]~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[17]~5_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(17)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(17),
+	combout => \flash_data_latch[17]~5_combout\);
 
 \flash_data_latch[17]\ : dffeas
 -- pragma translate_off
@@ -10382,25 +11032,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[17]~5_combout\,
+	d => \flash_data_latch[17]~5_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(17));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[1]~6\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~6\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[1]~6_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(1) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~6_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(1)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(1),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[1]~6_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~6_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[1]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~6_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(1));
+
+\flash_data_latch[1]~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[1]~6_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(1)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(1),
+	combout => \flash_data_latch[1]~6_combout\);
 
 \flash_data_latch[1]\ : dffeas
 -- pragma translate_off
@@ -10410,7 +11087,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[1]~6_combout\,
+	d => \flash_data_latch[1]~6_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -10432,19 +11109,46 @@ PORT MAP (
 	datad => flash_data_latch(1),
 	combout => \data[1]~36_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[25]~7\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~7\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[25]~7_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(25) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~7_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(25)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(25),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[25]~7_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~7_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[25]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~7_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(25));
+
+\flash_data_latch[25]~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[25]~7_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(25)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(25),
+	combout => \flash_data_latch[25]~7_combout\);
 
 \flash_data_latch[25]\ : dffeas
 -- pragma translate_off
@@ -10454,7 +11158,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[25]~7_combout\,
+	d => \flash_data_latch[25]~7_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -10831,19 +11535,46 @@ PORT MAP (
 	portadataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a2_PORTADATAOUT_bus\,
 	portbdataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a2_PORTBDATAOUT_bus\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[18]~8\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~8\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[18]~8_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(18) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~8_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(18)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(18),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[18]~8_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~8_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[18]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~8_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(18));
+
+\flash_data_latch[18]~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[18]~8_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(18)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(18),
+	combout => \flash_data_latch[18]~8_combout\);
 
 \flash_data_latch[18]\ : dffeas
 -- pragma translate_off
@@ -10853,25 +11584,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[18]~8_combout\,
+	d => \flash_data_latch[18]~8_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(18));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[10]~9\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~9\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[10]~9_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(10) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~9_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(10)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(10),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[10]~9_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~9_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[10]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~9_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(10));
+
+\flash_data_latch[10]~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[10]~9_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(10)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(10),
+	combout => \flash_data_latch[10]~9_combout\);
 
 \flash_data_latch[10]\ : dffeas
 -- pragma translate_off
@@ -10881,25 +11639,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[10]~9_combout\,
+	d => \flash_data_latch[10]~9_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(10));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[2]~10\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~10\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[2]~10_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(2) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~10_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(2)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(2),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[2]~10_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~10_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[2]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~10_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(2));
+
+\flash_data_latch[2]~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[2]~10_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(2)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(2),
+	combout => \flash_data_latch[2]~10_combout\);
 
 \flash_data_latch[2]\ : dffeas
 -- pragma translate_off
@@ -10909,7 +11694,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[2]~10_combout\,
+	d => \flash_data_latch[2]~10_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -10931,19 +11716,46 @@ PORT MAP (
 	datad => flash_data_latch(2),
 	combout => \data[2]~46_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[26]~11\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~11\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[26]~11_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(26) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~11_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(26)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(26),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[26]~11_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~11_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[26]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~11_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(26));
+
+\flash_data_latch[26]~11\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[26]~11_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(26)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(26),
+	combout => \flash_data_latch[26]~11_combout\);
 
 \flash_data_latch[26]\ : dffeas
 -- pragma translate_off
@@ -10953,7 +11765,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[26]~11_combout\,
+	d => \flash_data_latch[26]~11_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -11316,19 +12128,46 @@ PORT MAP (
 	portadataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a3_PORTADATAOUT_bus\,
 	portbdataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a3_PORTBDATAOUT_bus\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[11]~12\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~12\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[11]~12_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(11) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~12_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(11)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(11),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[11]~12_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~12_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[11]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~12_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(11));
+
+\flash_data_latch[11]~12\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[11]~12_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(11)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(11),
+	combout => \flash_data_latch[11]~12_combout\);
 
 \flash_data_latch[11]\ : dffeas
 -- pragma translate_off
@@ -11338,25 +12177,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[11]~12_combout\,
+	d => \flash_data_latch[11]~12_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(11));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[19]~13\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~13\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[19]~13_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(19) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~13_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(19)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(19),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[19]~13_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~13_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[19]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~13_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(19));
+
+\flash_data_latch[19]~13\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[19]~13_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(19)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(19),
+	combout => \flash_data_latch[19]~13_combout\);
 
 \flash_data_latch[19]\ : dffeas
 -- pragma translate_off
@@ -11366,25 +12232,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[19]~13_combout\,
+	d => \flash_data_latch[19]~13_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(19));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[3]~14\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~14\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[3]~14_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(3) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~14_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(3)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(3),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[3]~14_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~14_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[3]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~14_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(3));
+
+\flash_data_latch[3]~14\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[3]~14_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(3)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(3),
+	combout => \flash_data_latch[3]~14_combout\);
 
 \flash_data_latch[3]\ : dffeas
 -- pragma translate_off
@@ -11394,7 +12287,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[3]~14_combout\,
+	d => \flash_data_latch[3]~14_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -11416,19 +12309,46 @@ PORT MAP (
 	datad => flash_data_latch(3),
 	combout => \data[3]~56_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[27]~15\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~15\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[27]~15_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(27) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~15_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(27)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(27),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[27]~15_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~15_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[27]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~15_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(27));
+
+\flash_data_latch[27]~15\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[27]~15_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(27)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(27),
+	combout => \flash_data_latch[27]~15_combout\);
 
 \flash_data_latch[27]\ : dffeas
 -- pragma translate_off
@@ -11438,7 +12358,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[27]~15_combout\,
+	d => \flash_data_latch[27]~15_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -11815,19 +12735,46 @@ PORT MAP (
 	portadataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a4_PORTADATAOUT_bus\,
 	portbdataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a4_PORTBDATAOUT_bus\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[20]~16\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~16\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[20]~16_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(20) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~16_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(20)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(20),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[20]~16_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~16_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[20]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~16_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(20));
+
+\flash_data_latch[20]~16\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[20]~16_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(20)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(20),
+	combout => \flash_data_latch[20]~16_combout\);
 
 \flash_data_latch[20]\ : dffeas
 -- pragma translate_off
@@ -11837,25 +12784,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[20]~16_combout\,
+	d => \flash_data_latch[20]~16_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(20));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[12]~17\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~17\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[12]~17_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(12) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~17_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(12)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(12),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[12]~17_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~17_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[12]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~17_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(12));
+
+\flash_data_latch[12]~17\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[12]~17_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(12)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(12),
+	combout => \flash_data_latch[12]~17_combout\);
 
 \flash_data_latch[12]\ : dffeas
 -- pragma translate_off
@@ -11865,25 +12839,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[12]~17_combout\,
+	d => \flash_data_latch[12]~17_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(12));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[4]~18\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~18\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[4]~18_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(4) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~18_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(4)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(4),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[4]~18_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~18_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[4]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~18_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(4));
+
+\flash_data_latch[4]~18\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[4]~18_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(4)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(4),
+	combout => \flash_data_latch[4]~18_combout\);
 
 \flash_data_latch[4]\ : dffeas
 -- pragma translate_off
@@ -11893,7 +12894,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[4]~18_combout\,
+	d => \flash_data_latch[4]~18_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -11915,19 +12916,46 @@ PORT MAP (
 	datad => flash_data_latch(4),
 	combout => \data[4]~66_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[28]~19\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~19\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[28]~19_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(28) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~19_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(28)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(28),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[28]~19_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~19_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[28]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~19_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(28));
+
+\flash_data_latch[28]~19\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[28]~19_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(28)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(28),
+	combout => \flash_data_latch[28]~19_combout\);
 
 \flash_data_latch[28]\ : dffeas
 -- pragma translate_off
@@ -11937,7 +12965,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[28]~19_combout\,
+	d => \flash_data_latch[28]~19_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -12300,19 +13328,46 @@ PORT MAP (
 	portadataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a5_PORTADATAOUT_bus\,
 	portbdataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a5_PORTBDATAOUT_bus\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[13]~20\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~20\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[13]~20_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(13) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~20_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(13)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(13),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[13]~20_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~20_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[13]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~20_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(13));
+
+\flash_data_latch[13]~20\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[13]~20_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(13)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(13),
+	combout => \flash_data_latch[13]~20_combout\);
 
 \flash_data_latch[13]\ : dffeas
 -- pragma translate_off
@@ -12322,25 +13377,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[13]~20_combout\,
+	d => \flash_data_latch[13]~20_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(13));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[21]~21\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~21\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[21]~21_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(21) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~21_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(21)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(21),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[21]~21_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~21_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[21]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~21_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(21));
+
+\flash_data_latch[21]~21\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[21]~21_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(21)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(21),
+	combout => \flash_data_latch[21]~21_combout\);
 
 \flash_data_latch[21]\ : dffeas
 -- pragma translate_off
@@ -12350,25 +13432,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[21]~21_combout\,
+	d => \flash_data_latch[21]~21_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(21));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[5]~22\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~22\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[5]~22_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(5) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~22_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(5)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(5),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[5]~22_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~22_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[5]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~22_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(5));
+
+\flash_data_latch[5]~22\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[5]~22_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(5)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(5),
+	combout => \flash_data_latch[5]~22_combout\);
 
 \flash_data_latch[5]\ : dffeas
 -- pragma translate_off
@@ -12378,7 +13487,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[5]~22_combout\,
+	d => \flash_data_latch[5]~22_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -12400,19 +13509,46 @@ PORT MAP (
 	datad => flash_data_latch(5),
 	combout => \data[5]~76_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[29]~23\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~23\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[29]~23_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(29) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~23_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(29)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(29),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[29]~23_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~23_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[29]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~23_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(29));
+
+\flash_data_latch[29]~23\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[29]~23_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(29)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(29),
+	combout => \flash_data_latch[29]~23_combout\);
 
 \flash_data_latch[29]\ : dffeas
 -- pragma translate_off
@@ -12422,7 +13558,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[29]~23_combout\,
+	d => \flash_data_latch[29]~23_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -12841,19 +13977,46 @@ PORT MAP (
 	portadataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a6_PORTADATAOUT_bus\,
 	portbdataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a6_PORTBDATAOUT_bus\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[22]~24\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~24\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[22]~24_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(22) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~24_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(22)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(22),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[22]~24_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~24_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[22]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~24_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(22));
+
+\flash_data_latch[22]~24\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[22]~24_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(22)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(22),
+	combout => \flash_data_latch[22]~24_combout\);
 
 \flash_data_latch[22]\ : dffeas
 -- pragma translate_off
@@ -12863,25 +14026,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[22]~24_combout\,
+	d => \flash_data_latch[22]~24_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(22));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[14]~25\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~25\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[14]~25_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(14) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~25_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(14)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(14),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[14]~25_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~25_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[14]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~25_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(14));
+
+\flash_data_latch[14]~25\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[14]~25_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(14)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(14),
+	combout => \flash_data_latch[14]~25_combout\);
 
 \flash_data_latch[14]\ : dffeas
 -- pragma translate_off
@@ -12891,25 +14081,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[14]~25_combout\,
+	d => \flash_data_latch[14]~25_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(14));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[6]~26\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~26\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[6]~26_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(6) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~26_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(6)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(6),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[6]~26_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~26_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[6]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~26_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(6));
+
+\flash_data_latch[6]~26\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[6]~26_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(6)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(6),
+	combout => \flash_data_latch[6]~26_combout\);
 
 \flash_data_latch[6]\ : dffeas
 -- pragma translate_off
@@ -12919,7 +14136,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[6]~26_combout\,
+	d => \flash_data_latch[6]~26_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -12941,19 +14158,46 @@ PORT MAP (
 	datad => flash_data_latch(6),
 	combout => \data[6]~86_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[30]~27\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~27\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[30]~27_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(30) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~27_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(30)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(30),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[30]~27_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~27_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[30]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~27_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(30));
+
+\flash_data_latch[30]~27\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[30]~27_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(30)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(30),
+	combout => \flash_data_latch[30]~27_combout\);
 
 \flash_data_latch[30]\ : dffeas
 -- pragma translate_off
@@ -12963,7 +14207,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[30]~27_combout\,
+	d => \flash_data_latch[30]~27_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -13382,19 +14626,46 @@ PORT MAP (
 	portadataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a7_PORTADATAOUT_bus\,
 	portbdataout => \u1|dpram_master|altsyncram_component|auto_generated|ram_block1a7_PORTBDATAOUT_bus\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[15]~28\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~28\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[15]~28_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(15) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~28_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(15)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(15),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[15]~28_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~28_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[15]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~28_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(15));
+
+\flash_data_latch[15]~28\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[15]~28_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(15)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(15),
+	combout => \flash_data_latch[15]~28_combout\);
 
 \flash_data_latch[15]\ : dffeas
 -- pragma translate_off
@@ -13404,25 +14675,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[15]~28_combout\,
+	d => \flash_data_latch[15]~28_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(15));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[23]~29\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~29\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[23]~29_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(23) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~29_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(23)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(23),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[23]~29_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~29_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[23]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~29_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(23));
+
+\flash_data_latch[23]~29\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[23]~29_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(23)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(23),
+	combout => \flash_data_latch[23]~29_combout\);
 
 \flash_data_latch[23]\ : dffeas
 -- pragma translate_off
@@ -13432,25 +14730,52 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[23]~29_combout\,
+	d => \flash_data_latch[23]~29_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
 	q => flash_data_latch(23));
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[7]~30\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~30\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[7]~30_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(7) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~30_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(7)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(7),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[7]~30_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~30_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[7]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~30_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(7));
+
+\flash_data_latch[7]~30\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[7]~30_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(7)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(7),
+	combout => \flash_data_latch[7]~30_combout\);
 
 \flash_data_latch[7]\ : dffeas
 -- pragma translate_off
@@ -13460,7 +14785,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[7]~30_combout\,
+	d => \flash_data_latch[7]~30_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
@@ -13482,19 +14807,46 @@ PORT MAP (
 	datad => flash_data_latch(7),
 	combout => \data[7]~96_combout\);
 
-\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[31]~31\ : fiftyfivenm_lcell_comb
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata~31\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[31]~31_combout\ = (!\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(31) & \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\)
+-- \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~31_combout\ = (\u0|onchip_flash_0|altera_onchip_flash_block|drdout\(31)) # ((!\u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\) # (!\u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010100000000",
+	lut_mask => "1010111111111111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \u0|onchip_flash_0|altera_onchip_flash_block|drdout\(31),
+	datac => \u0|onchip_flash_0|avmm_data_controller|reset_n_reg2~q\,
 	datad => \u0|onchip_flash_0|avmm_data_controller|csr_status_r_pass~q\,
-	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[31]~31_combout\);
+	combout => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~31_combout\);
+
+\u0|onchip_flash_0|avmm_data_controller|avmm_readdata[31]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \ALT_INV_clk_57~input_o\,
+	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata~31_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(31));
+
+\flash_data_latch[31]~31\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \flash_data_latch[31]~31_combout\ = !\u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(31)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata\(31),
+	combout => \flash_data_latch[31]~31_combout\);
 
 \flash_data_latch[31]\ : dffeas
 -- pragma translate_off
@@ -13504,7 +14856,7 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \ALT_INV_clk_57~input_o\,
-	d => \u0|onchip_flash_0|avmm_data_controller|avmm_readdata[31]~31_combout\,
+	d => \flash_data_latch[31]~31_combout\,
 	ena => \u0|onchip_flash_0|avmm_data_controller|avmm_readdatavalid_reg~q\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
