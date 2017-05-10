@@ -9,30 +9,30 @@ z2
 cModel Technology
 Z0 dC:/Users/steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim
 Ehard_block
-Z1 w1494374827
+Z1 w1494428009
 Z2 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
-Z3 DPx11 fiftyfivenm 21 fiftyfivenm_atom_pack 0 22 1Dk;4?@modA7lIE5F<?`>0
+Z3 DPx11 fiftyfivenm 21 fiftyfivenm_atom_pack 0 22 QU]SmECo2a[Hl8eBXbHMn2
 Z4 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
 Z5 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z6 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
-Z7 DPx11 fiftyfivenm 22 fiftyfivenm_components 0 22 ^iWWaY5ekCN518OG[C9=X0
-R0
-Z8 8pbi_bridge.vho
-Z9 Fpbi_bridge.vho
+Z7 DPx11 fiftyfivenm 22 fiftyfivenm_components 0 22 Yd>JAFC2WgIA]bMk>i3Vn1
+Z8 dC:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim
+Z9 8pbi_bridge.vho
+Z10 Fpbi_bridge.vho
 l0
 L35
 Vhj[i;a0dD85B`o1JPT^cg2
 !s100 3A]XnMhF<;9mKUe5mn3aM1
-Z10 OV;C;10.5b;63
+Z11 OV;C;10.5b;63
 32
-Z11 !s110 1494374828
+Z12 !s110 1494428010
 !i10b 1
-Z12 !s108 1494374828.000000
-Z13 !s90 -work|work|pbi_bridge.vho|
-Z14 !s107 pbi_bridge.vho|
+Z13 !s108 1494428010.000000
+Z14 !s90 -work|work|pbi_bridge.vho|
+Z15 !s107 pbi_bridge.vho|
 !i113 1
-Z15 o-work work
-Z16 tExplicit 1 CvgOpt 0
+Z16 o-work work
+Z17 tExplicit 1 CvgOpt 0
 Astructure
 R2
 R3
@@ -40,51 +40,51 @@ R4
 R5
 R6
 R7
-DEx4 work 10 hard_block 0 22 hj[i;a0dD85B`o1JPT^cg2
+Z18 DEx4 work 10 hard_block 0 22 hj[i;a0dD85B`o1JPT^cg2
 l64
 L50
-Vb>R0MC?JSoM;9^5LiLRdB0
-!s100 fKQbZo5`HOoKjm4g@4@H`0
-R10
-32
+Z19 Vb>R0MC?JSoM;9^5LiLRdB0
+Z20 !s100 fKQbZo5`HOoKjm4g@4@H`0
 R11
-!i10b 1
+32
 R12
+!i10b 1
 R13
 R14
-!i113 1
 R15
+!i113 1
 R16
+R17
 Epbi_bridge
-Z17 w1494377933
-DPx11 fiftyfivenm 21 fiftyfivenm_atom_pack 0 22 QU]SmECo2a[Hl8eBXbHMn2
-DPx11 fiftyfivenm 22 fiftyfivenm_components 0 22 Yd>JAFC2WgIA]bMk>i3Vn1
+R1
+R3
+R7
 R2
 DPx6 altera 11 dffeas_pack 0 22 >EJOc2K4@P4f?njWHdOcd0
 R4
 R5
 R6
 DPx6 altera 28 altera_primitives_components 0 22 14j`ZKHCzSI;]V?hmAE6_1
-R0
 R8
 R9
-l0
-L37
-V20PJz9nGhdclC=9M@HK`X2
-!s100 L3B:8lm2VSM75oTSZM6[11
 R10
+l0
+L79
+Vh>P>Y<6`kAohh^XbzhjYg3
+!s100 8OOo<co4c0l8YKiiJ_N?V1
+R11
 32
-!s110 1494377935
+R12
 !i10b 1
-!s108 1494377935.000000
 R13
 R14
-!i113 1
 R15
+!i113 1
 R16
+R17
 Astructure
-R3
-R7
+DPx11 fiftyfivenm 21 fiftyfivenm_atom_pack 0 22 1Dk;4?@modA7lIE5F<?`>0
+DPx11 fiftyfivenm 22 fiftyfivenm_components 0 22 ^iWWaY5ekCN518OG[C9=X0
 R2
 DPx6 altera 11 dffeas_pack 0 22 zWCf]NF6heG=Dhmc@B0=T2
 R4
@@ -96,37 +96,38 @@ l294
 L137
 VJOidhV_UjM^YGFnaY;_TJ1
 !s100 n5nI7RK8iFUDWSR7`F>8f2
-R10
+R11
 32
-Z18 !s110 1491656785
+Z21 !s110 1491656785
 !i10b 1
-Z19 !s108 1491656785.000000
-R13
+Z22 !s108 1491656785.000000
 R14
-!i113 1
 R15
+!i113 1
 R16
+R17
+R0
 Epbi_bridge_vhd_vec_tst
-Z20 w1491656781
+Z23 w1491656781
 R5
 R6
 R0
-Z21 8Waveform1.vwf.vht
-Z22 FWaveform1.vwf.vht
+Z24 8Waveform1.vwf.vht
+Z25 FWaveform1.vwf.vht
 l0
 L32
 VOEQ=nH?3D@];QU4=UW[9d2
 !s100 RaK9FK=6F8F5Dm>;PA>?T3
-R10
+R11
 32
-R18
+R21
 !i10b 1
-R19
-Z23 !s90 -work|work|Waveform1.vwf.vht|
-Z24 !s107 Waveform1.vwf.vht|
+R22
+Z26 !s90 -work|work|Waveform1.vwf.vht|
+Z27 !s107 Waveform1.vwf.vht|
 !i113 1
-R15
 R16
+R17
 Apbi_bridge_arch
 R5
 R6
@@ -135,13 +136,13 @@ l69
 L34
 VHzbFcS^k=H7VNH6]o=TB<2
 !s100 kkLVTlnb>ibeSQoM50o1e0
-R10
+R11
 32
-R18
+R21
 !i10b 1
-R19
-R23
-R24
+R22
+R26
+R27
 !i113 1
-R15
 R16
+R17

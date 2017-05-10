@@ -46,7 +46,7 @@ end pbi_bridge;
 
 ARCHITECTURE behavior OF pbi_bridge IS
 	-- latch to hold address
-	SIGNAL addr_latch : std_logic_vector(15 downto 0) := X"0000";
+	SIGNAL addr_latch : std_logic_vector(15 downto 0) := X"FFFF";
 	-- latch to hold rw signal
 	SIGNAL rw_latch : std_logic := '0';
 	
@@ -74,9 +74,9 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	-- signals to interface with ALTUFM flash device
 	SIGNAL flash_read : std_logic := '0';
 	SIGNAL flash_read_valid : std_logic := '0';
-	SIGNAL flash_data : std_logic_vector(31 downto 0) := X"FFFFFFFF";
-	SIGNAL flash_data_latch : std_logic_vector(31 downto 0) := X"FFFFFFFF";
-	SIGNAL flash_addr : std_logic_vector(14 downto 0) := "000000000000000";
+	SIGNAL flash_data : std_logic_vector(31 downto 0) := (OTHERS => '1');
+	SIGNAL flash_data_latch : std_logic_vector(31 downto 0) := (OTHERS => '1');
+	SIGNAL flash_addr : std_logic_vector(14 downto 0) := (OTHERS => '0');
 	
 	-- signals for SPI dual port RAM interface
 	SIGNAL reg_sdcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
@@ -89,8 +89,6 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL reg_srbs		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL reg_fbs			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	
-	SIGNAL spi_busy		:		STD_LOGIC;
-	
 	SIGNAL slave_ram_en	:		STD_LOGIC := '0';
 	SIGNAL slave_din		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL slave_dout		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
@@ -99,6 +97,7 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL master_dout	:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	
 	-- Altera ALTUFM component for PBI Flash ROM space
+	-- See https://www.altera.com/en_US/pdfs/literature/hb/max-10/ug_m10_ufm.pdf
 	COMPONENT pbi_rom IS
 		PORT (
 			clock                   : in  std_logic                     := 'X';             -- clk
@@ -143,8 +142,7 @@ ARCHITECTURE behavior OF pbi_bridge IS
 			ss_n				:	 IN STD_LOGIC;
 			sclk				:	 IN STD_LOGIC;
 			mosi				:	 IN STD_LOGIC;
-			miso				:	 OUT STD_LOGIC;
-			busy				:	 OUT STD_LOGIC
+			miso				:	 OUT STD_LOGIC
 		);
 	END COMPONENT;
 
@@ -156,7 +154,7 @@ u0 : component pbi_rom
 	port map (
 		clock                   		=> clk_57,             				-- clk
 		reset_n                 		=> n_reset,            				-- reset
-		avmm_data_addr(14 DOWNTO 9)   => reg_fbs(5 DOWNTO 0), 						-- data.address[14:9] (64 total 512 x 32-bit banks selectable)
+		avmm_data_addr(14 DOWNTO 9)   => reg_fbs(5 DOWNTO 0), 			-- data.address[14:9] (64 total 512 x 32-bit banks selectable)
 		avmm_data_addr(8 DOWNTO 0)   	=> addr_latch(10 DOWNTO 2),  		-- data.address[ 8:0] (512 x 32-bit words bank size)
 		avmm_data_read          		=> flash_read,      					-- start read signal
 		avmm_data_readdata      		=> flash_data,  						-- flash data bus
@@ -178,14 +176,12 @@ u1	: component spi_dpram
 			p_slave_din		=>		slave_din,
 			p_slave_dout	=>		slave_dout,
 		
-
 			reset_n			=> n_reset,
 			
 			ss_n				=> spi_ss_n,
 			sclk				=> spi_clk,
 			mosi				=> spi_mosi,
 			miso				=> spi_miso,
-			busy				=> spi_busy,
 	
 			r_sdcr			=> reg_sdcr,
 			r_stbycr			=> reg_stbycr,
@@ -307,6 +303,13 @@ begin
 		dev_reg_act <= false;
 		master_ram_en <= '0';
 		slave_ram_en <= '0';
+		
+		reg_sdcr <= X"00";
+		reg_stbycr <= X"00";
+		reg_stbkcr <= X"00";
+		reg_mrbs <= X"00";
+		reg_srbs <= X"00";
+		reg_fbs <= X"00";
 		
 		data <= "ZZZZZZZZ";
 		led_latch <= "00000";
