@@ -19,7 +19,7 @@
 -- the top level entity of the current Quartus project .The user can use this   
 -- testbench to simulate his design using a third-party simulation tool .       
 -- *****************************************************************************
--- Generated on "04/08/2017 09:06:21"
+-- Generated on "05/09/2017 20:11:28"
                                                              
 -- Vhdl Test Bench(with test vectors) for design  :          pbi_bridge
 -- 
@@ -35,35 +35,55 @@ ARCHITECTURE pbi_bridge_arch OF pbi_bridge_vhd_vec_tst IS
 -- constants                                                 
 -- signals                                                   
 SIGNAL addr : STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL clk_50 : STD_LOGIC;
+SIGNAL clk_57 : STD_LOGIC;
 SIGNAL data : STD_LOGIC_VECTOR(7 DOWNTO 0);
 SIGNAL data_dir : STD_LOGIC;
+SIGNAL dip_sw : STD_LOGIC_VECTOR(4 DOWNTO 0);
 SIGNAL extenb : STD_LOGIC;
 SIGNAL n_data_oe : STD_LOGIC;
 SIGNAL n_extsel : STD_LOGIC;
 SIGNAL n_irq : STD_LOGIC;
+SIGNAL n_led1 : STD_LOGIC;
+SIGNAL n_led2 : STD_LOGIC;
+SIGNAL n_led3 : STD_LOGIC;
+SIGNAL n_led4 : STD_LOGIC;
+SIGNAL n_led5 : STD_LOGIC;
 SIGNAL n_mpd : STD_LOGIC;
 SIGNAL n_rdy : STD_LOGIC;
 SIGNAL n_reset : STD_LOGIC;
 SIGNAL phi2 : STD_LOGIC;
 SIGNAL phi2_early : STD_LOGIC;
 SIGNAL rw : STD_LOGIC;
+SIGNAL spi_clk : STD_LOGIC;
+SIGNAL spi_miso : STD_LOGIC;
+SIGNAL spi_mosi : STD_LOGIC;
+SIGNAL spi_ss_n : STD_LOGIC;
 COMPONENT pbi_bridge
 	PORT (
 	addr : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-	clk_50 : IN STD_LOGIC;
-	data : BUFFER STD_LOGIC_VECTOR(7 DOWNTO 0);
-	data_dir : BUFFER STD_LOGIC;
+	clk_57 : IN STD_LOGIC;
+	data : INOUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	data_dir : OUT STD_LOGIC;
+	dip_sw : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
 	extenb : IN STD_LOGIC;
-	n_data_oe : BUFFER STD_LOGIC;
-	n_extsel : BUFFER STD_LOGIC;
-	n_irq : BUFFER STD_LOGIC;
-	n_mpd : BUFFER STD_LOGIC;
-	n_rdy : BUFFER STD_LOGIC;
+	n_data_oe : OUT STD_LOGIC;
+	n_extsel : OUT STD_LOGIC;
+	n_irq : OUT STD_LOGIC;
+	n_led1 : OUT STD_LOGIC;
+	n_led2 : OUT STD_LOGIC;
+	n_led3 : OUT STD_LOGIC;
+	n_led4 : OUT STD_LOGIC;
+	n_led5 : OUT STD_LOGIC;
+	n_mpd : OUT STD_LOGIC;
+	n_rdy : OUT STD_LOGIC;
 	n_reset : IN STD_LOGIC;
 	phi2 : IN STD_LOGIC;
 	phi2_early : BUFFER STD_LOGIC;
-	rw : IN STD_LOGIC
+	rw : IN STD_LOGIC;
+	spi_clk : IN STD_LOGIC;
+	spi_miso : OUT STD_LOGIC;
+	spi_mosi : IN STD_LOGIC;
+	spi_ss_n : IN STD_LOGIC
 	);
 END COMPONENT;
 BEGIN
@@ -71,19 +91,29 @@ BEGIN
 	PORT MAP (
 -- list connections between master ports and signals
 	addr => addr,
-	clk_50 => clk_50,
+	clk_57 => clk_57,
 	data => data,
 	data_dir => data_dir,
+	dip_sw => dip_sw,
 	extenb => extenb,
 	n_data_oe => n_data_oe,
 	n_extsel => n_extsel,
 	n_irq => n_irq,
+	n_led1 => n_led1,
+	n_led2 => n_led2,
+	n_led3 => n_led3,
+	n_led4 => n_led4,
+	n_led5 => n_led5,
 	n_mpd => n_mpd,
 	n_rdy => n_rdy,
 	n_reset => n_reset,
 	phi2 => phi2,
 	phi2_early => phi2_early,
-	rw => rw
+	rw => rw,
+	spi_clk => spi_clk,
+	spi_miso => spi_miso,
+	spi_mosi => spi_mosi,
+	spi_ss_n => spi_ss_n
 	);
 
 -- n_reset
@@ -98,24 +128,6 @@ BEGIN
 	n_reset <= '0';
 WAIT;
 END PROCESS t_prcs_n_reset;
-
--- clk_50
-t_prcs_clk_50: PROCESS
-BEGIN
-	clk_50 <= '1';
-	WAIT FOR 1000 ps;
-	FOR i IN 1 TO 499
-	LOOP
-		clk_50 <= '0';
-		WAIT FOR 10000 ps;
-		clk_50 <= '1';
-		WAIT FOR 10000 ps;
-	END LOOP;
-	clk_50 <= '0';
-	WAIT FOR 10000 ps;
-	clk_50 <= '1';
-WAIT;
-END PROCESS t_prcs_clk_50;
 
 -- phi2
 t_prcs_phi2: PROCESS

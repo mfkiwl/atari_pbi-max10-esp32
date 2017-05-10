@@ -9,7 +9,7 @@ z2
 cModel Technology
 Z0 dC:/Users/steve/Documents/GitHub/atari_pbi/FPGA/simulation/qsim
 Ehard_block
-Z1 w1491656783
+Z1 w1494374827
 Z2 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
 Z3 DPx11 fiftyfivenm 21 fiftyfivenm_atom_pack 0 22 1Dk;4?@modA7lIE5F<?`>0
 Z4 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
@@ -25,9 +25,9 @@ Vhj[i;a0dD85B`o1JPT^cg2
 !s100 3A]XnMhF<;9mKUe5mn3aM1
 Z10 OV;C;10.5b;63
 32
-Z11 !s110 1491656785
+Z11 !s110 1494374828
 !i10b 1
-Z12 !s108 1491656785.000000
+Z12 !s108 1494374828.000000
 Z13 !s90 -work|work|pbi_bridge.vho|
 Z14 !s107 pbi_bridge.vho|
 !i113 1
@@ -56,27 +56,27 @@ R14
 R15
 R16
 Epbi_bridge
-R1
+Z17 w1494375089
 R3
 R7
 R2
-Z17 DPx6 altera 11 dffeas_pack 0 22 zWCf]NF6heG=Dhmc@B0=T2
+Z18 DPx6 altera 11 dffeas_pack 0 22 zWCf]NF6heG=Dhmc@B0=T2
 R4
 R5
 R6
-Z18 DPx6 altera 28 altera_primitives_components 0 22 _Q9E2TD5YB<<@P0[5jYTG0
+Z19 DPx6 altera 28 altera_primitives_components 0 22 _Q9E2TD5YB<<@P0[5jYTG0
 R0
 R8
 R9
 l0
-L79
-V_K_=Q=`<kmzBUEV1D1KN`3
-!s100 E7@ac9l9MX`MWQ20lcnA_1
+L37
+V20PJz9nGhdclC=9M@HK`X2
+!s100 L3B:8lm2VSM75oTSZM6[11
 R10
 32
-R11
+!s110 1494375090
 !i10b 1
-R12
+!s108 1494375090.000000
 R13
 R14
 !i113 1
@@ -86,11 +86,11 @@ Astructure
 R3
 R7
 R2
-R17
+R18
 R4
 R5
 R6
-R18
+R19
 DEx4 work 10 pbi_bridge 0 22 _K_=Q=`<kmzBUEV1D1KN`3
 l294
 L137
@@ -98,50 +98,50 @@ VJOidhV_UjM^YGFnaY;_TJ1
 !s100 n5nI7RK8iFUDWSR7`F>8f2
 R10
 32
-R11
+Z20 !s110 1491656785
 !i10b 1
-R12
+Z21 !s108 1491656785.000000
 R13
 R14
 !i113 1
 R15
 R16
 Epbi_bridge_vhd_vec_tst
-Z19 w1491656781
+Z22 w1491656781
 R5
 R6
 R0
-Z20 8Waveform1.vwf.vht
-Z21 FWaveform1.vwf.vht
+Z23 8Waveform1.vwf.vht
+Z24 FWaveform1.vwf.vht
 l0
 L32
 VOEQ=nH?3D@];QU4=UW[9d2
 !s100 RaK9FK=6F8F5Dm>;PA>?T3
 R10
 32
-R11
+R20
 !i10b 1
-R12
-Z22 !s90 -work|work|Waveform1.vwf.vht|
-Z23 !s107 Waveform1.vwf.vht|
+R21
+Z25 !s90 -work|work|Waveform1.vwf.vht|
+Z26 !s107 Waveform1.vwf.vht|
 !i113 1
 R15
 R16
 Apbi_bridge_arch
 R5
 R6
-Z24 DEx4 work 22 pbi_bridge_vhd_vec_tst 0 22 OEQ=nH?3D@];QU4=UW[9d2
+DEx4 work 22 pbi_bridge_vhd_vec_tst 0 22 OEQ=nH?3D@];QU4=UW[9d2
 l69
 L34
 VHzbFcS^k=H7VNH6]o=TB<2
 !s100 kkLVTlnb>ibeSQoM50o1e0
 R10
 32
-R11
+R20
 !i10b 1
-R12
-R22
-R23
+R21
+R25
+R26
 !i113 1
 R15
 R16
