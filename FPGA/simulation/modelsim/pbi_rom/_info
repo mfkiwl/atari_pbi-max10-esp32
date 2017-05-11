@@ -9,13 +9,13 @@ z2
 cModel Technology
 Z0 dC:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/simulation/modelsim
 valtera_onchip_flash
-Z1 !s110 1494446623
+Z1 !s110 1494505710
 !i10b 1
 !s100 Hl1eYSboRCZSMee1UR@3=1
 IRDdhIhGN>`JzdL0Fi]El=2
 Z2 VDg1SIo80bB@j0V0VzS_@n1
 R0
-Z3 w1494446599
+Z3 w1494505687
 8c:/users/steve/documents/github/atari_pbi/fpga/db/ip/pbi_rom/submodules/altera_onchip_flash.v
 Fc:/users/steve/documents/github/atari_pbi/fpga/db/ip/pbi_rom/submodules/altera_onchip_flash.v
 Z4 L0 38
@@ -23,7 +23,7 @@ Z5 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z6 !s108 1494446623.000000
+Z6 !s108 1494505710.000000
 !s107 c:/users/steve/documents/github/atari_pbi/fpga/db/ip/pbi_rom/submodules/altera_onchip_flash.v|
 !s90 -reportprogress|300|-vlog01compat|-work|pbi_rom|+incdir+c:/users/steve/documents/github/atari_pbi/fpga/db/ip/pbi_rom/submodules|c:/users/steve/documents/github/atari_pbi/fpga/db/ip/pbi_rom/submodules/altera_onchip_flash.v|
 !i113 1
@@ -220,30 +220,30 @@ Vam9Vf5oE94OJgN7m`U9k41
 !s100 cd8Lafhme:a7Mn_V]niEh2
 Z19 OV;C;10.5b;63
 31
-Z20 !s110 1494446624
+R1
 !i10b 1
-Z21 !s108 1494446624.000000
-Z22 !s90 -reportprogress|300|-93|-work|pbi_rom|c:/users/steve/documents/github/atari_pbi/fpga/db/ip/pbi_rom/pbi_rom.vhd|
-Z23 !s107 c:/users/steve/documents/github/atari_pbi/fpga/db/ip/pbi_rom/pbi_rom.vhd|
+R6
+Z20 !s90 -reportprogress|300|-93|-work|pbi_rom|c:/users/steve/documents/github/atari_pbi/fpga/db/ip/pbi_rom/pbi_rom.vhd|
+Z21 !s107 c:/users/steve/documents/github/atari_pbi/fpga/db/ip/pbi_rom/pbi_rom.vhd|
 !i113 1
-Z24 o-93 -work pbi_rom
-Z25 tExplicit 1 CvgOpt 0
+Z22 o-93 -work pbi_rom
+Z23 tExplicit 1 CvgOpt 0
 Artl
 R14
 R15
 R16
-DEx4 work 7 pbi_rom 0 22 am9Vf5oE94OJgN7m`U9k41
+Z24 DEx4 work 7 pbi_rom 0 22 am9Vf5oE94OJgN7m`U9k41
 l89
 L22
-V3>@jNKk@o442[:af=dnT_3
-!s100 XF;YYMC1fG3EU9WP1IWHN3
+Z25 V3>@jNKk@o442[:af=dnT_3
+Z26 !s100 XF;YYMC1fG3EU9WP1IWHN3
 R19
 31
-R20
+R1
 !i10b 1
+R6
+R20
 R21
+!i113 1
 R22
 R23
-!i113 1
-R24
-R25

@@ -74,11 +74,13 @@ ARCHITECTURE logic OF spi_dpram IS
 	SIGNAL mode    			: STD_LOGIC;  		-- groups modes by clock polarity relation to data
 	SIGNAL clk     			: STD_LOGIC;  		-- clock, normalized to be independent of external spi clock polarity
 	
-	SIGNAL bit_cnt 			: STD_LOGIC_VECTOR (RAM_ADDR_WIDTH DOWNTO 0) := (OTHERS => '0'); -- enough for 2x RAM width
+	SIGNAL first_bit_clocked: STD_LOGIC := '0';
+	SIGNAL bit_cnt 			: STD_LOGIC_VECTOR (RAM_ADDR_WIDTH+3 DOWNTO 0) := (OTHERS => '0'); -- enough for 2x RAM width
 	SIGNAL bit_cnt8			: INTEGER RANGE 0 to 7;
 
 	SIGNAL master_ram_clk	: STD_LOGIC;
 	SIGNAL slave_ram_clk		: STD_LOGIC;
+	
 	
 	SIGNAL master_wren		: STD_LOGIC;
 	SIGNAL slave_rden			: STD_LOGIC;
@@ -96,6 +98,7 @@ ARCHITECTURE logic OF spi_dpram IS
 	SIGNAL p_slave_rden		: STD_LOGIC;
 	SIGNAL p_slave_wren		: STD_LOGIC;
 	
+	-- https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/ug/ug_ram_rom.pdf
 	component dpram
 		PORT
 		(
@@ -121,7 +124,7 @@ BEGIN
 	p_master_rden <= (p_master_en AND p_rw);
 	p_master_wren <= 	(p_master_en AND NOT p_rw);
 	p_slave_rden <= (p_slave_en AND p_rw);
-	p_slave_wren <= 	(p_slave_en AND NOT p_rw);
+	p_slave_wren <= (p_slave_en AND NOT p_rw);
 	
 	-- "A" side of RAM is SPI interface (to ESP32)
 	--	"B" side of RAM is parallel interface (to Atari PBI)
@@ -175,35 +178,57 @@ BEGIN
 
 			  
   -- bit counter
-  PROCESS(ss_n, reset_n, bit_cnt, bit_cnt8, clk)
+  PROCESS(ss_n, reset_n, bit_cnt, bit_cnt8, clk, first_bit_clocked)
   BEGIN
     IF(ss_n = '1' OR reset_n = '0') THEN
 		-- reset miso/mosi bit count
 		bit_cnt <= (OTHERS => '0');
+		bit_cnt8 <= 0;
+		first_bit_clocked <= '0';
     ELSE
-      IF(falling_edge(clk)) THEN
-			-- increment bit count
-			bit_cnt <= bit_cnt + 1;
+      IF(rising_edge(clk)) THEN
+			if (first_bit_clocked = '0') THEN
+				first_bit_clocked <= '1';
+			ELSE
+				-- increment bit count
+				bit_cnt <= bit_cnt + 1;
+				
+				
+				IF (bit_cnt8 = 7 AND clk = '1') THEN
+					master_ram_clk <= '1';
+				ELSE
+					master_ram_clk <= '0';
+				END IF;
+				
+			END IF;
 		END IF;
     END IF;
 	 
 	 bit_cnt8 <= conv_integer(unsigned(bit_cnt(2 DOWNTO 0)));
 	 
-	 IF (bit_cnt8 = 7 AND clk = '1') THEN
-		master_ram_clk <= '1';
-	 ELSE
-		master_ram_clk <= '0';
-	 END IF;
-	 
-	 IF (bit_cnt8 = 0 AND clk = '0') THEN
+  END PROCESS;
+
+--  PROCESS(bit_cnt8, clk)
+--  BEGIN
+--	 IF (bit_cnt8 = 0 AND clk = '1') THEN
+--		master_ram_clk <= '1';
+--	 ELSE
+--		master_ram_clk <= '0';
+--	 END IF;
+--  END PROCESS;
+
+  PROCESS(bit_cnt8, clk)
+  BEGIN
+	 IF (bit_cnt8 = 7 AND clk = '0') THEN
 		slave_ram_clk <= '1';
 	ELSE
 		slave_ram_clk <= '0';
 	END IF;
-	 
+  
   END PROCESS;
-
-  PROCESS(ss_n, clk, reset_n, bit_cnt, p_clk, p_rw, p_master_en, p_master_addr, p_master_din, p_slave_en,
+  
+  
+  PROCESS(ss_n, clk, reset_n, bit_cnt, bit_cnt8, p_clk, p_rw, p_master_en, p_master_addr, p_master_din, p_slave_en,
 			 p_slave_addr, p_slave_din, busy, shadow_sdsr)
   BEGIN
 
@@ -212,7 +237,7 @@ BEGIN
 	r_sdsr(6 DOWNTO 0) <= shadow_sdsr(6 DOWNTO 0);
   
 	-- MOSI input
-    IF(reset_n = '0' OR ss_n = '1' OR bit_cnt <= spi_hdr_bits-1 ) THEN
+    IF(reset_n = '0' OR ss_n = '1') THEN
 		s_wr_addr <= (OTHERS => '0');
 		master_wren <= '0';
     ELSE
@@ -247,13 +272,14 @@ BEGIN
 		END IF;
 
 		-- auto-increment the write address after full byte clocked in
-		IF (rising_edge(clk) AND bit_cnt > spi_hdr_bits-1 AND bit_cnt(2 DOWNTO 0) = "111") THEN
+		-- NOTE: for some reason bit_cnt > spi_hdr_bits+8-1 was not working - hardcoded value for now
+		IF (rising_edge(clk) AND conv_integer(unsigned(bit_cnt)) >= 48 AND bit_cnt8 = 0) THEN
 			s_wr_addr <= s_wr_addr + 1;
 		END IF;
 	END IF;
 	
     -- transmit buffer for MISO output
-    IF(reset_n = '0' OR ss_n = '1' OR bit_cnt <= spi_hdr_bits-1) THEN
+    IF(reset_n = '0' OR ss_n = '1') THEN
       tx_buf <= (OTHERS => '0');
 		s_rd_addr <= (OTHERS => '0');
 		slave_rden <= '0';
@@ -278,7 +304,8 @@ BEGIN
 			ELSIF (bit_cnt >= 32 AND bit_cnt <= 39) THEN
 				-- 5th header byte: reserved
 				tx_buf <= X"FF";
-				slave_rden <= '0';
+				-- enabled one byte cycle early because data must be pre-read
+				slave_rden <= '1';
 			ELSIF (bit_cnt >= spi_hdr_bits) THEN
 				-- load transmit buffer from dual port RAM at the current read address
 				tx_buf <= slave_tx_buf;
@@ -287,7 +314,7 @@ BEGIN
 		END IF;
 
 		-- increment the read address
-		IF (rising_edge(clk) AND bit_cnt > spi_hdr_bits-1 AND bit_cnt(2 DOWNTO 0) = "111") THEN
+		IF (rising_edge(clk) AND bit_cnt >= 40 AND bit_cnt8 = 6) THEN
 			s_rd_addr <= s_rd_addr + 1;
 		END IF;
     END IF;

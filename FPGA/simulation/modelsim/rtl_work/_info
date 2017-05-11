@@ -22,9 +22,9 @@ VO5GHFWNnR4JBYm4Y`0CoO0
 !s100 aF;KF=0?6o2PPiS^:o=k32
 Z7 OV;C;10.5b;63
 31
-Z8 !s110 1494446660
+Z8 !s110 1494531784
 !i10b 1
-Z9 !s108 1494446660.000000
+Z9 !s108 1494531784.000000
 Z10 !s90 -reportprogress|300|-93|-work|work|C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/dpram.vhd|
 Z11 !s107 C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/dpram.vhd|
 !i113 1
@@ -64,11 +64,11 @@ Vknbn?7FI4[gB@6Hc`^GPk0
 !s100 CDUK9no?9Z=0`DHCofScg1
 R7
 31
-R8
+Z19 !s110 1494531783
 !i10b 1
-R9
-Z19 !s90 -reportprogress|300|-93|-work|work|C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd|
-Z20 !s107 C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd|
+Z20 !s108 1494531783.000000
+Z21 !s90 -reportprogress|300|-93|-work|work|C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd|
+Z22 !s107 C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd|
 !i113 1
 R12
 R13
@@ -84,73 +84,77 @@ V=lQf`g5]PQNXf:?G?Og_V1
 !s100 TCThdMFQk<7DFG5lG_Md10
 R7
 31
-R8
-!i10b 1
-R9
 R19
+!i10b 1
 R20
+R21
+R22
 !i113 1
 R12
 R13
 Epbi_bridge_vhd_tst
-Z21 w1494445599
-R3
-R4
-R0
-Z22 8C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht
-Z23 FC:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht
-l0
-L20
-VH<cMLmeKAaNOE@8ZPAD<_1
-!s100 8fmRPd9@i`?dlok?iaQO61
-R7
-31
-R8
-!i10b 1
-R9
-Z24 !s90 -reportprogress|300|-93|-work|work|C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht|
-Z25 !s107 C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht|
-!i113 1
-R12
-R13
-Apbi_bridge_arch
-R3
-R4
-DEx4 work 18 pbi_bridge_vhd_tst 0 22 H<cMLmeKAaNOE@8ZPAD<_1
-l80
-L22
-V5h=Oc3CG63Ijo[XHcF2^?2
-Z26 !s100 A:>hY2lTBXBGeOk[BRQ0k1
-R7
-31
-R8
-!i10b 1
-R9
-R24
-R25
-!i113 1
-R12
-R13
-Espi_dpram
-Z27 w1494445506
+Z23 w1494531757
 R15
 R16
 R3
 R4
 R0
-Z28 8C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd
-Z29 FC:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd
+Z24 8C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht
+Z25 FC:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht
+l0
+L15
+VM;:OUZHPRBV:IZk1Pbi6N3
+!s100 DMj[AnVkkQKZ_WWTi?4V72
+R7
+31
+R8
+!i10b 1
+R9
+Z26 !s90 -reportprogress|300|-93|-work|work|C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht|
+Z27 !s107 C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht|
+!i113 1
+R12
+R13
+Apbi_bridge_arch
+R15
+R16
+R3
+R4
+DEx4 work 18 pbi_bridge_vhd_tst 0 22 M;:OUZHPRBV:IZk1Pbi6N3
+l75
+L17
+VWMXZPV26h_M6V^MVoL[WF1
+Z28 !s100 LzHVH45MiRCCYTIEeG;1X2
+R7
+31
+R8
+!i10b 1
+R9
+R26
+R27
+!i113 1
+R12
+R13
+Espi_dpram
+Z29 w1494530863
+R15
+R16
+R3
+R4
+R0
+Z30 8C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd
+Z31 FC:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd
 l0
 L23
 V0l_n0fQRS`hDe^e;?>oJ02
 !s100 n`jiojWn;QW>M[KV;CBSd2
 R7
 31
-R8
+R19
 !i10b 1
-R9
-Z30 !s90 -reportprogress|300|-93|-work|work|C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd|
-Z31 !s107 C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd|
+R20
+Z32 !s90 -reportprogress|300|-93|-work|work|C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd|
+Z33 !s107 C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd|
 !i113 1
 R12
 R13
@@ -160,17 +164,17 @@ R16
 R3
 R4
 DEx4 work 9 spi_dpram 0 22 0l_n0fQRS`hDe^e;?>oJ02
-l117
+l120
 L67
-VnS?>KRbYMQP<3NNQL^8CG3
-!s100 NF3kXTb@dnCG:<Z6Q9?HM3
+VkfLBknVjILBE8oVfCZL>n2
+!s100 RZ:K=GEP2f^P?R^6G1IgF3
 R7
 31
-R8
+R19
 !i10b 1
-R9
-R30
-R31
+R20
+R32
+R33
 !i113 1
 R12
 R13

@@ -1,12 +1,5 @@
-
--- ***************************************************************************
--- This file contains a Vhdl test bench template that is freely editable to   
--- suit user's needs .Comments are provided in each section to help the user  
--- fill out necessary details.                                                
--- ***************************************************************************
--- Generated on "05/10/2017 13:52:38"
-                                                            
--- Vhdl Test Bench template for design  :  pbi_bridge
+                                                           
+-- VHDL Test Bench template for design  :  pbi_bridge
 -- 
 -- Simulation tool : ModelSim-Altera (VHDL)
 -- 
@@ -16,6 +9,8 @@
 
 LIBRARY ieee;                                               
 USE ieee.std_logic_1164.all;                                
+USE ieee.std_logic_arith.ALL;
+USE ieee.std_logic_unsigned.ALL;
 
 ENTITY pbi_bridge_vhd_tst IS
 END pbi_bridge_vhd_tst;
@@ -152,10 +147,41 @@ stimulus : PROCESS
 		END LOOP loop1;
 	end p_sync;
 
+	procedure spi_put_byte(constant b : std_logic_vector(7 downto 0)) is
+		variable i: integer := 0;
+	begin
+		loop1: WHILE i <= 7 LOOP
+			WAIT UNTIL spi_clk'event AND spi_clk = '0';
+			spi_mosi <= b(i);
+			i := i + 1;
+		END LOOP loop1;
+	end spi_put_byte;
+
+	procedure spi_write_ram_pattern is
+		variable i: integer := 0;
+		variable b: std_logic_vector(7 downto 0) := (OTHERS => '0');
+	begin
+		loop1: WHILE i <= 255 LOOP
+			spi_put_byte(b);
+			i := i + 1;
+			b := b + 1;
+		END LOOP loop1;
+		
+		-- finish SPI bus cycle
+		WAIT UNTIL spi_clk'event AND spi_clk = '0';
+		WAIT FOR 5 ns;
+	end spi_write_ram_pattern;
+
+
 BEGIN
 	p_stable;
 	spi_ss_n <= '0';
-	p_sync(296);
+	spi_put_byte(X"03"); -- sdsr
+	spi_put_byte(X"00"); -- mtbycr
+	spi_put_byte(X"80"); -- mtbkcr
+	spi_put_byte(X"00"); -- s_wr_bank
+	spi_put_byte(X"00"); -- s_rd_bank
+	spi_write_ram_pattern;
 	spi_ss_n <= '1';
 	p_sync(8);
 	
