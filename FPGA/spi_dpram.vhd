@@ -24,43 +24,40 @@ ENTITY spi_dpram IS
 	GENERIC (
 		cpol				: STD_LOGIC := '0';  -- spi clock polarity mode
 		cpha				: STD_LOGIC := '0';  -- spi clock phase mode
-		spi_hdr_bits	: INTEGER := 40;		-- count of bits in the SPI header
 		RAM_DATA_WIDTH	: INTEGER := 8;		-- data bus width of the dual port RAM
 		RAM_ADDR_WIDTH : INTEGER := 8			-- address bus width of the dual port RAM
 	);
 		
 	PORT(
-		p_clk				: IN		STD_LOGIC;			-- parallel memory interface, clock
-		p_rw				: IN		STD_LOGIC;			-- parallel memory interface, read/write
-		
-		p_master_en		: IN		STD_LOGIC;			-- parallel memory interface, master enable
-		p_master_addr	: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface, master address
-		p_master_din	: IN		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, master data
-		p_master_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, master data
-		
-		p_slave_en		: IN		STD_LOGIC;			-- parallel memory interface, slave enable
-		p_slave_addr	: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface,  slave address
-		p_slave_din		: IN		STD_LOGIC_VECTOR(7 downto 0);					-- parallel memory interface, slave data
-		p_slave_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');		-- parallel memory interface, slave data
-		
-		r_sdcr			: IN		STD_LOGIC_VECTOR(7 downto 0);		-- SDCR - Slave Data Control Register (written by Atari)
-		r_stbycr			: IN		STD_LOGIC_VECTOR(7 downto 0);		-- STBYCR - Slave Transfer Byte Count Register (written by Atari)
-		r_stbkcr			: IN		STD_LOGIC_VECTOR(7 downto 0);		-- STBKCR - Slave Transfer Bank Count Register (written by Atari)
-		r_sdsr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := "X0000000";	-- SDSR - Slave Data Status Register (written by state machine & ESP32)
-		r_mtbycr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');	-- MTBYCR - Master Transfer Byte Count Register (written by ESP32)
-		r_mtbkcr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');	-- MTBKCR - Master Transfer Bank Count Register (written by ESP32)
-
-	
-		r_mrbs			: IN		STD_LOGIC_VECTOR(7 downto 0);
-		r_srbs			: IN		STD_LOGIC_VECTOR(7 downto 0);
-
 		reset_n      	: IN		STD_LOGIC;  		-- active low reset
-		
 		
 		ss_n         	: IN		STD_LOGIC;  		-- SPI bus, active low slave select
 		sclk         	: IN		STD_LOGIC;  		-- SPI bus, clock from master
 		mosi         	: IN		STD_LOGIC;  		-- SPI bus, master out slave in
-		miso         	: OUT		STD_LOGIC := 'Z' -- SPI bus, master in slave out
+		miso         	: OUT		STD_LOGIC := 'Z'; -- SPI bus, master in slave out
+
+		p_clk				: IN		STD_LOGIC;												-- parallel memory interface, clock
+		p_rw				: IN		STD_LOGIC;												-- parallel memory interface, read/write
+		
+		p_master_en		: IN		STD_LOGIC;												-- parallel memory interface, master RAM enable
+		p_master_addr	: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface, master RAM address
+		p_master_din	: IN		STD_LOGIC_VECTOR(7 downto 0);						-- parallel memory interface, master data in
+		p_master_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";						-- parallel memory interface, master data out
+		
+		p_slave_en		: IN		STD_LOGIC;												-- parallel memory interface, slave enable
+		p_slave_addr	: IN		STD_LOGIC_VECTOR(RAM_ADDR_WIDTH-1 DOWNTO 0);	-- parallel memory interface,  slave address
+		p_slave_din		: IN		STD_LOGIC_VECTOR(7 downto 0);						-- parallel memory interface, slave data
+		p_slave_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- parallel memory interface, slave data
+		
+		r_sdcr			: IN		STD_LOGIC_VECTOR(7 downto 0);						-- SDCR - Slave Data Control Register (written by Atari)
+		r_stbycr			: IN		STD_LOGIC_VECTOR(7 downto 0);						-- STBYCR - Slave Transfer Byte Count Register (written by Atari)
+		r_stbkcr			: IN		STD_LOGIC_VECTOR(7 downto 0);						-- STBKCR - Slave Transfer Bank Count Register (written by Atari)
+		r_sdsr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := "X0000000";	-- SDSR - Slave Data Status Register (written by state machine & ESP32)
+		r_mtbycr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- MTBYCR - Master Transfer Byte Count Register (written by ESP32)
+		r_mtbkcr			: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- MTBKCR - Master Transfer Bank Count Register (written by ESP32)
+
+		r_mrbs			: IN		STD_LOGIC_VECTOR(7 downto 0);						-- MRBS - Master RAM Bank Select
+		r_srbs			: IN		STD_LOGIC_VECTOR(7 downto 0)						-- SRBS - Slave RAM Bank Select
 	);
 END spi_dpram;
 
@@ -272,7 +269,6 @@ BEGIN
 		END IF;
 
 		-- auto-increment the write address after full byte clocked in
-		-- NOTE: for some reason bit_cnt > spi_hdr_bits+8-1 was not working - hardcoded value for now
 		IF (rising_edge(clk) AND conv_integer(unsigned(bit_cnt)) >= 48 AND bit_cnt8 = 0) THEN
 			s_wr_addr <= s_wr_addr + 1;
 		END IF;
@@ -306,7 +302,7 @@ BEGIN
 				tx_buf <= X"FF";
 				-- enabled one byte cycle early because data must be pre-read
 				slave_rden <= '1';
-			ELSIF (bit_cnt >= spi_hdr_bits) THEN
+			ELSE
 				-- load transmit buffer from dual port RAM at the current read address
 				tx_buf <= slave_tx_buf;
 				slave_rden <= '1';
@@ -314,7 +310,7 @@ BEGIN
 		END IF;
 
 		-- increment the read address
-		IF (rising_edge(clk) AND bit_cnt >= 40 AND bit_cnt8 = 6) THEN
+		IF (rising_edge(clk) AND conv_integer(unsigned(bit_cnt)) >= 40 AND bit_cnt8 = 6) THEN
 			s_rd_addr <= s_rd_addr + 1;
 		END IF;
     END IF;

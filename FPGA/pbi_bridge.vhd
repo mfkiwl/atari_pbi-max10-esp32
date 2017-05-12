@@ -39,7 +39,10 @@ entity pbi_bridge is
 		spi_clk		: IN		std_logic;								-- SPI clock from master
 		spi_ss_n		: IN		std_logic;								-- SPI slave select
 		spi_mosi		: IN		std_logic;								-- SPI Master Out / Slave In
-		spi_miso		: OUT		std_logic := 'Z'						-- SPI Master In / Slave Out
+		spi_miso		: OUT		std_logic := 'Z';						-- SPI Master In / Slave Out
+		
+		spi_mbf		: OUT		std_logic;								-- SPI DMA engine, set to '1' when Master Buffer Free
+		spi_sdav		: OUT		std_logic								-- SPI DMA engine, set to '1' when Slave Data Available
 	);
 end pbi_bridge;
 
@@ -115,7 +118,6 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	COMPONENT spi_dpram
 		GENERIC ( 	cpol : STD_LOGIC := '0';
 						cpha : STD_LOGIC := '0';
-						spi_hdr_bits : INTEGER := 24;
 						RAM_DATA_WIDTH : INTEGER := 8;
 						RAM_ADDR_WIDTH : INTEGER := 8 );
 		PORT
@@ -284,6 +286,21 @@ begin
 end process;
 
 
+-- create output pins for the Master Buffer Full and Slave Data Available register bits
+-- these connect to ESP32 inputs and may trigger interrupts
+process (reg_sdcr, n_reset)
+begin
+	if (n_reset = '0') then
+		spi_mbf <= '0';
+		spi_sdav <= '0';
+	else
+		spi_mbf <= reg_sdcr(1);
+		spi_sdav <= reg_sdcr(0);
+	end if;
+end process;
+
+
+-- main body of Atari bus logic including address mapping and read/write operations
 process (n_reset, phi2, phi2_early, rw, rw_latch, hw_sel, addr_latch, dev_rom_act, hw_sel_act,
 			dev_reg_act, addr, data, flash_data_latch, PBI_ADDR, reg_sdcr, reg_stbycr, reg_stbkcr, reg_sdsr, reg_mtbycr,
 			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs, master_ram_en, master_din, master_dout, slave_ram_en, slave_din, slave_dout)
@@ -310,6 +327,7 @@ begin
 		reg_mrbs <= X"00";
 		reg_srbs <= X"00";
 		reg_fbs <= X"00";
+		
 		
 		data <= "ZZZZZZZZ";
 		led_latch <= "00000";
