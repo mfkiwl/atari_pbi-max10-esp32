@@ -1,10 +1,8 @@
-                                                           
 -- VHDL Test Bench template for design  :  pbi_bridge
 -- 
 -- Simulation tool : ModelSim-Altera (VHDL)
--- 
 
--- SEE http://www.alterawiki.com/wiki/File:Testbenches_public.pptx
+-- SEE http://www.alterawiki.com/uploads/d/d2/Testbenches_public.pdf
 
 
 LIBRARY ieee;                                               
@@ -127,7 +125,6 @@ BEGIN
         -- code executes for every event on sensitivity list  
 WAIT;                                                        
 END PROCESS always;
-
 
 stimulus : PROCESS
 

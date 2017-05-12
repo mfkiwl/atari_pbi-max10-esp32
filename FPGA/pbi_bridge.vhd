@@ -117,34 +117,32 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	-- SPI interface with dual port RAM transfer buffers
 	COMPONENT spi_dpram
 		GENERIC ( 	cpol : STD_LOGIC := '0';
-						cpha : STD_LOGIC := '0';
-						RAM_DATA_WIDTH : INTEGER := 8;
-						RAM_ADDR_WIDTH : INTEGER := 8 );
+						cpha : STD_LOGIC := '0');
 		PORT
 		(
-			p_clk				:	 IN STD_LOGIC;
-			p_rw				:	 IN STD_LOGIC;
-			p_master_en		:	 IN STD_LOGIC;
-			p_master_addr	:	 IN STD_LOGIC_VECTOR(ram_addr_width-1 DOWNTO 0);
-			p_master_din	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			p_master_dout	:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-			p_slave_en		:	 IN STD_LOGIC;
-			p_slave_addr	:	 IN STD_LOGIC_VECTOR(ram_addr_width-1 DOWNTO 0);
-			p_slave_din		:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			p_slave_dout	:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-			r_sdcr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			r_stbycr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			r_stbkcr			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			r_sdsr			:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-			r_mtbycr			:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-			r_mtbkcr			:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-			r_mrbs			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			r_srbs			:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			reset_n			:	 IN STD_LOGIC;
-			ss_n				:	 IN STD_LOGIC;
-			sclk				:	 IN STD_LOGIC;
-			mosi				:	 IN STD_LOGIC;
-			miso				:	 OUT STD_LOGIC
+			p_clk					:	 IN STD_LOGIC;
+			p_rw					:	 IN STD_LOGIC;
+			p_master_ram_en	:	 IN STD_LOGIC;
+			p_master_ram_addr	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_master_ram_din	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_master_ram_dout	:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_slave_ram_en		:	 IN STD_LOGIC;
+			p_slave_ram_addr	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_slave_ram_din	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_slave_ram_dout	:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_sdcr				:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_stbycr				:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_stbkcr				:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_sdsr				:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_mtbycr				:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_mtbkcr				:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_mrbs				:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_srbs				:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			reset_n				:	 IN STD_LOGIC;
+			ss_n					:	 IN STD_LOGIC;
+			sclk					:	 IN STD_LOGIC;
+			mosi					:	 IN STD_LOGIC;
+			miso					:	 OUT STD_LOGIC
 		);
 	END COMPONENT;
 
@@ -167,32 +165,32 @@ u0 : component pbi_rom
 -- SPI Dual Port RAM signal & pin mapping
 u1	: component spi_dpram
 	port map (
-			p_clk				=>		phi2_early,
-			p_rw				=>		rw_latch,
-			p_master_en		=>		master_ram_en,
-			p_master_addr	=>	 	addr_latch(7 DOWNTO 0),
-			p_master_din	=>		master_din,
-			p_master_dout	=>		master_dout,
-			p_slave_en		=>		slave_ram_en,
-			p_slave_addr	=>	 	addr_latch(7 DOWNTO 0),
-			p_slave_din		=>		slave_din,
-			p_slave_dout	=>		slave_dout,
+			p_clk					=>	phi2_early,
+			p_rw					=>	rw_latch,
+			p_master_ram_en	=>	master_ram_en,
+			p_master_ram_addr	=>	addr_latch(7 DOWNTO 0),
+			p_master_ram_din	=>	master_din,
+			p_master_ram_dout	=>	master_dout,
+			p_slave_ram_en		=>	slave_ram_en,
+			p_slave_ram_addr	=>	addr_latch(7 DOWNTO 0),
+			p_slave_ram_din	=>	slave_din,
+			p_slave_ram_dout	=>	slave_dout,
 		
-			reset_n			=> n_reset,
+			reset_n				=> n_reset,
 			
-			ss_n				=> spi_ss_n,
-			sclk				=> spi_clk,
-			mosi				=> spi_mosi,
-			miso				=> spi_miso,
+			ss_n					=> spi_ss_n,
+			sclk					=> spi_clk,
+			mosi					=> spi_mosi,
+			miso					=> spi_miso,
 	
-			r_sdcr			=> reg_sdcr,
-			r_stbycr			=> reg_stbycr,
-			r_stbkcr			=> reg_stbkcr,
-			r_sdsr			=> reg_sdsr,
-			r_mtbycr			=> reg_mtbycr,
-			r_mtbkcr			=> reg_mtbkcr,
-			r_mrbs			=> reg_mrbs,
-			r_srbs			=> reg_srbs
+			r_sdcr				=> reg_sdcr,
+			r_stbycr				=> reg_stbycr,
+			r_stbkcr				=> reg_stbkcr,
+			r_sdsr				=> reg_sdsr,
+			r_mtbycr				=> reg_mtbycr,
+			r_mtbkcr				=> reg_mtbkcr,
+			r_mrbs				=> reg_mrbs,
+			r_srbs				=> reg_srbs
 	);
 
 	
