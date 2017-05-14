@@ -234,4 +234,10 @@ set_instance_assignment -name PCI_IO ON -to spi_mbf
 set_location_assignment PIN_81 -to spi_sdav
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to spi_sdav
 set_instance_assignment -name PCI_IO ON -to spi_sdav
+set_location_assignment PIN_62 -to master_ram_clk -comment temporary
+set_location_assignment PIN_64 -to master_ram_rden -comment temporary
+set_location_assignment PIN_65 -to master_ram_wren -comment temporary
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to master_ram_clk -comment temporary
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to master_ram_rden -comment temporary
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to master_ram_wren -comment temporary
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

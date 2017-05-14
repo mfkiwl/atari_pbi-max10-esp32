@@ -15,17 +15,17 @@ add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi
 add wave -noupdate -expand -group {SPI Module Internals} -radix unsigned /pbi_bridge_vhd_tst/i1/u1/bit_cnt
 add wave -noupdate -expand -group {SPI Module Internals} -radix decimal /pbi_bridge_vhd_tst/i1/u1/bit_cnt8
 add wave -noupdate -expand -group {SPI Module Internals} -radix decimal /pbi_bridge_vhd_tst/i1/u1/bit_cnt8_reverse
-add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_wr_bank
-add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_wr_addr
-add wave -noupdate -expand -group {SPI Module Internals} /pbi_bridge_vhd_tst/i1/u1/master_wren
-add wave -noupdate -expand -group {SPI Module Internals} /pbi_bridge_vhd_tst/i1/u1/master_ram_clk
-add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_rd_bank
-add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_rd_addr
-add wave -noupdate -expand -group {SPI Module Internals} /pbi_bridge_vhd_tst/i1/u1/slave_rden
-add wave -noupdate -expand -group {SPI Module Internals} /pbi_bridge_vhd_tst/i1/u1/slave_ram_clk
-add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/slave_tx_buf
-add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/tx_buf
-add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/rx_buf
+add wave -noupdate -expand -group {SPI Module Internals} -expand -group {Master RAM} /pbi_bridge_vhd_tst/i1/u1/s_master_ram_clk
+add wave -noupdate -expand -group {SPI Module Internals} -expand -group {Master RAM} /pbi_bridge_vhd_tst/i1/u1/s_master_ram_wren
+add wave -noupdate -expand -group {SPI Module Internals} -expand -group {Master RAM} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_master_ram_bank
+add wave -noupdate -expand -group {SPI Module Internals} -expand -group {Master RAM} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_master_ram_addr
+add wave -noupdate -expand -group {SPI Module Internals} -expand -group {Master RAM} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_master_ram_data
+add wave -noupdate -expand -group {SPI Module Internals} -expand -group {Slave RAM} /pbi_bridge_vhd_tst/i1/u1/s_slave_ram_clk
+add wave -noupdate -expand -group {SPI Module Internals} -expand -group {Slave RAM} /pbi_bridge_vhd_tst/i1/u1/s_slave_ram_rden
+add wave -noupdate -expand -group {SPI Module Internals} -expand -group {Slave RAM} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_slave_ram_bank
+add wave -noupdate -expand -group {SPI Module Internals} -expand -group {Slave RAM} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_slave_ram_addr
+add wave -noupdate -expand -group {SPI Module Internals} -expand -group {Slave RAM} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_slave_ram_q
+add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/spi_tx_buf
 add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/r_sdcr
 add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/r_stbycr
 add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/r_stbkcr
@@ -47,8 +47,8 @@ add wave -noupdate -group {PBI Bridge Registers} -radix hexadecimal /pbi_bridge_
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {11198047 ps} 0}
 quietly wave cursor active 1
-configure wave -namecolwidth 274
-configure wave -valuecolwidth 100
+configure wave -namecolwidth 321
+configure wave -valuecolwidth 40
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
 configure wave -snapdistance 10
@@ -61,4 +61,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {10356584 ps} {13034282 ps}
+WaveRestoreZoom {43669629 ps} {46370565 ps}

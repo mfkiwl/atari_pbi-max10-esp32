@@ -22,9 +22,9 @@ VO5GHFWNnR4JBYm4Y`0CoO0
 !s100 aF;KF=0?6o2PPiS^:o=k32
 Z7 OV;C;10.5b;63
 31
-Z8 !s110 1494720441
+Z8 !s110 1494771207
 !i10b 1
-Z9 !s108 1494720441.000000
+Z9 !s108 1494771207.000000
 Z10 !s90 -reportprogress|300|-93|-work|work|C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/dpram.vhd|
 Z11 !s107 C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/dpram.vhd|
 !i113 1
@@ -50,25 +50,25 @@ R11
 R12
 R13
 Epbi_bridge
-Z14 w1494707693
+Z14 w1494770989
 Z15 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
 Z16 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
 R3
 R4
 R0
-Z17 8C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd
-Z18 FC:/Users/steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd
+Z17 8C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd
+Z18 FC:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd
 l0
 L16
-VEH9ASdnj<nUiQk@d0V?JT3
-!s100 KclnQc0`OUJTdkdcTgk=_1
+V@=:`>o8A1i`d^[n5]i_iH0
+!s100 lSaY?mQC75j>z6L?mQ@=o1
 R7
 31
-Z19 !s110 1494722572
+R8
 !i10b 1
-Z20 !s108 1494722572.000000
-Z21 !s90 -reportprogress|300|-93|-work|work|C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd|
-Z22 !s107 C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd|
+R9
+Z19 !s90 -reportprogress|300|-93|-work|work|C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd|
+Z20 !s107 C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/pbi_bridge.vhd|
 !i113 1
 R12
 R13
@@ -77,41 +77,41 @@ R15
 R16
 R3
 R4
-Z23 DEx4 work 10 pbi_bridge 0 22 EH9ASdnj<nUiQk@d0V?JT3
-l158
-L50
-Z24 VPh9X1Zaa[c2PPUYZWT[LW1
-Z25 !s100 27khno9k_DYgdY6bY=Dh50
+DEx4 work 10 pbi_bridge 0 22 @=:`>o8A1i`d^[n5]i_iH0
+l163
+L55
+VK1JQ[<1R84:9mcGCXz:C71
+!s100 bIU::V^Ch5@DgdVgl;_0`2
 R7
 31
-R19
+R8
 !i10b 1
+R9
+R19
 R20
-R21
-R22
 !i113 1
 R12
 R13
 Epbi_bridge_vhd_tst
-Z26 w1494719620
+Z21 w1494728573
 R15
 R16
 R3
 R4
 R0
-Z27 8C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht
-Z28 FC:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht
+Z22 8C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht
+Z23 FC:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht
 l0
 L13
 VZ5MTM=c:GoV?f>Mh@jRKH0
 !s100 B2T>SH;C[4kTVcbcZjba@3
 R7
 31
-Z29 !s110 1494720442
+Z24 !s110 1494771208
 !i10b 1
-R9
-Z30 !s90 -reportprogress|300|-93|-work|work|C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht|
-Z31 !s107 C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht|
+Z25 !s108 1494771208.000000
+Z26 !s90 -reportprogress|300|-93|-work|work|C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht|
+Z27 !s107 C:\Users\Steve\Documents\GitHub\atari_pbi\FPGA\simulation\modelsim\pbi_bridge.vht|
 !i113 1
 R12
 R13
@@ -120,41 +120,41 @@ R15
 R16
 R3
 R4
-DEx4 work 18 pbi_bridge_vhd_tst 0 22 Z5MTM=c:GoV?f>Mh@jRKH0
+Z28 DEx4 work 18 pbi_bridge_vhd_tst 0 22 Z5MTM=c:GoV?f>Mh@jRKH0
 l73
 L15
-Vn5UL]<TTj@bZEgf2gE;f^0
-!s100 aBbGh>8c@^2nl08[UNRoi2
+Z29 Vn5UL]<TTj@bZEgf2gE;f^0
+Z30 !s100 aBbGh>8c@^2nl08[UNRoi2
 R7
 31
-R29
+R24
 !i10b 1
-R9
-R30
-R31
+R25
+R26
+R27
 !i113 1
 R12
 R13
 Espi_dpram
-Z32 w1494722240
+Z31 w1494770273
 R15
 R16
 R3
 R4
 R0
-Z33 8C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd
-Z34 FC:/Users/steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd
+Z32 8C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd
+Z33 FC:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd
 l0
 L24
 V]@LYW0MO2dBV5TO<gddEH1
 !s100 3Vha1fd@Kje=T5hAhhY]23
 R7
 31
-Z35 !s110 1494722570
+R8
 !i10b 1
-Z36 !s108 1494722570.000000
-Z37 !s90 -reportprogress|300|-93|-work|work|C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd|
-Z38 !s107 C:/Users/steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd|
+R9
+Z34 !s90 -reportprogress|300|-93|-work|work|C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd|
+Z35 !s107 C:/Users/Steve/Documents/GitHub/atari_pbi/FPGA/spi_dpram.vhd|
 !i113 1
 R12
 R13
@@ -166,15 +166,15 @@ R4
 DEx4 work 9 spi_dpram 0 22 ]@LYW0MO2dBV5TO<gddEH1
 l111
 L64
-V19[_R<]D77LBK=UbmE<Wz1
-!s100 YUXNN6YMY;L`3LVLRCdT93
+VLkYc<3cNTNQZEHgJgKoG03
+!s100 V?Ol?Dj6^_7L1O?O_iPUz0
 R7
 31
-R35
+R8
 !i10b 1
-R36
-R37
-R38
+R9
+R34
+R35
 !i113 1
 R12
 R13

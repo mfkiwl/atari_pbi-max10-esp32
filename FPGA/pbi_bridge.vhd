@@ -15,6 +15,11 @@ use ieee.std_logic_unsigned.all;
 
 entity pbi_bridge is
 	PORT(
+		-- temp to observe externally
+		master_ram_clk	:	BUFFER std_logic;
+		master_ram_rden : BUFFER std_logic;
+		master_ram_wren : BUFFER std_logic;
+		
 		n_led1		: OUT		std_logic := '1';						-- LED1 for test
 		n_led2		: OUT		std_logic := '1';						-- LED2 for test
 		n_led3		: OUT		std_logic := '1';						-- LED3 for test
@@ -92,10 +97,10 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL reg_srbs			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL reg_fbs				:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	
-	SIGNAL master_ram_clk	:		STD_LOGIC := '0';
-	SIGNAL master_ram_rden	:		STD_LOGIC := '0';
-	SIGNAL master_ram_wren	:		STD_LOGIC := '0';
-	--SIGNAL master_din			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	--SIGNAL master_ram_clk	:		STD_LOGIC := '0';
+	--SIGNAL master_ram_rden	:		STD_LOGIC := '0';
+	--SIGNAL master_ram_wren	:		STD_LOGIC := '0';
+	SIGNAL master_din			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL master_dout		:		STD_LOGIC_VECTOR(7 DOWNTO 0);
 	SIGNAL slave_ram_clk		:		STD_LOGIC := '0';
 	SIGNAL slave_ram_rden	:		STD_LOGIC := '0';
@@ -270,13 +275,16 @@ begin
 				end if;
 				
 				phi2_early <= '1';
-
+				master_ram_clk <= '0';
+				
 				clk_counter <= clk_counter + 1;
 				
-			elsif (clk_counter = "0010") then
+			elsif (clk_counter = "0010" OR clk_counter = "0100") then
 				phi2_early <= '1';
 				flash_read <= '0';
 			
+				-- generate two read clocks for master/slave RAM (trigger on clk_counter=val, clk_counter=val+2)
+				-- (this is because synchronous 'q' output lags behind one clock cycle)
 				if (master_ram_rden = '1') then
 					master_ram_clk <= '1';
 				else

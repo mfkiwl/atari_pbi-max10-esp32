@@ -166,7 +166,6 @@ BEGIN
 
 			  
   -- bit counter
-  -- also generates the clock pulse at the appropriate cycle for the master RAM
   PROCESS(ss_n, reset_n, bit_cnt, bit_cnt8, clk)
   BEGIN
     IF(ss_n = '1' OR reset_n = '0') THEN
@@ -176,32 +175,29 @@ BEGIN
 		bit_cnt8_reverse <= 7;
     ELSE
       IF(rising_edge(clk)) THEN
-			-- increment bit count
+			-- increment overall bit count
 			bit_cnt <= bit_cnt + 1;
-			
---			IF (bit_cnt8 = 7 AND clk = '1') THEN
---				s_master_ram_clk <= '1';
---			ELSE
---				s_master_ram_clk <= '0';
---			END IF;
 		END IF;
     END IF;
 	 
+	 -- counts 0..7
 	 bit_cnt8 <= conv_integer(unsigned(bit_cnt(2 DOWNTO 0)));
+	 
+	 -- counts 7..0
 	 bit_cnt8_reverse <= 7 - conv_integer(unsigned(bit_cnt(2 DOWNTO 0)));
   END PROCESS;
 
   
-  -- generate slave RAM clock at the appropriate cycle
   PROCESS(bit_cnt8, clk)
   BEGIN
-	 IF (bit_cnt8 = 7 AND clk = '0') THEN
+	-- generate two clocks for slave RAM reads to clock synchronous 'q' register and get the right byte out
+	IF ((bit_cnt8 = 6 OR bit_cnt8 = 7) AND clk = '0') THEN
 		s_slave_ram_clk <= '1';
 	ELSE
 		s_slave_ram_clk <= '0';
 	END IF;
   
-  
+  -- generate master RAM clock pulse at the appropriate cycle for write
 	IF (bit_cnt8 = 0 AND clk = '1') THEN
 		s_master_ram_clk <= '1';
 	ELSE
@@ -212,8 +208,9 @@ BEGIN
   
   
   -- main body of SPI DMA engine
-  PROCESS(ss_n, clk, reset_n, bit_cnt, bit_cnt8, p_master_ram_clk, p_master_ram_rden, p_master_ram_wren, p_master_ram_addr,
-			 p_master_ram_din, p_slave_ram_clk, p_slave_ram_rden, p_slave_ram_wren, p_slave_ram_addr, p_slave_ram_din, busy, s_sdsr)
+  PROCESS(ss_n, clk, reset_n, bit_cnt, bit_cnt8, bit_cnt8_reverse, p_master_ram_clk, p_master_ram_rden, p_master_ram_wren, p_master_ram_addr,
+			 p_master_ram_din, p_slave_ram_clk, p_slave_ram_rden, p_slave_ram_wren, p_slave_ram_addr, p_slave_ram_din, busy, 
+			 s_sdsr, r_sdcr, r_stbycr, r_stbkcr, s_slave_ram_q, spi_tx_buf)
   BEGIN
 	-- sdsr register contents combine state machine data and data written by SPI master
 	r_sdsr(7) <= busy;
@@ -297,7 +294,7 @@ BEGIN
 		--END IF;
 
 		-- increment the read address
-		IF (rising_edge(clk) AND conv_integer(unsigned(bit_cnt)) >= 40 AND bit_cnt8 = 6) THEN
+		IF (rising_edge(clk) AND conv_integer(unsigned(bit_cnt)) >= 40 AND bit_cnt8 = 4) THEN
 			s_slave_ram_addr <= s_slave_ram_addr + 1;
 		END IF;
     END IF;
