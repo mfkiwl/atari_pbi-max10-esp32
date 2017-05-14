@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 17.0 595 win32 2017.05.10.12:59:39
+# ACDS 16.1 196 win32 2017.05.13.13:37:16
 
 # ----------------------------------------
 # vcsmx - auto-generated simulation script
@@ -101,12 +101,12 @@
 # within the Quartus project, and generate a unified
 # script which supports all the Altera IP within the design.
 # ----------------------------------------
-# ACDS 17.0 595 win32 2017.05.10.12:59:39
+# ACDS 16.1 196 win32 2017.05.13.13:37:16
 # ----------------------------------------
 # initialize variables
 TOP_LEVEL_NAME="pbi_rom"
 QSYS_SIMDIR="./../../"
-QUARTUS_INSTALL_DIR="C:/intelfpga_lite/17.0/quartus/"
+QUARTUS_INSTALL_DIR="C:/intelfpga_lite/16.1/quartus/"
 SKIP_FILE_COPY=0
 SKIP_DEV_COM=0
 SKIP_COM=0

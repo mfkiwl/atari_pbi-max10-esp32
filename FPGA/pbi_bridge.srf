@@ -19,4 +19,24 @@
 { "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(238): object \"is_sector5_writable_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
 { "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(245): object \"cur_e_addr\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
 { "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(259): object \"valid_csr_sector_erase_addr\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(212): object \"flash_drdin_neg_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(213): object \"write_count\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(214): object \"erase_count\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(215): object \"read_count\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(218): object \"write_timeout\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(220): object \"write_wait_neg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(221): object \"erase_timeout\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(227): object \"flash_se_pass_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(228): object \"flash_sp_pass_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(229): object \"flash_busy_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(230): object \"flash_busy_clear_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(231): object \"erase_busy_scan\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(232): object \"write_busy_scan\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(233): object \"is_sector1_writable_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(234): object \"is_sector2_writable_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(235): object \"is_sector3_writable_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(236): object \"is_sector4_writable_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(237): object \"is_sector5_writable_reg\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(244): object \"cur_e_addr\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
+{ "" "" "" "Verilog HDL or VHDL warning at altera_onchip_flash_avmm_data_controller.v(258): object \"valid_csr_sector_erase_addr\" assigned a value but never read" {  } {  } 0 10036 "" 0 0 "Design Software" 0 -1 0 ""}
 { "" "" "" "*" {  } {  } 0 292013 "" 0 0 "Design Software" 0 -1 0 ""}

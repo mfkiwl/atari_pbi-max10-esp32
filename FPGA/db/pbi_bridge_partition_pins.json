@@ -48,6 +48,14 @@
 					"strict" : false
 				},
 				{
+					"name" : "spi_mbf",
+					"strict" : false
+				},
+				{
+					"name" : "spi_sdav",
+					"strict" : false
+				},
+				{
 					"name" : "data[0]",
 					"strict" : false
 				},
@@ -112,11 +120,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "addr[9]",
+					"name" : "addr[12]",
 					"strict" : false
 				},
 				{
-					"name" : "addr[10]",
+					"name" : "addr[14]",
+					"strict" : false
+				},
+				{
+					"name" : "addr[15]",
+					"strict" : false
+				},
+				{
+					"name" : "addr[13]",
 					"strict" : false
 				},
 				{
@@ -124,11 +140,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "addr[12]",
+					"name" : "addr[9]",
 					"strict" : false
 				},
 				{
-					"name" : "addr[8]",
+					"name" : "addr[10]",
 					"strict" : false
 				},
 				{
@@ -148,6 +164,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "addr[8]",
+					"strict" : false
+				},
+				{
 					"name" : "addr[4]",
 					"strict" : false
 				},
@@ -164,27 +184,15 @@
 					"strict" : false
 				},
 				{
-					"name" : "addr[14]",
-					"strict" : false
-				},
-				{
-					"name" : "addr[15]",
-					"strict" : false
-				},
-				{
-					"name" : "addr[13]",
-					"strict" : false
-				},
-				{
 					"name" : "rw",
 					"strict" : false
 				},
 				{
-					"name" : "spi_clk",
+					"name" : "spi_ss_n",
 					"strict" : false
 				},
 				{
-					"name" : "spi_ss_n",
+					"name" : "spi_clk",
 					"strict" : false
 				},
 				{

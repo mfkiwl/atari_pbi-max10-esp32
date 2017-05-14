@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<EnsembleReport name="pbi_rom" kind="system" version="17.0" fabric="QSYS">
- <!-- Format version 17.0 595 (Future versions may contain additional information.) -->
- <!-- 2017.05.12.13:58:41 -->
+<EnsembleReport name="pbi_rom" kind="system" version="16.1" fabric="QSYS">
+ <!-- Format version 16.1 196 (Future versions may contain additional information.) -->
+ <!-- 2017.05.13.21:21:11 -->
  <!-- A collection of modules and connections -->
  <parameter name="clockCrossingAdapter">
   <type>com.altera.sopcmodel.ensemble.EClockAdapter</type>
@@ -53,7 +53,7 @@
  </parameter>
  <parameter name="generationId">
   <type>int</type>
-  <value>1494611920</value>
+  <value>1494724869</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>true</visible>
@@ -150,7 +150,7 @@
  <module
    name="onchip_flash_0"
    kind="altera_onchip_flash"
-   version="17.0"
+   version="16.1"
    path="onchip_flash_0">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -200,27 +200,27 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.SECTOR4_ENABLED</name>
-   <value>0</value>
+   <value>1</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.SECTOR4_END_ADDR</name>
-   <value>-1</value>
+   <value>176127</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.SECTOR4_START_ADDR</name>
-   <value>-1</value>
+   <value>116736</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.SECTOR5_ENABLED</name>
-   <value>0</value>
+   <value>1</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.SECTOR5_END_ADDR</name>
-   <value>-1</value>
+   <value>319487</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.SECTOR5_START_ADDR</name>
-   <value>-1</value>
+   <value>176128</value>
   </assignment>
   <assignment>
    <name>embeddedsw.memoryInfo.DAT_SYM_INSTALL_DIR</name>
@@ -260,7 +260,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.memoryInfo.MEM_INIT_FILENAME</name>
-   <value>testrom</value>
+   <value>handler</value>
   </assignment>
   <assignment>
    <name>embeddedsw.memoryInfo.USE_BYTE_ADDRESSING_FOR_HEX</name>
@@ -324,7 +324,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="SECTOR_ID">
    <type>[Ljava.lang.String;</type>
-   <value>1,2,3,NA,NA</value>
+   <value>1,2,3,4,5</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>true</visible>
@@ -332,7 +332,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="SECTOR_ACCESS_MODE">
    <type>[Ljava.lang.String;</type>
-   <value>Read only,Read only,Read only,Hidden,Hidden</value>
+   <value>Read only,Read only,Read only,Read only,Read only</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -340,7 +340,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="SECTOR_ADDRESS_MAPPING">
    <type>[Ljava.lang.String;</type>
-   <value>0x00000 - 0x03fff,0x04000 - 0x07fff,0x08000 - 0x1c7ff,NA,NA</value>
+   <value>0x00000 - 0x03fff,0x04000 - 0x07fff,0x08000 - 0x1c7ff,0x1c800 - 0x2afff,0x2b000 - 0x4dfff</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>true</visible>
@@ -372,7 +372,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="initializationFileName">
    <type>java.lang.String</type>
-   <value>C:/tmp/testrom.hex</value>
+   <value>C:/Users/steve/Documents/GitHub/atari_pbi/Atari/Handler/handler.hex</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -380,7 +380,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="initializationFileNameForSim">
    <type>java.lang.String</type>
-   <value>C:/tmp/testrom.hex</value>
+   <value>C:/Users/steve/Documents/GitHub/atari_pbi/Atari/Handler/handler.hex</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -397,7 +397,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="INIT_FILENAME">
    <type>java.lang.String</type>
-   <value>C:/tmp/testrom.hex</value>
+   <value>C:/Users/steve/Documents/GitHub/atari_pbi/Atari/Handler/handler.hex</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
@@ -405,7 +405,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="INIT_FILENAME_SIM">
    <type>java.lang.String</type>
-   <value>C:/tmp/testrom.hex</value>
+   <value>C:/Users/steve/Documents/GitHub/atari_pbi/Atari/Handler/handler.hex</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
@@ -497,33 +497,33 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="SECTOR4_START_ADDR">
    <type>int</type>
-   <value>0</value>
+   <value>29184</value>
    <derived>true</derived>
-   <enabled>false</enabled>
+   <enabled>true</enabled>
    <visible>false</visible>
    <valid>true</valid>
   </parameter>
   <parameter name="SECTOR4_END_ADDR">
    <type>int</type>
-   <value>0</value>
+   <value>44031</value>
    <derived>true</derived>
-   <enabled>false</enabled>
+   <enabled>true</enabled>
    <visible>false</visible>
    <valid>true</valid>
   </parameter>
   <parameter name="SECTOR5_START_ADDR">
    <type>int</type>
-   <value>0</value>
+   <value>44032</value>
    <derived>true</derived>
-   <enabled>false</enabled>
+   <enabled>true</enabled>
    <visible>false</visible>
    <valid>true</valid>
   </parameter>
   <parameter name="SECTOR5_END_ADDR">
    <type>int</type>
-   <value>0</value>
+   <value>79871</value>
    <derived>true</derived>
-   <enabled>false</enabled>
+   <enabled>true</enabled>
    <visible>false</visible>
    <valid>true</valid>
   </parameter>
@@ -537,7 +537,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="MAX_VALID_ADDR">
    <type>int</type>
-   <value>29183</value>
+   <value>79871</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -585,7 +585,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="SECTOR4_MAP">
    <type>int</type>
-   <value>0</value>
+   <value>4</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -593,7 +593,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="SECTOR5_MAP">
    <type>int</type>
-   <value>0</value>
+   <value>5</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -601,7 +601,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="ADDR_RANGE1_END_ADDR">
    <type>int</type>
-   <value>29183</value>
+   <value>79871</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -625,7 +625,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AVMM_DATA_ADDR_WIDTH">
    <type>int</type>
-   <value>15</value>
+   <value>17</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -775,7 +775,7 @@ the requested settings for a module instance. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <interface name="clk" kind="clock_sink" version="17.0">
+  <interface name="clk" kind="clock_sink" version="16.1">
    <!-- The connection points exposed by a module instance for the
 particular module parameters. Connection points and their
 parameters are a RESULT of the module parameters. -->
@@ -836,7 +836,7 @@ parameters are a RESULT of the module parameters. -->
     <role>clk</role>
    </port>
   </interface>
-  <interface name="nreset" kind="reset_sink" version="17.0">
+  <interface name="nreset" kind="reset_sink" version="16.1">
    <!-- The connection points exposed by a module instance for the
 particular module parameters. Connection points and their
 parameters are a RESULT of the module parameters. -->
@@ -881,7 +881,7 @@ parameters are a RESULT of the module parameters. -->
     <role>reset_n</role>
    </port>
   </interface>
-  <interface name="data" kind="avalon_slave" version="17.0">
+  <interface name="data" kind="avalon_slave" version="16.1">
    <!-- The connection points exposed by a module instance for the
 particular module parameters. Connection points and their
 parameters are a RESULT of the module parameters. -->
@@ -919,7 +919,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="addressSpan">
     <type>java.math.BigInteger</type>
-    <value>116736</value>
+    <value>319488</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -1007,7 +1007,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="explicitAddressSpan">
     <type>java.math.BigInteger</type>
-    <value>116736</value>
+    <value>319488</value>
     <derived>false</derived>
     <enabled>true</enabled>
     <visible>true</visible>
@@ -1218,7 +1218,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>avmm_data_addr</name>
     <direction>Input</direction>
-    <width>15</width>
+    <width>17</width>
     <role>address</role>
    </port>
    <port>
@@ -1259,7 +1259,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Altera On-Chip Flash</displayName>
-  <version>17.0</version>
+  <version>16.1</version>
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
@@ -1267,7 +1267,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
   <displayName>Clock Input</displayName>
-  <version>17.0</version>
+  <version>16.1</version>
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
@@ -1275,7 +1275,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
   <displayName>Reset Input</displayName>
-  <version>17.0</version>
+  <version>16.1</version>
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
@@ -1283,8 +1283,8 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
   <displayName>Avalon Memory Mapped Slave</displayName>
-  <version>17.0</version>
+  <version>16.1</version>
  </plugin>
- <reportVersion>17.0 595</reportVersion>
- <uniqueIdentifier>005056C000010000015BFDD007F7</uniqueIdentifier>
+ <reportVersion>16.1 196</reportVersion>
+ <uniqueIdentifier>00000000000000E00000015C048B836F</uniqueIdentifier>
 </EnsembleReport>

@@ -35,18 +35,19 @@ ENTITY spi_dpram IS
 		mosi         		: IN		STD_LOGIC;  											-- SPI bus, master out slave in
 		miso         		: OUT		STD_LOGIC := 'Z'; 									-- SPI bus, master in slave out
 
-		p_clk					: IN		STD_LOGIC;												-- parallel memory interface, clock (Atari PHI2)
-		p_rw					: IN		STD_LOGIC;												-- parallel memory interface, read/write
-		
-		p_master_ram_en	: IN		STD_LOGIC;												-- parallel memory interface, master RAM enable
+		p_master_ram_clk	: IN		STD_LOGIC;												-- parallel memory interface, master RAM clock
+		p_master_ram_rden	: IN		STD_LOGIC;												-- parallel memory interface, master RAM read enable
+		p_master_ram_wren	: IN		STD_LOGIC;												-- parallel memory interface, master RAM write enable
 		p_master_ram_addr	: IN		STD_LOGIC_VECTOR(7 DOWNTO 0);						-- parallel memory interface, master RAM address
 		p_master_ram_din	: IN		STD_LOGIC_VECTOR(7 downto 0);						-- parallel memory interface, master data in
 		p_master_ram_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- parallel memory interface, master data out
 		
-		p_slave_ram_en		: IN		STD_LOGIC;												-- parallel memory interface, slave enable
-		p_slave_ram_addr	: IN		STD_LOGIC_VECTOR(7 DOWNTO 0);						-- parallel memory interface,  slave address
-		p_slave_ram_din	: IN		STD_LOGIC_VECTOR(7 downto 0);						-- parallel memory interface, slave data
-		p_slave_ram_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- parallel memory interface, slave data
+		p_slave_ram_clk	: IN		STD_LOGIC;												-- parallel memory interface, slave RAM clock
+		p_slave_ram_rden	: IN		STD_LOGIC;												-- parallel memory interface, slave RAM read enable
+		p_slave_ram_wren	: IN		STD_LOGIC;												-- parallel memory interface, slave RAM write enable
+		p_slave_ram_addr	: IN		STD_LOGIC_VECTOR(7 DOWNTO 0);						-- parallel memory interface, slave RAM address
+		p_slave_ram_din	: IN		STD_LOGIC_VECTOR(7 downto 0);						-- parallel memory interface, slave data in
+		p_slave_ram_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- parallel memory interface, slave data out
 		
 		r_sdcr				: IN		STD_LOGIC_VECTOR(7 downto 0);						-- SDCR - Slave Data Control Register (written by Atari)
 		r_stbycr				: IN		STD_LOGIC_VECTOR(7 downto 0);						-- STBYCR - Slave Transfer Byte Count Register (written by Atari)
@@ -66,9 +67,9 @@ ARCHITECTURE logic OF spi_dpram IS
 	SIGNAL mode    					: STD_LOGIC;  		-- SPI bus mode based on clock phase and polarity
 	SIGNAL clk     					: STD_LOGIC;  		-- clock, normalized to be independent of external spi clock polarity
 	
-	SIGNAL first_bit_clocked		: STD_LOGIC := '0';
 	SIGNAL bit_cnt 					: STD_LOGIC_VECTOR (11 DOWNTO 0) := (OTHERS => '0'); -- enough for 2x RAM width
 	SIGNAL bit_cnt8					: INTEGER RANGE 0 to 7;
+	SIGNAL bit_cnt8_reverse			: INTEGER RANGE 0 to 7;
 	
 	SIGNAL s_master_ram_clk			: STD_LOGIC;														-- clock signal for the SPI port of the master RAM
 	SIGNAL s_master_ram_data  		: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');  	-- receive buffer
@@ -86,13 +87,6 @@ ARCHITECTURE logic OF spi_dpram IS
 
 	SIGNAL spi_tx_buf  				: STD_LOGIC_VECTOR(7 downto 0) := (OTHERS => '0');  	-- SPI transmit buffer for current byte clocked out on MISO
 
-	-- these are to satisfy ModelSim-Altera which does not like assignments in component instantiation
-	-- similar error to https://www.altera.com/support/support-resources/knowledge-base/solutions/rd03312005_587.html	
-	SIGNAL p_clk_n						: STD_LOGIC;
-	SIGNAL p_master_ram_rden		: STD_LOGIC;
-	SIGNAL p_master_ram_wren		: STD_LOGIC;
-	SIGNAL p_slave_ram_rden			: STD_LOGIC;
-	SIGNAL p_slave_ram_wren			: STD_LOGIC;
 	
 	-- Altera Dual Port RAM
 	-- https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/ug/ug_ram_rom.pdf
@@ -115,12 +109,6 @@ ARCHITECTURE logic OF spi_dpram IS
 	end component;
 	
 BEGIN
-	-- parallel bus memory logic signals
-	p_clk_n <= (NOT p_clk);
-	p_master_ram_rden <= (p_master_ram_en AND p_rw);
-	p_master_ram_wren <= 	(p_master_ram_en AND NOT p_rw);
-	p_slave_ram_rden <= (p_slave_ram_en AND p_rw);
-	p_slave_ram_wren <= (p_slave_ram_en AND NOT p_rw);
 	
 	-- master DPRAM (holds data from SPI master, destined for Atari)
 	dpram_master : dpram PORT MAP (
@@ -137,7 +125,7 @@ BEGIN
 			--	"B" side of RAM is parallel interface (to Atari PBI) - signals are prefixed with p_
 			address_b(13 DOWNTO 8)  => r_mrbs(5 DOWNTO 0),				-- upper 6 bits are controlled by MRBS register
 			address_b(7 DOWNTO 0)	=> p_master_ram_addr,
-			clock_b		=> p_clk_n,
+			clock_b		=> p_master_ram_clk,
 			data_b	 	=> p_master_ram_din,
 			rden_b	 	=> p_master_ram_rden,
 			wren_b	 	=> p_master_ram_wren,
@@ -158,7 +146,7 @@ BEGIN
 			--	"B" side of RAM is parallel interface (to Atari PBI) - signals are prefixed with p_
 			address_b(13 DOWNTO 8)  => r_srbs(5 DOWNTO 0),
 			address_b(7 DOWNTO 0)	=> p_slave_ram_addr,
-			clock_b		=> p_clk_n,
+			clock_b		=> p_slave_ram_clk,
 			data_b	 	=> p_slave_ram_din,
 			rden_b	 	=> p_slave_ram_rden,
 			wren_b	 	=> p_slave_ram_wren,
@@ -179,32 +167,28 @@ BEGIN
 			  
   -- bit counter
   -- also generates the clock pulse at the appropriate cycle for the master RAM
-  PROCESS(ss_n, reset_n, bit_cnt, bit_cnt8, clk, first_bit_clocked)
+  PROCESS(ss_n, reset_n, bit_cnt, bit_cnt8, clk)
   BEGIN
     IF(ss_n = '1' OR reset_n = '0') THEN
 		-- reset miso/mosi bit count
 		bit_cnt <= (OTHERS => '0');
 		bit_cnt8 <= 0;
-		first_bit_clocked <= '0';
+		bit_cnt8_reverse <= 7;
     ELSE
       IF(rising_edge(clk)) THEN
-			if (first_bit_clocked = '0') THEN
-				first_bit_clocked <= '1';
-			ELSE
-				-- increment bit count
-				bit_cnt <= bit_cnt + 1;
-				
-				IF (bit_cnt8 = 7 AND clk = '1') THEN
-					s_master_ram_clk <= '1';
-				ELSE
-					s_master_ram_clk <= '0';
-				END IF;
-				
-			END IF;
+			-- increment bit count
+			bit_cnt <= bit_cnt + 1;
+			
+--			IF (bit_cnt8 = 7 AND clk = '1') THEN
+--				s_master_ram_clk <= '1';
+--			ELSE
+--				s_master_ram_clk <= '0';
+--			END IF;
 		END IF;
     END IF;
 	 
 	 bit_cnt8 <= conv_integer(unsigned(bit_cnt(2 DOWNTO 0)));
+	 bit_cnt8_reverse <= 7 - conv_integer(unsigned(bit_cnt(2 DOWNTO 0)));
   END PROCESS;
 
   
@@ -217,12 +201,19 @@ BEGIN
 		s_slave_ram_clk <= '0';
 	END IF;
   
+  
+	IF (bit_cnt8 = 0 AND clk = '1') THEN
+		s_master_ram_clk <= '1';
+	ELSE
+		s_master_ram_clk <= '0';
+	END IF;
+  
   END PROCESS;
   
   
   -- main body of SPI DMA engine
-  PROCESS(ss_n, clk, reset_n, bit_cnt, bit_cnt8, p_clk, p_rw, p_master_ram_en, p_master_ram_addr, p_master_ram_din, p_slave_ram_en,
-			 p_slave_ram_addr, p_slave_ram_din, busy, s_sdsr)
+  PROCESS(ss_n, clk, reset_n, bit_cnt, bit_cnt8, p_master_ram_clk, p_master_ram_rden, p_master_ram_wren, p_master_ram_addr,
+			 p_master_ram_din, p_slave_ram_clk, p_slave_ram_rden, p_slave_ram_wren, p_slave_ram_addr, p_slave_ram_din, busy, s_sdsr)
   BEGIN
 	-- sdsr register contents combine state machine data and data written by SPI master
 	r_sdsr(7) <= busy;
@@ -237,28 +228,28 @@ BEGIN
 			IF (bit_cnt >= 0 AND bit_cnt <= 7) THEN
 				-- 1st header byte: SDSR
 				-- shadow used here because actual sdsr register contents are combined from SPI master and the SPI state machine
-				s_sdsr(bit_cnt8) <= mosi;
+				s_sdsr(bit_cnt8_reverse) <= mosi;
 				
 				s_master_ram_wren <= '0';
 			ELSIF (bit_cnt >= 8 AND bit_cnt <= 15) THEN
 				-- 2nd header byte: MTBYCR
-				r_mtbycr(bit_cnt8) <= mosi;
+				r_mtbycr(bit_cnt8_reverse) <= mosi;
 				s_master_ram_wren <= '0';
 			ELSIF (bit_cnt >= 16 AND bit_cnt <= 23) THEN
 				-- 3rd header byte: MTBKCR
-				r_mtbkcr(bit_cnt8) <= mosi;
+				r_mtbkcr(bit_cnt8_reverse) <= mosi;
 				s_master_ram_wren <= '0';
 			ELSIF (bit_cnt >= 24 AND bit_cnt <= 31) THEN
 				-- 4th header byte: s_master_ram_bank
-				s_master_ram_bank(bit_cnt8) <= mosi;
+				s_master_ram_bank(bit_cnt8_reverse) <= mosi;
 				s_master_ram_wren <= '0';
 			ELSIF (bit_cnt >= 32 AND bit_cnt <= 39) THEN
 				-- 5th header byte: s_slave_ram_bank
-				s_slave_ram_bank(bit_cnt8) <= mosi;
+				s_slave_ram_bank(bit_cnt8_reverse) <= mosi;
 				s_master_ram_wren <= '0';
 			ELSE
 				-- write to the rx buffer
-				s_master_ram_data(bit_cnt8) <= mosi;
+				s_master_ram_data(bit_cnt8_reverse) <= mosi;
 				s_master_ram_wren <= '1';
 			END IF;
 		END IF;
@@ -275,10 +266,11 @@ BEGIN
 		s_slave_ram_addr <= (OTHERS => '0');
 		s_slave_ram_rden <= '0';
     ELSE
-		IF (falling_edge(clk)) THEN
+		--IF (falling_edge(clk)) THEN
 			IF (bit_cnt >= 0 AND bit_cnt <= 7) THEN
 				-- 1st header byte: SDCR
 				spi_tx_buf <= r_sdcr;
+				--spi_tx_buf <= X'80'; -- testing
 				s_slave_ram_rden <= '0';
 			ELSIF (bit_cnt >= 8 AND bit_cnt <= 15) THEN
 				-- 2nd header byte: STBYCR
@@ -302,7 +294,7 @@ BEGIN
 				spi_tx_buf <= s_slave_ram_q;
 				s_slave_ram_rden <= '1';
 			END IF;
-		END IF;
+		--END IF;
 
 		-- increment the read address
 		IF (rising_edge(clk) AND conv_integer(unsigned(bit_cnt)) >= 40 AND bit_cnt8 = 6) THEN
@@ -314,11 +306,12 @@ BEGIN
     IF(ss_n = '1' OR reset_n = '0') THEN
 		-- no transaction occuring or reset
       miso <= 'Z';
-    ELSIF(rising_edge(clk)) THEN
-      -- send transmit buffer data bit to master
-		miso <= spi_tx_buf(bit_cnt8);
+	 --ELSIF (rising_edge(clk)) THEN
+	 ELSE
+		-- send transmit buffer data bit to master
+		miso <= spi_tx_buf(bit_cnt8_reverse);
     END IF;
-    
+		
   END PROCESS;
 END logic;
 

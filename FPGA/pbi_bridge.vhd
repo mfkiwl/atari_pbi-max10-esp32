@@ -82,22 +82,27 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL flash_addr : std_logic_vector(14 downto 0) := (OTHERS => '0');
 	
 	-- signals for SPI dual port RAM interface
-	SIGNAL reg_sdcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL reg_stbycr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL reg_stbkcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL reg_sdsr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL reg_mtbycr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL reg_mtbkcr		:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL reg_mrbs		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL reg_srbs		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL reg_fbs			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_sdcr			:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_stbycr			:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_stbkcr			:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_sdsr			:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_mtbycr			:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_mtbkcr			:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_mrbs			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_srbs			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_fbs				:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	
-	SIGNAL slave_ram_en	:		STD_LOGIC := '0';
-	SIGNAL slave_din		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL slave_dout		:		STD_LOGIC_VECTOR(7 DOWNTO 0);
-	SIGNAL master_ram_en :		STD_LOGIC := '0';
-	SIGNAL master_din		:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
-	SIGNAL master_dout	:		STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL master_ram_clk	:		STD_LOGIC := '0';
+	SIGNAL master_ram_rden	:		STD_LOGIC := '0';
+	SIGNAL master_ram_wren	:		STD_LOGIC := '0';
+	--SIGNAL master_din			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL master_dout		:		STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL slave_ram_clk		:		STD_LOGIC := '0';
+	SIGNAL slave_ram_rden	:		STD_LOGIC := '0';
+	SIGNAL slave_ram_wren	:		STD_LOGIC := '0';
+	--SIGNAL slave_din			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL slave_dout			:		STD_LOGIC_VECTOR(7 DOWNTO 0);
+	
 	
 	-- Altera ALTUFM component for PBI Flash ROM space
 	-- See https://www.altera.com/en_US/pdfs/literature/hb/max-10/ug_m10_ufm.pdf
@@ -105,7 +110,7 @@ ARCHITECTURE behavior OF pbi_bridge IS
 		PORT (
 			clock                   : in  std_logic                     := 'X';             -- clk
 			reset_n                 : in  std_logic                     := 'X';             -- reset_n
-			avmm_data_addr          : in  std_logic_vector(14 downto 0) := (others => 'X'); -- address
+			avmm_data_addr          : in  std_logic_vector(16 downto 0) := (others => 'X'); -- address
 			avmm_data_read          : in  std_logic                     := 'X';             -- read
 			avmm_data_readdata      : out std_logic_vector(31 downto 0);                    -- readdata
 			avmm_data_waitrequest   : out std_logic;                                        -- waitrequest
@@ -114,19 +119,22 @@ ARCHITECTURE behavior OF pbi_bridge IS
 		);
 	END COMPONENT pbi_rom;
 
+	
 	-- SPI interface with dual port RAM transfer buffers
 	COMPONENT spi_dpram
 		GENERIC ( 	cpol : STD_LOGIC := '0';
 						cpha : STD_LOGIC := '0');
 		PORT
 		(
-			p_clk					:	 IN STD_LOGIC;
-			p_rw					:	 IN STD_LOGIC;
-			p_master_ram_en	:	 IN STD_LOGIC;
+			p_master_ram_clk	:	 IN STD_LOGIC;
+			p_master_ram_rden	:	 IN STD_LOGIC;
+			p_master_ram_wren	:	 IN STD_LOGIC;
 			p_master_ram_addr	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			p_master_ram_din	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			p_master_ram_dout	:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-			p_slave_ram_en		:	 IN STD_LOGIC;
+			p_slave_ram_clk	:	 IN STD_LOGIC;
+			p_slave_ram_rden	:	 IN STD_LOGIC;
+			p_slave_ram_wren	:	 IN STD_LOGIC;
 			p_slave_ram_addr	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			p_slave_ram_din	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			p_slave_ram_dout	:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -154,7 +162,7 @@ u0 : component pbi_rom
 	port map (
 		clock                   		=> clk_57,             				-- clk
 		reset_n                 		=> n_reset,            				-- reset
-		avmm_data_addr(14 DOWNTO 9)   => reg_fbs(5 DOWNTO 0), 			-- data.address[14:9] (64 total 512 x 32-bit banks selectable)
+		avmm_data_addr(16 DOWNTO 9)   => reg_fbs, 							-- data.address[16:9] (256 total 512 x 32-bit banks selectable)
 		avmm_data_addr(8 DOWNTO 0)   	=> addr_latch(10 DOWNTO 2),  		-- data.address[ 8:0] (512 x 32-bit words bank size)
 		avmm_data_read          		=> flash_read,      					-- start read signal
 		avmm_data_readdata      		=> flash_data,  						-- flash data bus
@@ -165,15 +173,17 @@ u0 : component pbi_rom
 -- SPI Dual Port RAM signal & pin mapping
 u1	: component spi_dpram
 	port map (
-			p_clk					=>	phi2_early,
-			p_rw					=>	rw_latch,
-			p_master_ram_en	=>	master_ram_en,
+			p_master_ram_clk	=>	master_ram_clk,
+			p_master_ram_rden	=>	master_ram_rden,
+			p_master_ram_wren	=>	master_ram_wren,
 			p_master_ram_addr	=>	addr_latch(7 DOWNTO 0),
-			p_master_ram_din	=>	master_din,
+			p_master_ram_din	=>	data,
 			p_master_ram_dout	=>	master_dout,
-			p_slave_ram_en		=>	slave_ram_en,
+			p_slave_ram_clk	=>	slave_ram_clk,
+			p_slave_ram_rden	=>	slave_ram_rden,
+			p_slave_ram_wren	=>	slave_ram_wren,
 			p_slave_ram_addr	=>	addr_latch(7 DOWNTO 0),
-			p_slave_ram_din	=>	slave_din,
+			p_slave_ram_din	=>	data,
 			p_slave_ram_dout	=>	slave_dout,
 		
 			reset_n				=> n_reset,
@@ -233,22 +243,26 @@ end process;
 -- >> starts flash read process (data is available up when flash_read_valid is 1, several fast clock cycles later)
 -- >> creates a delayed signal a fixed amount after PHI2 goes high (falling edge of this signal used to latch data from Atari)
 --    the rising edge of the early_phi2 signal is a clock period later than the real rising edge of PHI2
-process (phi2, clk_57, dev_rom_act, rw_latch, n_reset)
+process (phi2, clk_57, dev_rom_act, rw_latch, n_reset, master_ram_wren, master_ram_rden, slave_ram_wren, slave_ram_rden)
 begin
 	if (n_reset = '0') then
 		clk_counter <= "0000";
 		phi2_early <= '0';
 		flash_read <= '0';
+		master_ram_clk <= '0';
+		slave_ram_clk <= '0';
 	else
 		if (phi2 = '0') then
 			-- counter only runs when PHI2 is high
 			clk_counter <= "0000";
 			phi2_early <= '0';
+			master_ram_clk <= '0';
+			slave_ram_clk <= '0';
 		elsif (rising_edge(clk_57)) then
 			if (clk_counter = "0001") then
-				if (dev_rom_act AND rw_latch = '1') then 
-				-- start the read from ALTUFM for a ROM read access
-				-- this is turned off next tick of clk_counter by the 'else' at bottom of process
+				if (hw_sel = PBI_ADDR AND dev_rom_act AND rw_latch = '1') then 
+				-- start the read from ALTUFM for a PBI ROM read access
+				-- this is turned off next tick of clk_counter (possibly by the 'else' at bottom of process)
 					flash_read <= '1';
 				else
 					-- not a ROM access or not a read of the ROM space
@@ -256,16 +270,52 @@ begin
 				end if;
 				
 				phi2_early <= '1';
+
+				clk_counter <= clk_counter + 1;
+				
+			elsif (clk_counter = "0010") then
+				phi2_early <= '1';
+				flash_read <= '0';
+			
+				if (master_ram_rden = '1') then
+					master_ram_clk <= '1';
+				else
+					master_ram_clk <= '0';
+				end if;
+				
+				if (slave_ram_rden = '1') then
+					slave_ram_clk <= '1';
+				else
+					slave_ram_clk <= '0';
+				end if;
 				
 				clk_counter <= clk_counter + 1;
+
 			elsif (clk_counter = "1100") then
 				-- this is the 'early' falling edge for latching data from Atari
 				phi2_early <= '0';
 				flash_read <= '0';
+				
+				if (master_ram_wren = '1') then
+					master_ram_clk <= '1';
+				else
+					master_ram_clk <= '0';
+				end if;
+				
+				if (slave_ram_wren = '1') then
+					slave_ram_clk <= '1';
+				else
+					slave_ram_clk <= '0';
+				end if;
+
+				-- count stops here
+				
 			else
 				-- initial clk_counter state and all others
 				flash_read <= '0';
 				phi2_early <= '1';
+				master_ram_clk <= '0';
+				slave_ram_clk <= '0';
 				clk_counter <= clk_counter + 1;
 			end if;
 		end if;
@@ -275,10 +325,14 @@ end process;
 
 -- look for valid read from ALTUFM and latch in the data on falling edge of fast clock
 -- per timing diagram from ALTUFM data sheet, this should happen ~4 fast clocks after we requested the read
-process (clk_57, flash_read_valid)
+process (phi2, clk_57, flash_read_valid)
 begin
-	if (falling_edge(clk_57) AND flash_read_valid = '1') then
-		flash_data_latch <= flash_data;
+	if (phi2 = '1') then
+		if (flash_read_valid = '1' AND falling_edge(clk_57)) then
+			flash_data_latch <= flash_data;
+		end if;
+	else
+		flash_data_latch <= (OTHERS => '1');
 	end if;
 
 end process;
@@ -301,7 +355,8 @@ end process;
 -- main body of Atari bus logic including address mapping and read/write operations
 process (n_reset, phi2, phi2_early, rw, rw_latch, hw_sel, addr_latch, dev_rom_act, hw_sel_act,
 			dev_reg_act, addr, data, flash_data_latch, PBI_ADDR, reg_sdcr, reg_stbycr, reg_stbkcr, reg_sdsr, reg_mtbycr,
-			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs, master_ram_en, master_din, master_dout, slave_ram_en, slave_din, slave_dout)
+			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs, master_ram_rden, master_ram_wren, master_dout,
+			slave_ram_rden, slave_ram_wren, slave_dout)
 begin
 	if (n_reset = '0') then
 		n_rdy <= '1';
@@ -316,8 +371,10 @@ begin
 		dev_rom_act <= false;
 		hw_sel_act <= false;
 		dev_reg_act <= false;
-		master_ram_en <= '0';
-		slave_ram_en <= '0';
+		master_ram_rden <= '0';
+		master_ram_wren <= '0';
+		slave_ram_rden <= '0';
+		slave_ram_wren <= '0';
 		
 		reg_sdcr <= X"00";
 		reg_stbycr <= X"00";
@@ -325,8 +382,7 @@ begin
 		reg_mrbs <= X"00";
 		reg_srbs <= X"00";
 		reg_fbs <= X"00";
-		
-		
+				
 		data <= "ZZZZZZZZ";
 		led_latch <= "00000";
 	else
@@ -353,21 +409,9 @@ begin
 			-- using 'addr' and not 'addr_latch' because data may not be latched yet at rising edge of PHI2
 			-- but we trust addr to be stable
 			dev_rom_act <= (addr >= X"D800" AND addr <= X"DFFF");
-			hw_sel_act <= (addr = X"D1FF");
 			dev_reg_act <= (addr >= X"D100" AND addr <= X"D1FE");
+			hw_sel_act <= (addr = X"D1FF");
 			
-			if (hw_sel = PBI_ADDR AND addr >= X"D600" AND addr <= X"D6FF") then
-				master_ram_en <= '1';
-			else
-				master_ram_en <= '0';
-			end if;
-			
-			if (hw_sel = PBI_ADDR AND addr >= X"D700" AND addr <= X"D7FF") then
-				slave_ram_en <= '1';
-			else
-				slave_ram_en <= '0';
-			end if;
-
 			-- set data bus transceiver direction and output enables on rising edge of phi2
 			if ((hw_sel = PBI_ADDR AND addr >= X"D800" AND addr <= X"DFFF") OR
 				 (hw_sel = PBI_ADDR AND addr >= X"D600" AND addr <= X"D7FF") OR
@@ -383,14 +427,53 @@ begin
 			end if;
 		end if;
 
+		if (phi2 = '1') then
+			if (hw_sel = PBI_ADDR AND addr_latch >= X"D600" AND addr_latch <= X"D6FF") then
+				master_ram_rden <= rw_latch;
+				master_ram_wren <= NOT rw_latch;
+			else
+				master_ram_rden <= '0';
+				master_ram_wren <= '0';
+			end if;
+			
+			if (hw_sel = PBI_ADDR AND addr_latch >= X"D700" AND addr_latch <= X"D7FF") then
+				slave_ram_rden <= rw_latch;
+				slave_ram_wren <= NOT rw_latch;
+			else
+				slave_ram_rden <= '0';
+				slave_ram_wren <= '0';
+			end if;
+		else
+			master_ram_rden <= '0';
+			master_ram_wren <= '0';
+			slave_ram_rden <= '0';
+			slave_ram_wren <= '0';
+		end if;
+		
 		
 		if (phi2 = '1' AND rw_latch = '1' AND hw_sel = PBI_ADDR) then
 			-- READ of an address in our PBI device address space
-			if (dev_reg_act) then 
+			if (dev_rom_act) then
+				-- device ROM
+				n_mpd <= '0';
+				n_extsel <= '0';
+				n_data_oe <= '0';
+
+				-- unpack the 32-bit word from the flash read and output it on data bus
+				if (addr_latch(1 downto 0) = "11") then
+					data <= flash_data_latch(31 downto 24);
+				elsif (addr_latch(1 downto 0) = "10") then
+					data <= flash_data_latch(23 downto 16);
+				elsif (addr_latch(1 downto 0) = "01") then
+					data <= flash_data_latch(15 downto 8);
+				else
+					data <= flash_data_latch(7 downto 0);
+				end if;
 				
+			elsif (dev_reg_act) then 
 				-- device registers
-				n_mpd <= '1';
-				n_extsel <= '1';
+				n_mpd <= '0';
+				n_extsel <= '0';
 				n_data_oe <= '0';
 				
 				if (addr_latch = X"D100") then
@@ -414,40 +497,20 @@ begin
 				else
 					data <= X"FF";
 				end if;
-				
-			elsif (master_ram_en = '1') then
+			elsif (master_ram_rden = '1') then
 				-- SPI master dual port RAM window
-				n_mpd <= '1';
-				n_extsel <= '1';
-				n_data_oe <= '0';
-
-				data <= master_dout;
-				
-			elsif (slave_ram_en = '1') then
-				-- SPI slave dual port RAM window
-				n_mpd <= '1';
-				n_extsel <= '1';
-				n_data_oe <= '0';
-
-				data <= slave_dout;
-				
-			elsif (dev_rom_act) then
-				-- device ROM
 				n_mpd <= '0';
 				n_extsel <= '0';
 				n_data_oe <= '0';
 
-				-- unpack the 32-bit word from the flash read and output it on data bus
-				if (addr_latch(1 downto 0) = "11") then
-					data <= flash_data_latch(31 downto 24);
-				elsif (addr_latch(1 downto 0) = "10") then
-					data <= flash_data_latch(23 downto 16);
-				elsif (addr_latch(1 downto 0) = "01") then
-					data <= flash_data_latch(15 downto 8);
-				else
-					data <= flash_data_latch(7 downto 0);
-				end if;
+				data <= master_dout;
+			elsif (slave_ram_rden = '1') then
+				-- SPI slave dual port RAM window
+				n_mpd <= '0';
+				n_extsel <= '0';
+				n_data_oe <= '0';
 
+				data <= slave_dout;
 			else 
 				n_data_oe <= '1';
 				n_mpd <= '1';
@@ -472,13 +535,13 @@ begin
 					hw_sel <= data;
 					
 				elsif (hw_sel = PBI_ADDR) then 
-					if (master_ram_en = '1') then
+					--if (master_ram_wren = '1') then
 						-- master RAM write (latched on falling edge of phi2_early)
-						master_din <= data;
-					elsif (slave_ram_en = '1') then
+						--master_din <= data;
+					--elsif (slave_ram_wren = '1') then
 						-- slave RAM write (latched on falling edge of phi2_early)
-						slave_din <= data;
-					elsif (dev_reg_act) then
+						--slave_din <= data;
+					if (dev_reg_act) then
 						-- device register write (latched on falling edge of phi2_early)
 						if (addr_latch = X"D100") then
 							reg_sdcr <= data;

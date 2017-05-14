@@ -56,7 +56,7 @@
  <module
    name="onchip_flash_0"
    kind="altera_onchip_flash"
-   version="17.0"
+   version="16.1"
    enabled="1"
    autoexport="1">
   <parameter name="AUTO_CLOCK_RATE" value="0" />
@@ -68,11 +68,11 @@
   <parameter name="PART_NAME" value="10M08SAE144C8G" />
   <parameter name="READ_BURST_COUNT" value="8" />
   <parameter name="READ_BURST_MODE" value="Incrementing" />
-  <parameter name="SECTOR_ACCESS_MODE">Read only,Read only,Read only,Hidden,Hidden</parameter>
-  <parameter name="autoInitializationFileName">$${FILENAME}_onchip_flash_0</parameter>
+  <parameter name="SECTOR_ACCESS_MODE">Read only,Read only,Read only,Read only,Read only</parameter>
+  <parameter name="autoInitializationFileName">pbi_rom_onchip_flash_0</parameter>
   <parameter name="initFlashContent" value="true" />
-  <parameter name="initializationFileName" value="C:/tmp/testrom.hex" />
-  <parameter name="initializationFileNameForSim" value="C:/tmp/testrom.hex" />
+  <parameter name="initializationFileName">C:/Users/steve/Documents/GitHub/atari_pbi/Atari/Handler/handler.hex</parameter>
+  <parameter name="initializationFileNameForSim">C:/Users/steve/Documents/GitHub/atari_pbi/Atari/Handler/handler.hex</parameter>
   <parameter name="useNonDefaultInitFile" value="true" />
  </module>
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />

@@ -10,7 +10,7 @@ module pbi_rom (
 	reset_n);	
 
 	input		clock;
-	input	[14:0]	avmm_data_addr;
+	input	[16:0]	avmm_data_addr;
 	input		avmm_data_read;
 	output	[31:0]	avmm_data_readdata;
 	output		avmm_data_waitrequest;

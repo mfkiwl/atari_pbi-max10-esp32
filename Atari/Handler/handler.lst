@@ -22,7 +22,7 @@ Source: C:\Users\steve\Documents\GitHub\atari_pbi\Atari\Handler\handler.asm
     20
     21 = 0020			IOCBCHIDZ = $20
     22
-    23 = D100			DEVREG = $D100
+    23 = D130			LEDTEST = $D130
     24
     25 = 0052			devname = 'R'
     26
@@ -103,7 +103,7 @@ Source: C:\Users\steve\Documents\GitHub\atari_pbi\Atari\Handler\handler.asm
    101 						; TODO: device-specific init
    102
    103 D832 A9 01				lda #01			; turn on an LED to indicate PBI init was a success
-   104 D834 8D 00 D1				sta DEVREG
+   104 D834 8D 30 D1				sta LEDTEST
    105
    106 					
    107 D837 60					rts
@@ -138,7 +138,7 @@ Source: C:\Users\steve\Documents\GitHub\atari_pbi\Atari\Handler\handler.asm
    136 						; this is about as simple as it gets - output the byte to the test LEDs
    137 						; this is confirmed to work with a simple BASIC program that OPENs R: and PUTs bytes - but only if U1MB PBI disabled
    138 						; (see above)
-   139 D844 8D 00 D1				sta DEVREG
+   139 D844 8D 30 D1				sta LEDTEST
    140
    141 D847 A0 01				ldy #1
    142 D849 38					sec
@@ -156,6 +156,6 @@ Source: C:\Users\steve\Documents\GitHub\atari_pbi\Atari\Handler\handler.asm
    154
    155 				;-------------------------------------------------------------------------	
    156 D853					.local banner
-   157 D853 54 61 6E 67 65 6E + 		.byte 'TangentAudio R:Fi PBI Handler 2017 Steve Richardson'
+   157 D853 52 3A 46 69 20 50 + 		.byte 'R:Fi PBI Handler 2017MAY13 Steve Richardson'
    158 						.endl
    159 						

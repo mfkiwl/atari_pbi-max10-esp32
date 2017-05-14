@@ -139,18 +139,18 @@ stimulus : PROCESS
 		variable i: integer := 0;
 	begin
 		loop1: WHILE i <= c_loop LOOP
-			WAIT UNTIL spi_clk'event AND spi_clk = '1';
 			i := i + 1;
+			WAIT UNTIL spi_clk'event AND spi_clk = '1';
 		END LOOP loop1;
 	end p_sync;
 
 	procedure spi_put_byte(constant b : std_logic_vector(7 downto 0)) is
-		variable i: integer := 0;
+		variable i: integer := 7;
 	begin
-		loop1: WHILE i <= 7 LOOP
-			WAIT UNTIL spi_clk'event AND spi_clk = '0';
+		loop1: WHILE i >= 0 LOOP
 			spi_mosi <= b(i);
-			i := i + 1;
+			i := i - 1;
+			WAIT UNTIL spi_clk'event AND spi_clk = '0';
 		END LOOP loop1;
 	end spi_put_byte;
 
@@ -172,10 +172,12 @@ stimulus : PROCESS
 
 BEGIN
 	p_stable;
+	WAIT UNTIL spi_clk'event AND spi_clk = '0';
+	WAIT FOR 50 ns;
 	spi_ss_n <= '0';
-	spi_put_byte(X"03"); -- sdsr
-	spi_put_byte(X"00"); -- mtbycr
-	spi_put_byte(X"80"); -- mtbkcr
+	spi_put_byte(X"88"); -- sdsr
+	spi_put_byte(X"22"); -- mtbycr
+	spi_put_byte(X"11"); -- mtbkcr
 	spi_put_byte(X"00"); -- s_wr_bank
 	spi_put_byte(X"00"); -- s_rd_bank
 	spi_write_ram_pattern;

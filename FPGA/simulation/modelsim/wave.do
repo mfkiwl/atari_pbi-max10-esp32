@@ -14,6 +14,7 @@ add wave -noupdate -expand -group {SPI Bus} /pbi_bridge_vhd_tst/spi_mosi
 add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/clk
 add wave -noupdate -expand -group {SPI Module Internals} -radix unsigned /pbi_bridge_vhd_tst/i1/u1/bit_cnt
 add wave -noupdate -expand -group {SPI Module Internals} -radix decimal /pbi_bridge_vhd_tst/i1/u1/bit_cnt8
+add wave -noupdate -expand -group {SPI Module Internals} -radix decimal /pbi_bridge_vhd_tst/i1/u1/bit_cnt8_reverse
 add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_wr_bank
 add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_wr_addr
 add wave -noupdate -expand -group {SPI Module Internals} /pbi_bridge_vhd_tst/i1/u1/master_wren
@@ -28,7 +29,7 @@ add wave -noupdate -expand -group {SPI Module Internals} -radix hexadecimal /pbi
 add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/r_sdcr
 add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/r_stbycr
 add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/r_stbkcr
-add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/shadow_sdsr
+add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/s_sdsr
 add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/r_sdsr
 add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/r_mtbycr
 add wave -noupdate -expand -group {SPI Module Registers} -radix hexadecimal /pbi_bridge_vhd_tst/i1/u1/r_mtbkcr

@@ -20,7 +20,7 @@ HATABS = $031A
 
 IOCBCHIDZ = $20
 
-DEVREG = $D100
+LEDTEST = $D130
 
 devname = 'R'
 
@@ -101,7 +101,7 @@ init_vector	lda DEVMASK		; get known PBI devices
 		; TODO: device-specific init
 
 		lda #01			; turn on an LED to indicate PBI init was a success
-		sta DEVREG
+		sta LEDTEST
 
 	
 		rts
@@ -136,7 +136,7 @@ put_vector
 		; this is about as simple as it gets - output the byte to the test LEDs
 		; this is confirmed to work with a simple BASIC program that OPENs R: and PUTs bytes - but only if U1MB PBI disabled
 		; (see above)
-		sta DEVREG
+		sta LEDTEST
 
 		ldy #1
 		sec
@@ -154,6 +154,6 @@ special_vector
 
 ;-------------------------------------------------------------------------	
 		.local banner
-		.byte 'TangentAudio R:Fi PBI Handler 2017 Steve Richardson'
+		.byte 'R:Fi PBI Handler 2017MAY13 Steve Richardson'
 		.endl
 		
