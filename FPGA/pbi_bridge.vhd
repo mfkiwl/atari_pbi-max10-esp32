@@ -444,6 +444,22 @@ begin
 		else
 			led_latch(4) <= '0';
 		end if;
+
+		-- extsel logic
+		if ((hw_sel = PBI_ADDR AND ((addr >= X"D800" AND addr <= X"DFFF") OR (addr >= X"D100" AND addr <= X"D1FE") OR 
+											 (addr >= X"D600" AND addr <= X"7FFF"))) OR
+			 (lmap_en = '1' AND addr >= reg_lbtm AND addr <= reg_ltop)) then
+			n_extsel <= '0';
+		else
+			n_extsel <= '1';
+		end if;
+											
+		-- math pack disable logic
+		if (hw_sel = PBI_ADDR AND (addr >= X"D800" AND addr <= X"DFFF")) then
+			n_mpd <= '0';
+		else
+			n_mpd <= '1';
+		end if;
 		
 		if (rising_edge(phi2)) then
 			-- latch in address bus and the rw signal on the rising edge of phi2
@@ -500,13 +516,15 @@ begin
 			slave_ram_wren <= '0';
 		end if;
 		
+
+		
 		
 		if (phi2 = '1' AND rw_latch = '1' AND hw_sel = PBI_ADDR) then
 			-- READ of an address in our PBI device address space
 			if (dev_rom_act) then
 				-- device ROM
-				n_mpd <= '0';
-				n_extsel <= '0';
+				--n_mpd <= '0';
+				--n_extsel <= '0';
 				n_data_oe <= '0';
 
 				-- unpack the 32-bit word from the flash read and output it on data bus
@@ -522,8 +540,8 @@ begin
 				
 			elsif (dev_reg_act) then 
 				-- device registers
-				n_mpd <= '0';
-				n_extsel <= '0';
+				--n_mpd <= '0';
+				--n_extsel <= '0';
 				n_data_oe <= '0';
 				
 				if (addr_latch = X"D100") then
@@ -559,29 +577,29 @@ begin
 				end if;
 			elsif (master_ram_rden = '1') then
 				-- SPI master dual port RAM window (also linear mapped window)
-				n_mpd <= '0';
-				n_extsel <= '0';
+				--n_mpd <= '0';
+				--n_extsel <= '0';
 				n_data_oe <= '0';
 
 				data <= master_dout;
 			elsif (slave_ram_rden = '1') then
 				-- SPI slave dual port RAM window
-				n_mpd <= '0';
-				n_extsel <= '0';
+				--n_mpd <= '0';
+				--n_extsel <= '0';
 				n_data_oe <= '0';
 
 				data <= slave_dout;
 			else 
 				n_data_oe <= '1';
-				n_mpd <= '1';
-				n_extsel <= '1';
+				--n_mpd <= '1';
+				--n_extsel <= '1';
 				data <= "ZZZZZZZZ";
 			end if;
 		else
 			n_data_oe <= rw_latch;
 			data <= "ZZZZZZZZ";
-			n_mpd <= '1';
-			n_extsel <= '1';
+			--n_mpd <= '1';
+			--n_extsel <= '1';
 		end if;
 		
 		
