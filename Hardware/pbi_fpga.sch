@@ -5,6 +5,7 @@ LIBS:altera_max10
 LIBS:power
 LIBS:device
 LIBS:conn
+LIBS:esp32
 EELAYER 25 0
 EELAYER END
 $Descr B 17000 11000
