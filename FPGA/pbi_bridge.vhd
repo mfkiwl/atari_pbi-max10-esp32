@@ -96,18 +96,26 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL reg_mrbs			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL reg_srbs			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL reg_fbs				:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+
+	SIGNAL reg_lmap			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_lbtm			:		STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '1');
+	SIGNAL reg_ltop			:		STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '1');
 	
+	SIGNAL master_ram_addr_hi 	: 	STD_LOGIC_VECTOR(5 DOWNTO 0) := (OTHERS => '0');
 	--SIGNAL master_ram_clk	:		STD_LOGIC := '0';
 	--SIGNAL master_ram_rden	:		STD_LOGIC := '0';
 	--SIGNAL master_ram_wren	:		STD_LOGIC := '0';
 	SIGNAL master_din			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL master_dout		:		STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL slave_ram_addr_hi	:	STD_LOGIC_VECTOR(5 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL slave_ram_clk		:		STD_LOGIC := '0';
 	SIGNAL slave_ram_rden	:		STD_LOGIC := '0';
 	SIGNAL slave_ram_wren	:		STD_LOGIC := '0';
 	--SIGNAL slave_din			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL slave_dout			:		STD_LOGIC_VECTOR(7 DOWNTO 0);
+
 	
+	SIGNAL lmap_en				: 	STD_LOGIC := '0';
 	
 	-- Altera ALTUFM component for PBI Flash ROM space
 	-- See https://www.altera.com/en_US/pdfs/literature/hb/max-10/ug_m10_ufm.pdf
@@ -134,13 +142,13 @@ ARCHITECTURE behavior OF pbi_bridge IS
 			p_master_ram_clk	:	 IN STD_LOGIC;
 			p_master_ram_rden	:	 IN STD_LOGIC;
 			p_master_ram_wren	:	 IN STD_LOGIC;
-			p_master_ram_addr	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_master_ram_addr	:	 IN STD_LOGIC_VECTOR(13 DOWNTO 0);
 			p_master_ram_din	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			p_master_ram_dout	:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			p_slave_ram_clk	:	 IN STD_LOGIC;
 			p_slave_ram_rden	:	 IN STD_LOGIC;
 			p_slave_ram_wren	:	 IN STD_LOGIC;
-			p_slave_ram_addr	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			p_slave_ram_addr	:	 IN STD_LOGIC_VECTOR(13 DOWNTO 0);
 			p_slave_ram_din	:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			p_slave_ram_dout	:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_sdcr				:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -149,8 +157,6 @@ ARCHITECTURE behavior OF pbi_bridge IS
 			r_sdsr				:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_mtbycr				:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_mtbkcr				:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-			r_mrbs				:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			r_srbs				:	 IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 			reset_n				:	 IN STD_LOGIC;
 			ss_n					:	 IN STD_LOGIC;
 			sclk					:	 IN STD_LOGIC;
@@ -181,13 +187,15 @@ u1	: component spi_dpram
 			p_master_ram_clk	=>	master_ram_clk,
 			p_master_ram_rden	=>	master_ram_rden,
 			p_master_ram_wren	=>	master_ram_wren,
-			p_master_ram_addr	=>	addr_latch(7 DOWNTO 0),
+			p_master_ram_addr(13 DOWNTO 8) => master_ram_addr_hi,
+			p_master_ram_addr(7 DOWNTO 0)	=>	addr_latch(7 DOWNTO 0),
 			p_master_ram_din	=>	data,
 			p_master_ram_dout	=>	master_dout,
 			p_slave_ram_clk	=>	slave_ram_clk,
 			p_slave_ram_rden	=>	slave_ram_rden,
 			p_slave_ram_wren	=>	slave_ram_wren,
-			p_slave_ram_addr	=>	addr_latch(7 DOWNTO 0),
+			p_slave_ram_addr(13 DOWNTO 8) => slave_ram_addr_hi,
+			p_slave_ram_addr(7 DOWNTO 0)	=>	addr_latch(7 DOWNTO 0),
 			p_slave_ram_din	=>	data,
 			p_slave_ram_dout	=>	slave_dout,
 		
@@ -203,9 +211,7 @@ u1	: component spi_dpram
 			r_stbkcr				=> reg_stbkcr,
 			r_sdsr				=> reg_sdsr,
 			r_mtbycr				=> reg_mtbycr,
-			r_mtbkcr				=> reg_mtbkcr,
-			r_mrbs				=> reg_mrbs,
-			r_srbs				=> reg_srbs
+			r_mtbkcr				=> reg_mtbkcr
 	);
 
 	
@@ -360,10 +366,41 @@ begin
 end process;
 
 
+process (n_reset, lmap_en, reg_lmap, reg_mrbs, reg_srbs, addr_latch)
+begin
+	if (n_reset = '0') then
+		master_ram_addr_hi <= (OTHERS => '0');
+		slave_ram_addr_hi <= (OTHERS => '0');
+	
+	else
+		-- reg_lmap(7) is the enable for linear mapping of master/slave RAM
+		lmap_en <= reg_lmap(7);
+
+
+		if (lmap_en = '1') then
+			-- reg_lmap(5..0) is a bit mask to activate address lines
+			master_ram_addr_hi(5) <= addr_latch(13) AND reg_lmap(5);
+			master_ram_addr_hi(4) <= addr_latch(12) AND reg_lmap(4);
+			master_ram_addr_hi(3) <= addr_latch(11) AND reg_lmap(3);
+			master_ram_addr_hi(2) <= addr_latch(10) AND reg_lmap(2);
+			master_ram_addr_hi(1)  <= addr_latch(9) AND reg_lmap(1);
+			master_ram_addr_hi(0)  <= addr_latch(8) AND reg_lmap(0);
+			
+			
+			slave_ram_addr_hi <= reg_srbs(5 DOWNTO 0);
+		else
+			master_ram_addr_hi <= reg_mrbs(5 DOWNTO 0);
+			slave_ram_addr_hi <= reg_srbs(5 DOWNTO 0);
+		end if;
+	end if;
+
+end process;
+
+
 -- main body of Atari bus logic including address mapping and read/write operations
 process (n_reset, phi2, phi2_early, rw, rw_latch, hw_sel, addr_latch, dev_rom_act, hw_sel_act,
 			dev_reg_act, addr, data, flash_data_latch, PBI_ADDR, reg_sdcr, reg_stbycr, reg_stbkcr, reg_sdsr, reg_mtbycr,
-			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs, master_ram_rden, master_ram_wren, master_dout,
+			reg_mtbkcr, reg_mrbs, reg_srbs, reg_fbs, reg_lmap, reg_lbtm, reg_ltop, lmap_en, master_ram_rden, master_ram_wren, master_dout,
 			slave_ram_rden, slave_ram_wren, slave_dout)
 begin
 	if (n_reset = '0') then
@@ -390,6 +427,9 @@ begin
 		reg_mrbs <= X"00";
 		reg_srbs <= X"00";
 		reg_fbs <= X"00";
+		reg_lmap <= X"00";
+		reg_lbtm <= X"FFFF";
+		reg_ltop <= X"FFFF";
 				
 		data <= "ZZZZZZZZ";
 		led_latch <= "00000";
@@ -424,19 +464,21 @@ begin
 			if ((hw_sel = PBI_ADDR AND addr >= X"D800" AND addr <= X"DFFF") OR
 				 (hw_sel = PBI_ADDR AND addr >= X"D600" AND addr <= X"D7FF") OR
 				 (hw_sel = PBI_ADDR AND addr >= X"D100" AND addr <= X"D1FE") OR
+				 (lmap_en = '1' AND addr >= reg_lbtm AND addr <= reg_ltop) OR
 				 (addr = X"D1FF")) then
 				
-				-- this is a state where this PBI device is specifically being addressed, or the global hw_sel register is being addressed
-				-- set up the external bus transceiver to point the right way and enable its output
+				-- this is a state where this PBI device is specifically being addressed, the linear mapped memory is being addressed,
+				-- or the global hw_sel register is being addressed - so we set up the external bus transceiver to point the right way
 				data_dir <= NOT rw;
 			else
-				-- this is any other access, point the external bus transceiver into the FPGA, enable its output
+				-- this is any other access, point the external bus transceiver into the FPGA
 				data_dir <= '1';
 			end if;
 		end if;
 
 		if (phi2 = '1') then
-			if (hw_sel = PBI_ADDR AND addr_latch >= X"D600" AND addr_latch <= X"D6FF") then
+			if ((hw_sel = PBI_ADDR AND addr_latch >= X"D600" AND addr_latch <= X"D6FF") OR
+				 (lmap_en = '1' AND addr_latch >= reg_lbtm AND addr_latch <= reg_ltop)) then
 				master_ram_rden <= rw_latch;
 				master_ram_wren <= NOT rw_latch;
 			else
@@ -502,11 +544,21 @@ begin
 					data <= reg_srbs;
 				elsif (addr_latch = X"D122") then
 					data <= reg_fbs;
+				elsif (addr_latch = X"D123") then
+					data <= reg_lmap;
+				elsif (addr_latch = X"D124") then
+					data <= reg_lbtm(7 DOWNTO 0);
+				elsif (addr_latch = X"D125") then
+					data <= reg_lbtm(15 DOWNTO 8);
+				elsif (addr_latch = X"D126") then
+					data <= reg_ltop(7 DOWNTO 0);
+				elsif (addr_latch = X"D127") then
+					data <= reg_ltop(15 DOWNTO 8);
 				else
 					data <= X"FF";
 				end if;
 			elsif (master_ram_rden = '1') then
-				-- SPI master dual port RAM window
+				-- SPI master dual port RAM window (also linear mapped window)
 				n_mpd <= '0';
 				n_extsel <= '0';
 				n_data_oe <= '0';
@@ -543,12 +595,6 @@ begin
 					hw_sel <= data;
 					
 				elsif (hw_sel = PBI_ADDR) then 
-					--if (master_ram_wren = '1') then
-						-- master RAM write (latched on falling edge of phi2_early)
-						--master_din <= data;
-					--elsif (slave_ram_wren = '1') then
-						-- slave RAM write (latched on falling edge of phi2_early)
-						--slave_din <= data;
 					if (dev_reg_act) then
 						-- device register write (latched on falling edge of phi2_early)
 						if (addr_latch = X"D100") then
@@ -563,6 +609,16 @@ begin
 							reg_srbs <= data;
 						elsif (addr_latch = X"D122") then
 							reg_fbs <= data;
+						elsif (addr_latch = X"D123") then
+							reg_lmap <= data;
+						elsif (addr_latch = X"D124") then
+							reg_lbtm(7 DOWNTO 0) <= data;
+						elsif (addr_latch = X"D125") then
+							reg_lbtm(15 DOWNTO 8) <= data;
+						elsif (addr_latch = X"D126") then
+							reg_ltop(7 DOWNTO 0) <= data;
+						elsif (addr_latch = X"D127") then
+							reg_ltop(15 DOWNTO 8) <= data;
 						elsif (addr_latch = X"D130") then
 							led_latch(3 downto 0) <= data(3 downto 0);
 						end if;

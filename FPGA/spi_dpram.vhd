@@ -38,14 +38,14 @@ ENTITY spi_dpram IS
 		p_master_ram_clk	: IN		STD_LOGIC;												-- parallel memory interface, master RAM clock
 		p_master_ram_rden	: IN		STD_LOGIC;												-- parallel memory interface, master RAM read enable
 		p_master_ram_wren	: IN		STD_LOGIC;												-- parallel memory interface, master RAM write enable
-		p_master_ram_addr	: IN		STD_LOGIC_VECTOR(7 DOWNTO 0);						-- parallel memory interface, master RAM address
+		p_master_ram_addr	: IN		STD_LOGIC_VECTOR(13 DOWNTO 0);					-- parallel memory interface, master RAM address
 		p_master_ram_din	: IN		STD_LOGIC_VECTOR(7 downto 0);						-- parallel memory interface, master data in
 		p_master_ram_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- parallel memory interface, master data out
 		
 		p_slave_ram_clk	: IN		STD_LOGIC;												-- parallel memory interface, slave RAM clock
 		p_slave_ram_rden	: IN		STD_LOGIC;												-- parallel memory interface, slave RAM read enable
 		p_slave_ram_wren	: IN		STD_LOGIC;												-- parallel memory interface, slave RAM write enable
-		p_slave_ram_addr	: IN		STD_LOGIC_VECTOR(7 DOWNTO 0);						-- parallel memory interface, slave RAM address
+		p_slave_ram_addr	: IN		STD_LOGIC_VECTOR(13 DOWNTO 0);					-- parallel memory interface, slave RAM address
 		p_slave_ram_din	: IN		STD_LOGIC_VECTOR(7 downto 0);						-- parallel memory interface, slave data in
 		p_slave_ram_dout	: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- parallel memory interface, slave data out
 		
@@ -54,10 +54,7 @@ ENTITY spi_dpram IS
 		r_stbkcr				: IN		STD_LOGIC_VECTOR(7 downto 0);						-- STBKCR - Slave Transfer Bank Count Register (written by Atari)
 		r_sdsr				: OUT		STD_LOGIC_VECTOR(7 downto 0) := "X0000000";	-- SDSR - Slave Data Status Register (written by state machine & ESP32)
 		r_mtbycr				: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- MTBYCR - Master Transfer Byte Count Register (written by ESP32)
-		r_mtbkcr				: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- MTBKCR - Master Transfer Bank Count Register (written by ESP32)
-
-		r_mrbs				: IN		STD_LOGIC_VECTOR(7 downto 0);						-- MRBS - Master RAM Bank Select
-		r_srbs				: IN		STD_LOGIC_VECTOR(7 downto 0)						-- SRBS - Slave RAM Bank Select
+		r_mtbkcr				: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00"			-- MTBKCR - Master Transfer Bank Count Register (written by ESP32)
 	);
 END spi_dpram;
 
@@ -123,8 +120,7 @@ BEGIN
 
 			
 			--	"B" side of RAM is parallel interface (to Atari PBI) - signals are prefixed with p_
-			address_b(13 DOWNTO 8)  => r_mrbs(5 DOWNTO 0),				-- upper 6 bits are controlled by MRBS register
-			address_b(7 DOWNTO 0)	=> p_master_ram_addr,
+			address_b(13 DOWNTO 0)	=> p_master_ram_addr,
 			clock_b		=> p_master_ram_clk,
 			data_b	 	=> p_master_ram_din,
 			rden_b	 	=> p_master_ram_rden,
@@ -144,8 +140,7 @@ BEGIN
 			wren_a	 	=> '0',
 
 			--	"B" side of RAM is parallel interface (to Atari PBI) - signals are prefixed with p_
-			address_b(13 DOWNTO 8)  => r_srbs(5 DOWNTO 0),
-			address_b(7 DOWNTO 0)	=> p_slave_ram_addr,
+			address_b(13 DOWNTO 0)	=> p_slave_ram_addr,
 			clock_b		=> p_slave_ram_clk,
 			data_b	 	=> p_slave_ram_din,
 			rden_b	 	=> p_slave_ram_rden,
