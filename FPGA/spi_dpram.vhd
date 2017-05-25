@@ -53,8 +53,9 @@ ENTITY spi_dpram IS
 		r_stbycr				: IN		STD_LOGIC_VECTOR(7 downto 0);						-- STBYCR - Slave Transfer Byte Count Register (written by Atari)
 		r_stbkcr				: IN		STD_LOGIC_VECTOR(7 downto 0);						-- STBKCR - Slave Transfer Bank Count Register (written by Atari)
 		r_sdsr				: OUT		STD_LOGIC_VECTOR(7 downto 0) := "X0000000";	-- SDSR - Slave Data Status Register (written by state machine & ESP32)
-		r_mtbycr				: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- MTBYCR - Master Transfer Byte Count Register (written by ESP32)
-		r_mtbkcr				: OUT		STD_LOGIC_VECTOR(7 downto 0) := X"00"			-- MTBKCR - Master Transfer Bank Count Register (written by ESP32)
+		r_mtbycr				: BUFFER	STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- MTBYCR - Master Transfer Byte Count Register (written by ESP32)
+		r_mtbkcr				: BUFFER	STD_LOGIC_VECTOR(7 downto 0) := X"00";			-- MTBKCR - Master Transfer Bank Count Register (written by ESP32)
+		r_tcr					: BUFFER	STD_LOGIC_VECTOR(15 downto 0) := X"0000"		-- TCR - Transaction Count Register
 	);
 END spi_dpram;
 
@@ -159,6 +160,18 @@ BEGIN
 		clk <= sclk WHEN '1',
 			NOT sclk WHEN OTHERS;
 
+  -- transaction counter
+  PROCESS(ss_n, reset_n)
+  BEGIN
+	IF (reset_n = '0') THEN
+		r_tcr <= (OTHERS => '0');
+	ELSE
+		IF(rising_edge(ss_n)) THEN
+			r_tcr <= r_tcr + 1;
+		END IF;
+	END IF;
+  
+  END PROCESS;
 			  
   -- bit counter
   PROCESS(ss_n, reset_n, bit_cnt, bit_cnt8, clk)
@@ -240,9 +253,15 @@ BEGIN
 				s_slave_ram_bank(bit_cnt8_reverse) <= mosi;
 				s_master_ram_wren <= '0';
 			ELSE
-				-- write to the rx buffer
-				s_master_ram_data(bit_cnt8_reverse) <= mosi;
-				s_master_ram_wren <= '1';
+				IF (r_sdcr(1) = '1' AND (r_mtbycr /= X"00" OR r_mtbkcr /= X"00")) THEN
+					-- write to the rx buffer only if:
+					-- Master Buffer Free is set in SDCR, and Master Byte/Bank count is nonzero 
+					s_master_ram_data(bit_cnt8_reverse) <= mosi;
+					s_master_ram_wren <= '1';
+				ELSE
+					-- MBF not set, don't write to RAM
+					s_master_ram_wren <= '0';
+				END IF;
 			END IF;
 		END IF;
 
@@ -258,35 +277,39 @@ BEGIN
 		s_slave_ram_addr <= (OTHERS => '0');
 		s_slave_ram_rden <= '0';
     ELSE
-		--IF (falling_edge(clk)) THEN
-			IF (bit_cnt >= 0 AND bit_cnt <= 7) THEN
-				-- 1st header byte: SDCR
-				spi_tx_buf <= r_sdcr;
-				--spi_tx_buf <= X'80'; -- testing
-				s_slave_ram_rden <= '0';
-			ELSIF (bit_cnt >= 8 AND bit_cnt <= 15) THEN
-				-- 2nd header byte: STBYCR
-				spi_tx_buf <= r_stbycr;
-				s_slave_ram_rden <= '0';
-			ELSIF (bit_cnt >= 16 AND bit_cnt <= 23) THEN
-				-- 3rd header byte: STBKCR
-				spi_tx_buf <= r_stbkcr;
-				s_slave_ram_rden <= '0';
-			ELSIF (bit_cnt >= 24 AND bit_cnt <= 31) THEN
-				-- 4th header byte: reserved
-				spi_tx_buf <= X"FF";
-				s_slave_ram_rden <= '0';
-			ELSIF (bit_cnt >= 32 AND bit_cnt <= 39) THEN
-				-- 5th header byte: reserved
-				spi_tx_buf <= X"FF";
-				-- enabled one byte cycle early because data must be pre-read
-				s_slave_ram_rden <= '1';
-			ELSE
-				-- load transmit buffer from dual port RAM at the current read address
+		IF (bit_cnt >= 0 AND bit_cnt <= 7) THEN
+			-- 1st header byte: SDCR
+			spi_tx_buf <= r_sdcr;
+			s_slave_ram_rden <= '0';
+		ELSIF (bit_cnt >= 8 AND bit_cnt <= 15) THEN
+			-- 2nd header byte: STBYCR
+			spi_tx_buf <= r_stbycr;
+			s_slave_ram_rden <= '0';
+		ELSIF (bit_cnt >= 16 AND bit_cnt <= 23) THEN
+			-- 3rd header byte: STBKCR
+			spi_tx_buf <= r_stbkcr;
+			s_slave_ram_rden <= '0';
+		ELSIF (bit_cnt >= 24 AND bit_cnt <= 31) THEN
+			-- 4th header byte: reserved
+			spi_tx_buf <= X"FF";
+			s_slave_ram_rden <= '0';
+		ELSIF (bit_cnt >= 32 AND bit_cnt <= 39) THEN
+			-- 5th header byte: reserved
+			spi_tx_buf <= X"FF";
+			-- enabled one byte cycle early because data must be pre-read
+			s_slave_ram_rden <= '1';
+		ELSE
+			IF (r_sdcr(0) = '1' AND (r_stbycr /= X"00" OR r_stbkcr /= X"00")) THEN
+				-- Load transmit buffer from dual port RAM at the current read address, if:
+				-- Slave Data Available is set, and Slave Byte/Bank count is nonzero
 				spi_tx_buf <= s_slave_ram_q;
 				s_slave_ram_rden <= '1';
+			ELSE
+				-- SDAV is not set, clock out dummy bytes
+				spi_tx_buf <= X"FF";
+				s_slave_ram_rden <= '0';
 			END IF;
-		--END IF;
+		END IF;
 
 		-- increment the read address
 		IF (rising_edge(clk) AND conv_integer(unsigned(bit_cnt)) >= 40 AND bit_cnt8 = 4) THEN

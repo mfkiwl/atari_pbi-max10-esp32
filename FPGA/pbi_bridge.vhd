@@ -15,11 +15,6 @@ use ieee.std_logic_unsigned.all;
 
 entity pbi_bridge is
 	PORT(
-		-- temp to observe externally
-		master_ram_clk	:	BUFFER std_logic;
-		master_ram_rden : BUFFER std_logic;
-		master_ram_wren : BUFFER std_logic;
-		
 		n_led1		: OUT		std_logic := '1';						-- LED1 for test
 		n_led2		: OUT		std_logic := '1';						-- LED2 for test
 		n_led3		: OUT		std_logic := '1';						-- LED3 for test
@@ -93,6 +88,7 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL reg_sdsr			:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL reg_mtbycr			:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL reg_mtbkcr			:	 	STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
+	SIGNAL reg_tcr				:		STD_LOGIC_VECTOR(15 DOWNTO 0) := X"0000";
 	SIGNAL reg_mrbs			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL reg_srbs			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL reg_fbs				:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
@@ -102,9 +98,9 @@ ARCHITECTURE behavior OF pbi_bridge IS
 	SIGNAL reg_ltop			:		STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '1');
 	
 	SIGNAL master_ram_addr_hi 	: 	STD_LOGIC_VECTOR(5 DOWNTO 0) := (OTHERS => '0');
-	--SIGNAL master_ram_clk	:		STD_LOGIC := '0';
-	--SIGNAL master_ram_rden	:		STD_LOGIC := '0';
-	--SIGNAL master_ram_wren	:		STD_LOGIC := '0';
+	SIGNAL master_ram_clk	:		STD_LOGIC := '0';
+	SIGNAL master_ram_rden	:		STD_LOGIC := '0';
+	SIGNAL master_ram_wren	:		STD_LOGIC := '0';
 	SIGNAL master_din			:		STD_LOGIC_VECTOR(7 DOWNTO 0) := X"00";
 	SIGNAL master_dout		:		STD_LOGIC_VECTOR(7 DOWNTO 0);
 	SIGNAL slave_ram_addr_hi	:	STD_LOGIC_VECTOR(5 DOWNTO 0) := (OTHERS => '0');
@@ -157,6 +153,8 @@ ARCHITECTURE behavior OF pbi_bridge IS
 			r_sdsr				:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_mtbycr				:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 			r_mtbkcr				:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			r_tcr					: 	 OUT STD_LOGIC_VECTOR(15 downto 0);
+			
 			reset_n				:	 IN STD_LOGIC;
 			ss_n					:	 IN STD_LOGIC;
 			sclk					:	 IN STD_LOGIC;
@@ -211,7 +209,8 @@ u1	: component spi_dpram
 			r_stbkcr				=> reg_stbkcr,
 			r_sdsr				=> reg_sdsr,
 			r_mtbycr				=> reg_mtbycr,
-			r_mtbkcr				=> reg_mtbkcr
+			r_mtbkcr				=> reg_mtbkcr,
+			r_tcr					=> reg_tcr
 	);
 
 	
@@ -556,6 +555,10 @@ begin
 					data <= reg_mtbycr;
 				elsif (addr_latch = X"D112") then
 					data <= reg_mtbkcr;
+				elsif (addr_latch = X"D113") then
+					data <= reg_tcr(7 DOWNTO 0);
+				elsif (addr_latch = X"D114") then
+					data <= reg_tcr(15 DOWNTO 8);
 				elsif (addr_latch = X"D120") then
 					data <= reg_mrbs;
 				elsif (addr_latch = X"D121") then
