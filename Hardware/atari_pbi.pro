@@ -1,4 +1,4 @@
-update=4/14/2017 9:34:51 AM
+update=5/19/2017 12:34:39 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -45,3 +45,5 @@ LibName3=altera_max10
 LibName4=power
 LibName5=device
 LibName6=conn
+LibName7=esp32
+LibName8=800xl/800xl
