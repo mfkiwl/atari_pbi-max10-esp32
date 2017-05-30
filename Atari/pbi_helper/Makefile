@@ -2,7 +2,10 @@
 CL=cl65
 CFLAGS=-t atarixl
 
-all: pbi.xex pbi2spi.xex lmaptest.xex
+all: rfi.xex pbi.xex pbi2spi.xex lmaptest.xex
+
+rfi.xex: rfi.c
+	$(CL) $(CFLAGS) -o $@ $^
 
 pbi.xex: pbi.c
 	$(CL) $(CFLAGS) -o $@ $^
